@@ -27,7 +27,7 @@ import {
   WalletIcon,
 } from "lucide-react";
 
-const Navbar = ({ onScrollTo }: any) => {
+const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -77,23 +77,23 @@ const Navbar = ({ onScrollTo }: any) => {
       <li>
         <div
           className="flex items-center text-foreground text-sm font-medium whitespace-nowrap cursor-pointer"
-          onClick={() => onScrollTo("W Original")}
+          onClick={() => onScrollTo("W Original", "game_section")}
         >
           W Original
         </div>
       </li>
       <li>
-        <Link
-          href="#"
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
+        <div
+          onClick={() => onScrollTo("Live Sport", "sport_section")}
+          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
         >
           <MdLiveTv size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
           <span className="text-sm">Live Sport</span>
-        </Link>
+        </div>
       </li>
       <li>
         <div
-          onClick={() => onScrollTo("Slots")}
+          onClick={() => onScrollTo("Slots", "game_section")}
           className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
         >
           <FaDice size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
@@ -102,7 +102,7 @@ const Navbar = ({ onScrollTo }: any) => {
       </li>
       <li>
         <div
-          onClick={() => onScrollTo("Live Casino")}
+          onClick={() => onScrollTo("Live Casino", "game_section")}
           className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
         >
           <PiPokerChipFill size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
@@ -177,11 +177,13 @@ const Navbar = ({ onScrollTo }: any) => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex flex-grow-0">
-            <ul className="flex gap-4 xl:gap-6 items-center">
-              <NavLinks />
-            </ul>
-          </nav>
+          {isNavLinksHidden ? "" :
+            <nav className="hidden lg:flex flex-grow-0">
+              <ul className="flex gap-4 xl:gap-6 items-center">
+                <NavLinks />
+              </ul>
+            </nav>
+          }
 
           {/* User Actions (Desktop) */}
           <div className="hidden lg:flex flex-shrink-0 items-center space-x-4">

@@ -42,7 +42,7 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
   const [modalTitle, setModalTitle] = useState("");
   const [launchURL, setLaunchURL] = useState("");
   const [selectedProviderCode, setSelectedProviderCode] = useState("list");
-  const { isAuthenticated, authData } = useAuth();
+  const { isAuthenticated, setIsAuthenticated, authData, setAuthData } = useAuth();
 
   const [api, contextHolder] = notification.useNotification();
 
@@ -75,11 +75,24 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
     });
   };
 
-  const onModalClose = () => {
+  const onModalClose = async () => {
     setIsAuthModalOpen(false);
     setIsSlotGameModalOpen(false);
     setModalType("");
     setLaunchURL("");
+
+    const response = await axiosInstance.get('/api/check_session', {
+      withCredentials: true,
+    });
+
+    const res = dot(response.data);
+
+    if (res.status == 1) {
+      setAuthData(res.userData);
+      setIsAuthenticated(res.status);
+    } else {
+      console.log(res.msg);
+    }
   }
 
   const onGameClick = async (providerCode: string, type: string) => {

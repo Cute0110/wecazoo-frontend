@@ -52,8 +52,8 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const onScrollTo = (type: any) => {
-    const element = document.getElementById("game_section"); // Replace with your target element's ID
+  const onScrollTo = (categoryType: any, gameType: any) => {
+    const element = document.getElementById(gameType); // Replace with your target element's ID
     if (element) {
       const top = element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
@@ -61,20 +61,20 @@ const Home = () => {
         behavior: "smooth", // Adds smooth scrolling
       });
     }
-    setSelectedCategory(type);
+    setSelectedCategory(categoryType);
   }
 
   return (
     <>
       {contextHolder}
       <div className="min-h-screen bg-background text-foreground">
-        <Navbar onScrollTo={onScrollTo} />
+        <Navbar isNavLinksHidden={false} onScrollTo={onScrollTo} />
 
         <main className="container py-8">
           <Hero />
 
           <section className="container mb-8">
-            <div className="flex flex-col md:flex-row justify-center items-center gap-4 w-full mb-4 sm:mb-0">
+            <div id="sport_section" className="flex flex-col md:flex-row justify-center items-center gap-4 w-full mb-4 sm:mb-0">
               <HeroCard
                 title="Casino"
                 description="Dive in to our wide range of in-house games, live casino and slots to experience a thrilling casino adventure."

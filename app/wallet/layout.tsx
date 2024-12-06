@@ -9,7 +9,7 @@ export default function WalletLayout({
 }) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <Navbar />
+      <Navbar isNavLinksHidden={true}/>
 
       <div className="flex-grow">{children}</div>
 
