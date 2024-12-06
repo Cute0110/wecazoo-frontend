@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #1BB96B;
+  --color-primary-accent: #148F53;
+  --color-secondary: #B91B5D;
+  --color-secondary-accent: #8B1546;
+  --color-text: #ffffff;
+  --color-background: #07001A;
+  --color-muted: #808792;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: var(--font-open-sans), Arial, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-montserrat), Arial, sans-serif;
+  }
+}
+
+.ant-modal-content {
+  border: 1px solid gray !important;
+  background-color: #060019 !important;
+
+  .ant-modal-close-x {
+    color: white !important;
+  }
+
+  .ant-modal-header {
+    background-color: #060019 !important;
+
+    .ant-modal-title {
+      color: white !important;
+      font-size: 20px !important;
+    }
+  }
+}
