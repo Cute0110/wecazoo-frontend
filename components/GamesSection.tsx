@@ -100,7 +100,7 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
           } else {
             setIsSlotGameModalOpen(false);
             setIsSlotGameLoading(false);
-            openNotification("info", "Info", "Under development!", "topRight");
+            openNotification("error", "Error", res.msg, "topRight");
           }
         } catch (err) {
           console.log(err);
@@ -121,7 +121,7 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
           } else {
             setIsSlotGameModalOpen(false);
             setIsSlotGameLoading(false);
-            openNotification("info", "Info", "Under development!", "topRight");
+            openNotification("error", "Error", res.msg, "topRight");
           }
         } catch (err) {
           console.log(err);
@@ -141,7 +141,7 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
         setModalType("play");
         setLaunchURL(res.launch_url);
       } else {
-        openNotification("info", "Info", "Under development!", "topRight");
+        openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
       console.log(err);

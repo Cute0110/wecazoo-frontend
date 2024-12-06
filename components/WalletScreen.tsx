@@ -99,7 +99,7 @@ const WalletScreen = () => {
       setAuthData({...authData, balance: res.balance});
       openNotification("success", "Withdraw Success!", "Crypto will be arrived in your wallet soon!", "topRight");
     } else {
-      openNotification("error", "Error", "You can not deposit now!", "topRight");
+      openNotification("error", "Error", res.msg, "topRight");
     }
   }
 
@@ -109,7 +109,7 @@ const WalletScreen = () => {
     if (res.status == 1) {
       window.open(res.url, '_blank');
     } else {
-      openNotification("error", "Error", "You can not deposit now!", "topRight");
+      openNotification("error", "Error", res.msg, "topRight");
     }
   }
 
