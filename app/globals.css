@@ -50,3 +50,29 @@ body {
     }
   }
 }
+
+.ant-pagination {
+  display: flex;
+  align-items: center;;
+}
+.ant-pagination-item-link {
+  color: white !important;
+}
+.ant-pagination .ant-pagination-disabled .ant-pagination-item-link, .ant-pagination .ant-pagination-disabled:hover .ant-pagination-item-link {
+  color: #313D4A !important;
+}
+.ant-pagination-simple-pager {
+  color: white;
+  background-color: transparent;
+}
+.ant-pagination.ant-pagination-simple .ant-pagination-simple-pager input {
+  background-color: white;
+  color: black;
+  border: none;
+}
+.ant-pagination-total-text {
+  color: white;
+}
+.ant-pagination-options {
+  display: block !important;
+}

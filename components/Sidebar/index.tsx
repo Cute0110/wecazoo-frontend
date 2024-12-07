@@ -26,56 +26,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         {
           icon: (<HomeOutlined />),
           label: "Dashboard",
-          route: "/",
+          route: "/admin",
         },
         {
           icon: (<UserOutlined />),
-          label: "Agents",
-          route: "#",
-          children: [
-            { label: "Manage", route: "/agent/manage", icon: (<UserSwitchOutlined />) },
-            { label: "Transactions", route: "/agent/transaction", icon: (<FileSyncOutlined />) },
-            { label: "Balance History", route: "/agent/balance-history", icon: (<HistoryOutlined />) },
-          ],
-        },
-        {
-          icon: (<TeamOutlined />
-          ),
-          label: "Users",
-          route: "#",
-          children: [
-            { label: "Manage", route: "/user/manage", icon: (<UserSwitchOutlined />) },
-            { label: "Transactions", route: "/user/transaction", icon: (<FileSyncOutlined />) },
-            { label: "Balance History", route: "/user/balance-history", icon: (<HistoryOutlined />) },
-          ],
-        },
-        {
-          icon: (<FundProjectionScreenOutlined />),
-          label: "Game History",
-          route: "/game-history",
-        },
-        {
-          icon: (<CommentOutlined />),
-          label: "Message",
-          route: "/messages",
-        },
-        {
-          icon: (<LinkOutlined />),
-          label: "IP Address",
-          route: "/ipAddress",
-        },
-      ],
-    },
-    {
-      name: "OTHERS",
-      menuItems: [
-        {
-          icon: (<ProductOutlined />),
-          label: "API",
-          route: "#",
-          children: [
-            { label: "Guide", route: "/docs", icon: (<CopyOutlined />) },
-          ],
+          label: "Manage User",
+          route: "/admin/userManage",
         },
       ],
     },
@@ -87,20 +43,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
       <aside
-        className={`fixed left-0 top-0 z-[100] flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed left-0 top-0 z-[100] flex h-screen w-72.5 flex-col overflow-y-hidden bg-[#130d25] duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         {/* <!-- SIDEBAR HEADER --> */}
-        <div className="flex items-center justify-center gap-2 px-6 py-5.5 lg:py-6.5">
-          <Link className="flex items-center gap-x-2" href="/">
+        <div className="flex items-center justify-center gap-2 px-6 py-6 lg:py-8">
+          <Link className="flex items-center gap-x-4" href="/">
             <Image
-              width={50}
-              height={50}
-              src={"/images/logo/logo-white.svg"}
+              width={70}
+              height={70}
+              src={"/wecazoo-logo.svg"}
               alt="Logo"
               priority
             />
-            <span className="font-semibold text-white text-[30px]">BESTFUN</span>
+            <span className="font-semibold text-white text-[30px]">WECAZOO</span>
           </Link>
 
           <button
