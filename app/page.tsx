@@ -43,9 +43,7 @@ const Home = () => {
           openNotification("error", "Error", res.msg, "topRight");
         }
       } catch (err) {
-        console.log("Failed to load data");
-      } finally {
-        console.log("Finished");
+        openNotification("error", "Error", "Network error!", "topRight");
       }
     };
 
@@ -82,6 +80,7 @@ const Home = () => {
                 buttonTextSecondary="Live Casino"
                 imageSrc="/images/hero-card-bg-1.png"
                 iconType="casino"
+                onScrollTo={onScrollTo}
               />
               <HeroCard
                 title="Sport"
@@ -90,6 +89,7 @@ const Home = () => {
                 buttonTextSecondary="Live Sport"
                 imageSrc="/images/hero-card-bg-2.png"
                 iconType="sports"
+                onScrollTo={onScrollTo}
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">

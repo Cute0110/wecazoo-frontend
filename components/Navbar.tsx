@@ -25,6 +25,7 @@ import {
   SettingsIcon,
   UserIcon,
   WalletIcon,
+  Home,
 } from "lucide-react";
 
 const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
@@ -44,11 +45,11 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
     <>
       <li>
         <Link
-          href="/profile"
+          href="/"
           className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
         >
-          <UserIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Profile</span>
+          <Home size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
+          <span className="text-sm">Home</span>
         </Link>
       </li>
       <li>
@@ -66,7 +67,7 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
           onClick={onLogOutClick}
         >
           <LogOutIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          LgoOut
+          Log Out
         </div>
       </li>
     </>

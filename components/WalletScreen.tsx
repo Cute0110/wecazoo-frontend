@@ -93,23 +93,32 @@ const WalletScreen = () => {
   }
 
   const withdrawAction = async (amount: any, address: any) => {
-    const response = await axiosInstance.post('/api/withdraw', eot({ amount: amount.toFixed(5), address: address }));
-    const res = dot(response.data);
-    if (res.status == 1) {
-      setAuthData({...authData, balance: res.balance});
-      openNotification("success", "Withdraw Success!", "Crypto will be arrived in your wallet soon!", "topRight");
-    } else {
-      openNotification("error", "Error", res.msg, "topRight");
+    try {
+      const response = await axiosInstance.post('/api/withdraw', eot({ amount: amount.toFixed(5), address: address }));
+      const res = dot(response.data);
+      if (res.status == 1) {
+        setAuthData({ ...authData, balance: res.balance });
+        openNotification("success", "Withdraw Success!", "Crypto will be arrived in your wallet soon!", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
+      }
+    } catch (error) {
+      openNotification("error", "Error", "Token expired or network error!", "topRight");
     }
   }
 
   const onCreateInvoice = async (amount: any) => {
-    const response = await axiosInstance.post('/api/createInvoice', eot({ price: amount.toFixed(5), currency: "USD" }));
-    const res = dot(response.data);
-    if (res.status == 1) {
-      window.open(res.url, '_blank');
-    } else {
-      openNotification("error", "Error", res.msg, "topRight");
+    try {
+
+      const response = await axiosInstance.post('/api/createInvoice', eot({ price: amount.toFixed(5), currency: "USD" }));
+      const res = dot(response.data);
+      if (res.status == 1) {
+        window.open(res.url, '_blank');
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
+      }
+    } catch (error) {
+      openNotification("error", "Error", "Token expired or network error", "topRight");
     }
   }
 

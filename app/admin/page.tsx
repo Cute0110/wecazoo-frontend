@@ -26,10 +26,11 @@ const Admin = () => {
 
         const res = dot(response.data);
 
-        if (res.status == 0 || res.userData.userCode != "wcz_test1g1195") {
+        if (res.status == 0 || res.userData.userCode != "wcz_test1gf985") {
           router.push("/");
         }
       } catch (err) {
+        router.push("/");
         setIsLoading(false);
       } finally {
         setIsLoading(false);

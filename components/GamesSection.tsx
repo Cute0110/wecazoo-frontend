@@ -18,7 +18,6 @@ const categories = [
   "W Original",
   "Slots",
   "Live Casino",
-  "Poker",
 ];
 
 const originalGamesInfo = [
@@ -81,17 +80,21 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
     setModalType("");
     setLaunchURL("");
 
-    const response = await axiosInstance.get('/api/check_session', {
-      withCredentials: true,
-    });
+    try {
+      const response = await axiosInstance.get('/api/check_session', {
+        withCredentials: true,
+      });
 
-    const res = dot(response.data);
+      const res = dot(response.data);
 
-    if (res.status == 1) {
-      setAuthData(res.userData);
-      setIsAuthenticated(res.status);
-    } else {
-      console.log(res.msg);
+      if (res.status == 1) {
+        setAuthData(res.userData);
+        setIsAuthenticated(res.status);
+      } else {
+        console.log(res.msg);
+      }
+    } catch (error) {
+      openNotification("error", "Error", "error", "topRight");
     }
   }
 
@@ -116,7 +119,7 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
             openNotification("error", "Error", res.msg, "topRight");
           }
         } catch (err) {
-          console.log(err);
+          openNotification("error", "Error", "Token expired or network error!", "topRight");
         } finally {
           setIsSlotGameLoading(false);
         }
@@ -137,7 +140,7 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
             openNotification("error", "Error", res.msg, "topRight");
           }
         } catch (err) {
-          console.log(err);
+          openNotification("error", "Error", "Token expired or network error", "topRight");
         } finally {
           setIsSlotGameLoading(false);
         }
@@ -157,7 +160,7 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
         openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
-      console.log(err);
+      openNotification("error", "Error", "Token expired or network error!", "topRight");
     } finally {
       setIsSlotGameLoading(false);
     }

@@ -54,26 +54,35 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
         e.preventDefault();
 
         if (isLogin) {
-            const response = await axiosInstance.post('/api/login', eot({ emailAddress: formData.email, password: formData.password }));
-            const res = dot(response.data);
-            if (res.status == 1) {
-                openNotification('success', 'Success', 'Logged In successfully!', 'topRight');
-                const token = res.token;
-                localStorage.setItem('authToken', token);
-                setIsAuthenticated(true);
-                setAuthData(res.userData);
-                onModalClose();
-            } else {
-                openNotification('error', 'Error', res.msg, 'topRight');
+            try {
+                const response = await axiosInstance.post('/api/login', eot({ emailAddress: formData.email, password: formData.password }));
+                const res = dot(response.data);
+                if (res.status == 1) {
+                    openNotification('success', 'Success', 'Logged In successfully!', 'topRight');
+                    const token = res.token;
+                    localStorage.setItem('authToken', token);
+                    setIsAuthenticated(true);
+                    setAuthData(res.userData);
+                    onModalClose();
+                } else {
+                    openNotification('error', 'Error', res.msg, 'topRight');
+                }
+            } catch (error) {
+                openNotification('error', 'Error', "Network error!", 'topRight');
             }
         } else {
-            const response = await axiosInstance.post('/api/register', eot({ emailAddress: formData.email, password: formData.password }));
-            const res = dot(response.data);
-            if (res.status == 1) {
-                openNotification('success', 'Success', 'Registerd successfully!', 'topRight');
-                setIsLogin(true);
-            } else {
-                openNotification('error', 'Error', res.msg, 'topRight');
+            try {
+
+                const response = await axiosInstance.post('/api/register', eot({ emailAddress: formData.email, password: formData.password }));
+                const res = dot(response.data);
+                if (res.status == 1) {
+                    openNotification('success', 'Success', 'Registerd successfully!', 'topRight');
+                    setIsLogin(true);
+                } else {
+                    openNotification('error', 'Error', res.msg, 'topRight');
+                }
+            } catch (error) {
+                openNotification('error', 'Error', "Network error!", 'topRight');
             }
         }
 

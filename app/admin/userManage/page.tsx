@@ -41,7 +41,7 @@ const UserManagePage = () => {
 
         const result = dot(response.data);
 
-        if (result.status == 0 || result.userData.userCode != "wcz_test1g1195") {
+        if (result.status == 0 || result.userData.userCode != "wcz_test1gf985") {
           router.push("/");
         } else {
           const userDataResult = await axiosInstance.post('/api/get_all_users', eot({ start: 0, length: 10, search: "", order: "id", dir: "ASC" }));
@@ -53,6 +53,7 @@ const UserManagePage = () => {
           }
         }
       } catch (err) {
+        router.push("/");
         setIsLoading(false);
       } finally {
         setIsLoading(false);
@@ -71,7 +72,7 @@ const UserManagePage = () => {
       }
       setUserData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
     } catch (err) {
-      console.error("Error fetching data:", err);
+      openNotification('error', "Error", "error", "topRight");
     } finally {
       setIsLoading(false);
     }
