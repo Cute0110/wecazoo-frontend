@@ -107,6 +107,7 @@ const UserManage = ({
         <div className="relative w-[calc(100vw-70px)] lg:w-[calc(100vw-340px)]">
 
           <div className="my-4">
+            <p className="my-6">Total Users : <span className="text-[20px]">{totalCount}</span></p>
             <Pagination
               simple
               current={paginationVal}
@@ -115,7 +116,8 @@ const UserManage = ({
               showSizeChanger
               pageSize={pageSizeVal}
               pageSizeOptions={pageSizeOptions}
-              showTotal={(total: any, range: any) => `${range[0]}-${range[1]} of ${total} items`} />
+              // showTotal={(total: any, range: any) => `${range[0]}-${range[1]} of ${total} items`} 
+            />
           </div>
           <div className="mb-2">
             <UserManageTable
@@ -135,7 +137,8 @@ const UserManage = ({
               showSizeChanger
               pageSize={pageSizeVal}
               pageSizeOptions={pageSizeOptions}
-              showTotal={(total: any, range: any) => `${range[0]}-${range[1]} of ${total} items`} />
+              // showTotal={(total: any, range: any) => `${range[0]}-${range[1]} of ${total} items`} 
+            />
           </div>
         </div>
       </div>

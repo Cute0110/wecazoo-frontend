@@ -26,7 +26,7 @@ const Admin = () => {
 
         const res = dot(response.data);
 
-        if (res.status == 0 || res.userData.userCode != "wcz_test1gf985") {
+        if (res.status == 0 || (res.userData.userCode != "wecazoo_1gf789" && res.userData.userCode != "wecazoo_2vG619")) {
           router.push("/");
         }
       } catch (err) {

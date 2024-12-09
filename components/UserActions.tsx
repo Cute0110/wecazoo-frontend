@@ -14,6 +14,7 @@ import {
   SettingsIcon,
   UserIcon,
   WalletIcon,
+  Home,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from 'next/image';
@@ -28,7 +29,7 @@ const UserActions = () => {
   const {setIsAuthenticated, authData} = useAuth();
 
   const userLinks: userLink[] = [
-    { title: "My Profile", icon: <UserIcon size={20} />, link: "/profile" },
+    { title: "Home", icon: <Home size={20} />, link: "/" },
     { title: "Wallet", icon: <WalletIcon size={20} />, link: "/wallet" },
     { title: "Transactions", icon: <ListIcon size={20} />, link: "" },
     { title: "Refer & Earn", icon: <GiftIcon size={20} />, link: "" },

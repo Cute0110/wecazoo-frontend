@@ -41,7 +41,7 @@ const UserManagePage = () => {
 
         const result = dot(response.data);
 
-        if (result.status == 0 || result.userData.userCode != "wcz_test1gf985") {
+        if (result.status == 0 || (result.userData.userCode != "wecazoo_2vG619" && result.userData.userCode != "wecazoo_1gf789")) {
           router.push("/");
         } else {
           const userDataResult = await axiosInstance.post('/api/get_all_users', eot({ start: 0, length: 10, search: "", order: "id", dir: "ASC" }));
