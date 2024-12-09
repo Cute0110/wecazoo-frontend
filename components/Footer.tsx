@@ -7,17 +7,21 @@ import { FaInstagram, FaXTwitter, FaTelegram } from "react-icons/fa6";
 import CryptoCarousel from "./CryptoCarousel";
 import { useState } from "react";
 import AboutUs from "./Modals/AboutUs";
+import CustomerSupport from "./Modals/CustomerSupport";
 
 const Footer = () => {
   const [isAboutUsModalOpen, setIsAboutUsModalOpen] = useState(false);
+  const [isCSModalOpen, setIsCSModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
 
   const onModalClose = () => {
     setIsAboutUsModalOpen(false);
+    setIsCSModalOpen(false);
   }
   return (
     <footer className="bg-[#130D25] mt-12">
       <AboutUs isModalOpen={isAboutUsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
+      <CustomerSupport isModalOpen={isCSModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <section className="container bg-[#D9D9D9CC] rounded-[10px] py-4 px-2 overflow-hidden w-[95%] lg:w-full">
         <CryptoCarousel />
       </section>
@@ -36,7 +40,7 @@ const Footer = () => {
         </div>
         {/* Footer Links */}
         <div className="flex flex-col md:flex-row gap-6 lg:gap-12">
-          <div className="flex items-start justify-between py-2 gap-2 sm:gap-6 md:gap-8 lg:gap-20">
+          <div className="flex items-start py-2 gap-6 sm:gap-6 md:gap-8 lg:gap-20">
             <div className="flex flex-col gap-6">
               <h3 className="font-bold text-lg">About</h3>
               <ul className="text-muted flex flex-col gap-6 justify-start">
@@ -51,17 +55,17 @@ const Footer = () => {
                 </li> */}
               </ul>
             </div>
-            {/* <div className="flex flex-col gap-6">
-              <h3 className="font-bold text-lg">Help</h3>
+            <div className="flex flex-col gap-6">
+              <h3 className="font-bold text-lg">Support</h3>
               <ul className="text-muted flex flex-col gap-6 justify-start">
                 <li className="hover:text-primary transition-colors">
-                  <a href="#">FAQs</a>
+                <span className="cursor-pointer" onClick={() => {setIsCSModalOpen(true); setModalTitle("Customer Support");}}>Customer Support</span>
                 </li>
-                <li className="hover:text-primary transition-colors">
+                {/* <li className="hover:text-primary transition-colors">
                   <a href="#">Contact Us</a>
-                </li>
+                </li> */}
               </ul>
-            </div> */}
+            </div>
             {/* <div className="flex flex-col gap-6">
               <h3 className="font-bold text-lg">Regulations</h3>
               <ul className="text-muted flex flex-col gap-6 justify-end">

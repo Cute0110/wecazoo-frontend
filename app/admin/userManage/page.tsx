@@ -35,13 +35,13 @@ const UserManagePage = () => {
       setIsLoading(true);
 
       try {
-        const response = await axiosInstance.get('/api/check_session', {
+        const response = await axiosInstance.get('/api/admin_check_session', {
           withCredentials: true,
         });
 
         const result = dot(response.data);
 
-        if (result.status == 0 || (result.userData.userCode != "wecazoo_2vG619" && result.userData.userCode != "wecazoo_1gf789")) {
+        if (result.status == 0) {
           router.push("/");
         } else {
           const userDataResult = await axiosInstance.post('/api/get_all_users', eot({ start: 0, length: 10, search: "", order: "id", dir: "ASC" }));
@@ -51,12 +51,11 @@ const UserManagePage = () => {
           if (res.status == 1) {
             setUserData({ data: res.data, count: res.totalCount, pageNum: res.start + 1, pageCount: res.length })
           }
+          setIsLoading(false);
         }
       } catch (err) {
         router.push("/");
-        setIsLoading(false);
       } finally {
-        setIsLoading(false);
       }
     }
     check_auth();

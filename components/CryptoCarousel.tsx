@@ -15,6 +15,7 @@ const cryptoIcons = [
   { src: "/images/coins/bnb.svg", alt: "BNB" },
   { src: "/images/coins/usdt.svg", alt: "USDT" },
   { src: "/images/coins/usdc.jpg", alt: "USDC" },
+  { src: "/images/coins/tron.jpg", alt: "TRON" },
   { src: "/images/coins/litecoin.svg", alt: "Litecoin" },
   { src: "/images/coins/dogecoin.svg", alt: "Dogecoin" },
   { src: "/images/coins/ripple.svg", alt: "Ripple" },

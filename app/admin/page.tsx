@@ -20,20 +20,20 @@ const Admin = () => {
       setIsLoading(true);
 
       try {
-        const response = await axiosInstance.get('/api/check_session', {
+        const response = await axiosInstance.get('/api/admin_check_session', {
           withCredentials: true,
         });
 
         const res = dot(response.data);
 
-        if (res.status == 0 || (res.userData.userCode != "wecazoo_1gf789" && res.userData.userCode != "wecazoo_2vG619")) {
+        if (res.status == 0) {
           router.push("/");
+        } else {
+          setIsLoading(false);
         }
       } catch (err) {
         router.push("/");
-        setIsLoading(false);
       } finally {
-        setIsLoading(false);
       }
     }
     check_auth();
