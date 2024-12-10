@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { Icon } from "@iconify/react";
 import { ChevronDown, ChevronDownIcon, CopyIcon } from "lucide-react";
 import Image from "next/image";
-import { FaArrowUp } from "react-icons/fa";
+import { FaArrowUp, FaQuestionCircle } from "react-icons/fa";
 import { RiExchangeDollarLine } from "react-icons/ri";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
@@ -18,6 +18,7 @@ import axiosInstance from "@/lib/action";
 import { eot, dot } from "@/lib/cryptoUtils";
 import Web3 from 'web3';
 import { isAddress } from 'web3-validator';
+import AboutLockedBalance from "./Modals/AboutLockedBalance";
 
 const web3 = new Web3();
 
@@ -43,7 +44,7 @@ const WalletScreen = () => {
   };
 
   const onAmountMinClick = () => {
-    setWithdrawAmount("1.00");
+    setWithdrawAmount("5.00");
   }
 
   const onAmountMaxClick = () => {
@@ -77,11 +78,11 @@ const WalletScreen = () => {
   const onWithdrawClick = () => {
     if (!isNaN(Number(withdrawAmount)) && withdrawAmount.trim() !== "") {
       if (Number(withdrawAmount) < 1) {
-        openNotification("warning", "Warning", "Minimum value is 1$!", "topRight");
+        openNotification("warning", "Warning", "Minimum value is 5$!", "topRight");
       } else if (Number(withdrawAmount) > authData.balance) {
         openNotification("warning", "Warning", "You have not enough balance!", "topRight");
       } else {
-        if (withdrawWalletAddress == "" || !isAddress(withdrawWalletAddress)) {
+        if (withdrawWalletAddress == "") {
           openNotification("warning", "Warning", "Input correct wallet address!", "topRight");
         } else {
           withdrawAction(Number(withdrawAmount), withdrawWalletAddress);
@@ -151,12 +152,12 @@ const WalletScreen = () => {
               <TabsContent value="deposit">
                 <div className="bg-[#130D25] flex flex-col p-5 md:p-6 gap-8">
                   <div className="flex flex-col md:flex-row justify-center items-center md:justify-between gap-6 divide-y divide-gray-500/50 md:divide-none">
-                    <div className="flex divide-x divide-gray-500/25">
+                    <div className="flex">
                       <div className="pr-4">
-                        <span className="text-muted whitespace-nowrap text-sm">
+                        <span className="text-muted whitespace-nowrap text-sm flex items-center">
                           Your Balance
                         </span>
-                        <p className="text-sm md:text-base font-medium">${authData.balance.toFixed(5)}</p>
+                        <p className="text-sm md:text-base font-medium">${authData.balance.toFixed(2)}</p>
                       </div>
                     </div>
                     <div className="flex gap-4 w-full justify-center pt-6 md:pt-0">
@@ -200,17 +201,11 @@ const WalletScreen = () => {
               <TabsContent value="withdraw">
                 <div className="bg-[#130D25] flex flex-col p-5 md:p-6 gap-8">
                   <div>
-                    <h2 className="text-xl font-semibold">Your Balance</h2>
-                    <div className="flex flex-col my-4 gap-3">
-                      <div className="flex items-center justify-between bg-[#2A253A] rounded-[10px] px-6 py-5 md:py-4">
-                        <div className="flex items-center justify-center gap-2.5">
-                          <p className="font-semibold text-lg">${authData.balance.toFixed(5)}</p>
-                        </div>
-                      </div>
-                    </div>
+                    <h2 className="text-muted font-lg">Your Balance</h2>
+                    <p className="font-semibold text-lg">${authData.balance.toFixed(5)}</p>
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold">Withdraw Amount</h2>
+                    <h2 className="text-muted font-lg">Withdraw Amount</h2>
                     <div className="flex flex-col my-4 gap-3">
                       <input
                         type="withdrawAmount"
@@ -219,7 +214,7 @@ const WalletScreen = () => {
                         placeholder=""
                         value={withdrawAmount}
                         onChange={handleWithdrawAmountInputChange}
-                        className="w-[50%] p-2 border rounded-xl bg-[#2A253A]"
+                        className="w-[100%] lg:w-[50%] p-2 border rounded-xl bg-[#2A253A]"
                         required
                       />
                       <div className="flex">
@@ -233,7 +228,7 @@ const WalletScreen = () => {
                     </div>
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold">Your Wallet Address(USDT ERC20)</h2>
+                    <h2 className="text-muted font-lg">Your Wallet Address(Only ERC20 or TRC20)</h2>
                     <div className="flex flex-col my-4 gap-3">
                       <input
                         type="withdrawWalletAddress"
@@ -242,7 +237,7 @@ const WalletScreen = () => {
                         placeholder=""
                         value={withdrawWalletAddress}
                         onChange={handleWalletAddressInputChange}
-                        className="w-[50%] p-2 border rounded-xl bg-[#2A253A]"
+                        className="w-[100%] lg:w-[50%] p-2 border rounded-xl bg-[#2A253A]"
                         required
                       />
                     </div>

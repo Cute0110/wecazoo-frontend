@@ -54,6 +54,15 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
       </li>
       <li>
         <Link
+          href="/profile"
+          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
+        >
+          <UserIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
+          <span className="text-sm">Profile</span>
+        </Link>
+      </li>
+      <li>
+        <Link
           href="/wallet"
           className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
         >

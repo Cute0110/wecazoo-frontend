@@ -30,10 +30,10 @@ const UserActions = () => {
 
   const userLinks: userLink[] = [
     { title: "Home", icon: <Home size={20} />, link: "/" },
+    { title: "Profile", icon: <UserIcon size={20} />, link: "/profile" },
     { title: "Wallet", icon: <WalletIcon size={20} />, link: "/wallet" },
-    { title: "Transactions", icon: <ListIcon size={20} />, link: "" },
-    { title: "Refer & Earn", icon: <GiftIcon size={20} />, link: "" },
-    { title: "Settings", icon: <SettingsIcon size={20} />, link: "" },
+    // { title: "Refer & Earn", icon: <GiftIcon size={20} />, link: "" },
+    // { title: "Settings", icon: <SettingsIcon size={20} />, link: "" },
     { title: "Logout", icon: <LogOutIcon size={20}/>, link: "" },
   ];
   const router = useRouter();
