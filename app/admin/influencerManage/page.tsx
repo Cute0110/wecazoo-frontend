@@ -48,8 +48,6 @@ const InfluencerManagePage = () => {
 
           const res = dot(dataResult.data);
 
-          console.log(res);
-
           if (res.status == 1) {
             setOriginalData({ data: res.data, count: res.totalCount, pageNum: res.start + 1, pageCount: res.length })
           }

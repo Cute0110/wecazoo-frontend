@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Checkbox, Input, InputNumber, Modal, notification, Select, Slider } from 'antd';
-import { v4 as uuidv4 } from 'uuid';
+import { customAlphabet } from 'nanoid';
 
 const CreateModal = ({ isModalOpen, setIsModalOpen, modalTitle, onCreate }: any) => {
     const [nameVal, setNameVal] = useState("");
@@ -46,8 +46,8 @@ const CreateModal = ({ isModalOpen, setIsModalOpen, modalTitle, onCreate }: any)
     };
 
     const onCodeGenerate = () => {
-        const randomUUID = uuidv4().slice(9, 23);
-        setPromoCodeVal(randomUUID);
+        const promoCode = customAlphabet('0123456789', 8);
+        setPromoCodeVal(promoCode());
     }
 
     return (

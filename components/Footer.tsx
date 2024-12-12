@@ -8,20 +8,24 @@ import CryptoCarousel from "./CryptoCarousel";
 import { useState } from "react";
 import AboutUs from "./Modals/AboutUs";
 import CustomerSupport from "./Modals/CustomerSupport";
+import PrivacyPolicy from "./Modals/PrivacyPolicy";
 
 const Footer = () => {
   const [isAboutUsModalOpen, setIsAboutUsModalOpen] = useState(false);
   const [isCSModalOpen, setIsCSModalOpen] = useState(false);
+  const [isPolicyModalOpen, setIsPolicyModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
 
   const onModalClose = () => {
     setIsAboutUsModalOpen(false);
     setIsCSModalOpen(false);
+    setIsPolicyModalOpen(false);
   }
   return (
     <footer className="bg-[#130D25] mt-12">
       <AboutUs isModalOpen={isAboutUsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <CustomerSupport isModalOpen={isCSModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
+      <PrivacyPolicy isModalOpen={isPolicyModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <section className="container bg-[#D9D9D9CC] rounded-[10px] py-4 px-2 overflow-hidden w-[95%] lg:w-full">
         <CryptoCarousel />
       </section>
@@ -47,12 +51,6 @@ const Footer = () => {
                 <li className="hover:text-primary transition-colors">
                   <span className="cursor-pointer" onClick={() => {setIsAboutUsModalOpen(true); setModalTitle("About Us");}}>About Us</span>
                 </li>
-                {/* <li className="hover:text-primary transition-colors">
-                  <a href="#">Responsible Gaming</a>
-                </li>
-                <li className="hover:text-primary transition-colors">
-                  <a href="#">Affiliates</a>
-                </li> */}
               </ul>
             </div>
             <div className="flex flex-col gap-6">
@@ -61,25 +59,16 @@ const Footer = () => {
                 <li className="hover:text-primary transition-colors">
                 <span className="cursor-pointer" onClick={() => {setIsCSModalOpen(true); setModalTitle("Customer Support");}}>Customer Support</span>
                 </li>
-                {/* <li className="hover:text-primary transition-colors">
-                  <a href="#">Contact Us</a>
-                </li> */}
               </ul>
             </div>
-            {/* <div className="flex flex-col gap-6">
-              <h3 className="font-bold text-lg">Regulations</h3>
-              <ul className="text-muted flex flex-col gap-6 justify-end">
+            <div className="flex flex-col gap-6">
+              <h3 className="font-bold text-lg">Policy</h3>
+              <ul className="text-muted flex flex-col gap-6 justify-start">
                 <li className="hover:text-primary transition-colors">
-                  <a href="#">Privacy Policy</a>
-                </li>
-                <li className="hover:text-primary transition-colors">
-                  <a href="#">General Terms and Conditions</a>
-                </li>
-                <li className="hover:text-primary transition-colors">
-                  <a href="#">AML & KYC Policy</a>
+                <span className="cursor-pointer" onClick={() => {setIsPolicyModalOpen(true); setModalTitle("Privacy Policy");}}>Privacy Policy</span>
                 </li>
               </ul>
-            </div> */}
+            </div>
           </div>
           <div className="border-t border-primary-accent md:border-none pt-8 md:pt-2 md:pb-2">
             <div className="flex flex-col gap-6">

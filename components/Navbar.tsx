@@ -96,9 +96,9 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
       <li>
         <div
           className="flex items-center text-foreground text-sm font-medium whitespace-nowrap cursor-pointer"
-          onClick={() => onScrollTo("W Original", "game_section")}
+          onClick={() => onScrollTo("All Games", "game_section")}
         >
-          W Original
+          All Games
         </div>
       </li>
       <li>

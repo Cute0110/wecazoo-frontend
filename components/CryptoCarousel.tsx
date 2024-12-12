@@ -11,15 +11,15 @@ import Autoplay from "embla-carousel-autoplay";
 
 const cryptoIcons = [
   { src: "/images/coins/bitcoin.svg", alt: "BTC" },
-  { src: "/images/coins/ethereum.svg", alt: "ETH" },
+  { src: "/images/coins/ethereum.png", alt: "ETH" },
   { src: "/images/coins/bnb.svg", alt: "BNB" },
   { src: "/images/coins/usdt.svg", alt: "USDT" },
   { src: "/images/coins/usdc.jpg", alt: "USDC" },
   { src: "/images/coins/tron.jpg", alt: "TRON" },
-  { src: "/images/coins/litecoin.svg", alt: "Litecoin" },
-  { src: "/images/coins/dogecoin.svg", alt: "Dogecoin" },
-  { src: "/images/coins/ripple.svg", alt: "Ripple" },
-  { src: "/images/coins/solana.svg", alt: "Solana" },
+  { src: "/images/coins/litecoin.jpg", alt: "Litecoin" },
+  { src: "/images/coins/dogecoin.jpg", alt: "Dogecoin" },
+  { src: "/images/coins/ripple.jpg", alt: "Ripple" },
+  { src: "/images/coins/solana.jpg", alt: "Solana" },
 ];
 
 export default function CryptoCarousel() {

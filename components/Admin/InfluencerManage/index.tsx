@@ -82,7 +82,6 @@ const InfluencerManage = ({
 
   const onTransaction = (id: any) => {
     const data = originalData.data.find((item: any) => item.id == id);
-    console.log(1111111, data);
     setSelectedData(data);
     setIsTransactionModalOpen(true);
   }

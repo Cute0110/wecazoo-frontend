@@ -6,8 +6,6 @@ const CreateModal = ({ selectedData, isModalOpen, setIsModalOpen, modalTitle, on
     const [payVal, setPayVal] = useState(1);
     const [api, contextHolder] = notification.useNotification();
 
-    console.log(selectedData);
-
     type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
     const openNotification = (type: NotificationType, placement: any, title: any, content: any) => {

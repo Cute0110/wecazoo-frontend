@@ -18,14 +18,13 @@ const categories = [
   "W Original",
   "Slots",
   "Live Casino",
+  "All Games",
 ];
 
 const originalGamesInfo = [
   "EVOLUTION",
   "PRAGMATICLIVE",
   "PRAGMATIC",
-  "PGSOFT",
-  "EVOPLAY",
 ]
 
 type NotificationPlacement = NotificationArgsProps['placement'];
@@ -60,6 +59,8 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
       setGames(allGamesData.filter((item: any) => item.type === "live"));
     } else if (category === "W Original") {
       setGames(allGamesData.filter((item: any) => originalGamesInfo.includes(item.code)));
+    } else if (category === "All Games") {
+      setGames(allGamesData);
     } else {
       setGames([]);
     }
