@@ -20,6 +20,7 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
         email: "",
         password: "",
         confirmPassword: "",
+        promoCode: "",
         ageConfirmation: false,
         emailConfirmation: false,
     });
@@ -73,7 +74,7 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
         } else {
             try {
 
-                const response = await axiosInstance.post('/api/register', eot({ emailAddress: formData.email, password: formData.password }));
+                const response = await axiosInstance.post('/api/register', eot({ emailAddress: formData.email, password: formData.password, promoCode: formData.promoCode }));
                 const res = dot(response.data);
                 if (res.status == 1) {
                     openNotification('success', 'Success', 'Registerd successfully!', 'topRight');
@@ -189,6 +190,31 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                         )} */}
                             {!isLogin && (
                                 <div>
+                                    <div className="mb-4">
+                                        <label
+                                            htmlFor="promoCode"
+                                            className="block mb-2  text-white font-semibold"
+                                        >
+                                            Promo Code(option)
+                                        </label>
+                                        <input
+                                            type="promoCode"
+                                            id="promoCode"
+                                            name="promoCode"
+                                            placeholder="Received code from influencer"
+                                            value={formData.promoCode}
+                                            onChange={handleInputChange}
+                                            className="w-full p-2 border rounded-xl"
+                                        />
+                                        {isLogin && (
+                                            <Link
+                                                href="#"
+                                                className="text-sm text-[#1BB96B] block text-right font-semibold mt-1"
+                                            >
+                                                Forgot password?
+                                            </Link>
+                                        )}
+                                    </div>
                                     {/* <label
                                     htmlFor="referralCode"
                                     className="mb-1 flex items-center gap-1 cursor-pointer text-muted"
