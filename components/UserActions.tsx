@@ -32,7 +32,7 @@ const UserActions = () => {
     { title: "Home", icon: <Home size={20} />, link: "/" },
     { title: "Profile", icon: <UserIcon size={20} />, link: "/profile" },
     { title: "Wallet", icon: <WalletIcon size={20} />, link: "/wallet" },
-    // { title: "Refer & Earn", icon: <GiftIcon size={20} />, link: "" },
+    { title: "Bonus", icon: <GiftIcon size={20} />, link: "/bonus" },
     // { title: "Settings", icon: <SettingsIcon size={20} />, link: "" },
     { title: "Logout", icon: <LogOutIcon size={20}/>, link: "" },
   ];

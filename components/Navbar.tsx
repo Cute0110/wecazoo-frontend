@@ -71,6 +71,15 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
         </Link>
       </li>
       <li>
+        <Link
+          href="/bonus"
+          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
+        >
+          <GiftIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
+          <span className="text-sm">Bonus</span>
+        </Link>
+      </li>
+      <li>
         <div
           className="flex items-center text-foreground text-sm font-medium whitespace-nowrap cursor-pointer"
           onClick={onLogOutClick}
