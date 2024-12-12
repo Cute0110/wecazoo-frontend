@@ -29,6 +29,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           route: "/admin",
         },
         {
+          icon: (<TeamOutlined />),
+          label: "Manage Influencer",
+          route: "/admin/influencerManage",
+        },
+        {
           icon: (<UserOutlined />),
           label: "Manage User",
           route: "/admin/userManage",
