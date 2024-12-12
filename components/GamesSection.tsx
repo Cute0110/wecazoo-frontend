@@ -23,6 +23,7 @@ const categories = [
 
 const originalGamesInfo = [
   "EVOLUTION",
+  "EVOPLAY",
   "PRAGMATICLIVE",
   "PRAGMATIC",
 ]
