@@ -103,15 +103,6 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
       </li>
       <li>
         <div
-          onClick={() => onScrollTo("Live Sport", "sport_section")}
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
-        >
-          <MdLiveTv size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Live Sport</span>
-        </div>
-      </li>
-      <li>
-        <div
           onClick={() => onScrollTo("Slots", "game_section")}
           className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
         >

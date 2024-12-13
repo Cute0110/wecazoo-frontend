@@ -13,11 +13,14 @@ import axiosInstance from "@/lib/action";
 import { dot } from "@/lib/cryptoUtils";
 import { notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
+import BonusMarket from "@/components/BonusMarket";
+import { useAuth } from "@/lib/authContext";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 const Home = () => {
+  const { isAuthenticated } = useAuth();
   const [allGamesData, setAllGamesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("W Original");
   const [api, contextHolder] = notification.useNotification();
@@ -72,7 +75,8 @@ const Home = () => {
           <Hero />
 
           <section className="container mb-8">
-            <div id="sport_section" className="flex flex-col md:flex-row justify-center items-center gap-4 w-full mb-4 sm:mb-0">
+            <div id="sport_section" className="flex flex-col md:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
+              <BonusMarket />
               <HeroCard
                 title="Casino"
                 description="Dive in to our wide range of in-house games, live casino and slots to experience a thrilling casino adventure."
@@ -82,7 +86,7 @@ const Home = () => {
                 iconType="casino"
                 onScrollTo={onScrollTo}
               />
-              <HeroCard
+              {/* <HeroCard
                 title="Sport"
                 description="Explore our sports, live betting, and virtual games for an exciting sports adventure."
                 buttonText="Sport"
@@ -90,9 +94,9 @@ const Home = () => {
                 imageSrc="/images/hero-card-bg-2.png"
                 iconType="sports"
                 onScrollTo={onScrollTo}
-              />
+              /> */}
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
               <BetCard
                 league="Premier League"
                 date="Feb 2"
@@ -133,7 +137,7 @@ const Home = () => {
                 awayTeamLogo="/images/teams/WHU.png"
                 odds={{ home: 2.5, draw: 3.2, away: 2.8 }}
               />
-            </div>
+            </div> */}
           </section>
 
           <div id="game_section"><GamesSection allGamesData={allGamesData} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} /></div>

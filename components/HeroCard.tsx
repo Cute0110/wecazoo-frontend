@@ -19,7 +19,7 @@ const HeroCard = ({
   const iconAlt = iconType === "sports" ? "Sports icon" : "Casino icon";
 
   return (
-    <div className="relative w-full h-[400px] overflow-hidden rounded-t-lg rounded-b-lg sm:rounded-b-none">
+    <div className="relative w-full lg:w-[50%] h-[400px] overflow-hidden rounded-t-lg rounded-b-lg sm:rounded-b-none">
       <Image src={imageSrc} alt={title} fill className="object-cover z-0" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(19,13,37,0.8)] to-[#130D25] z-10" />
       <div className="absolute inset-0 z-20 p-4 flex flex-col justify-end gap-9 bottom-0">
