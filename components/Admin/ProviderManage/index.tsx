@@ -1,19 +1,15 @@
 import { Pagination } from "antd";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/authContext";
-import DeleteConfirmModal from "./DeleteConfirmModal";
 import ManageTable from "./ManageTable";
-import { UserAddOutlined } from '@ant-design/icons'
-import CreateModal from "./CreateModal";
-import TransactionModal from "./TransactionModal";
+import { UserAddOutlined, ReloadOutlined } from '@ant-design/icons'
 
-const InfluencerManage = ({
+const ProviderManage = ({
   originalData,
   onGetTableDataAction,
   onStatusChangeAction,
-  onTransactionAction,
-  onCreateAction,
-  onDeleteAction
+  onOriginalStatusChangeAction,
+  onRefreshProviderAction,
 }: any) => {
 
   const { authData } = useAuth();
@@ -22,10 +18,6 @@ const InfluencerManage = ({
   const [paginationVal, setPaginationVal] = useState(1);
   const [pageSizeVal, setPageSizeVal] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
-  const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [selectedData, setSelectedData] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [orderData, setOrderData] = useState({ order: "id", dir: "asc" });
 
   const pageSizeOptions = ['10', '20', '50'];
@@ -36,13 +28,13 @@ const InfluencerManage = ({
       const temp = {
         key: originalData[i].id,
         no: (pageNum - 1) * pageCount + i + 1,
+        code: originalData[i].code,
         name: originalData[i].name,
-        promoCode: originalData[i].promoCode,
-        usersCount: originalData[i].usersCount,
-        usersTotalBet: originalData[i].usersTotalBet.toFixed(2),
-        profit: originalData[i].profit.toFixed(2),
-        createDate: originalData[i].createdAt,
+        type: originalData[i].type,
+        order: originalData[i].order,
+        isOriginal: originalData[i].isOriginal == 0 ? false : true,
         status: originalData[i].status == 0 ? false : true,
+        createDate: originalData[i].createdAt,
       }
       tempData.push(temp);
     }
@@ -80,47 +72,16 @@ const InfluencerManage = ({
     setPageSizeVal(size);
   }
 
-  const onTransaction = (id: any) => {
-    const data = originalData.data.find((item: any) => item.id == id);
-    setSelectedData(data);
-    setIsTransactionModalOpen(true);
-  }
-
-  const onDelete = (id: any) => {
-    const data = originalData.data.find((item: any) => item.id == id);
-    setSelectedData(data);
-    setIsDeleteModalOpen(true);
-  }
-
-  const onDeleteConfirmAction = () => {
-    let temp: any = selectedData;
-    onDeleteAction(temp.id, searchValue, paginationVal, pageSizeVal, orderData);
-    setSelectedData(null);
-  }
-
-  const onCreate = (name: any, promoCode: any) => {
-    onCreateAction(name, promoCode, searchValue, paginationVal, pageSizeVal, orderData);
-  }
-
-  const onTransactionConfirm = (id: any, payoutAmount: any) => {
-    onTransactionAction(id, payoutAmount);
-    setSelectedData(null);
-  }
-
   return (
     <>
-      <CreateModal isModalOpen={isCreateModalOpen} setIsModalOpen={setIsCreateModalOpen} modalTitle={"Create Influencer"} onCreate={onCreate}/>
-      <TransactionModal selectedData={selectedData} isModalOpen={isTransactionModalOpen} setIsModalOpen={setIsTransactionModalOpen} modalTitle={"Pay Influencer"} onTransactionConfirm={onTransactionConfirm}/>
-      <DeleteConfirmModal isModalOpen={isDeleteModalOpen} setIsModalOpen={setIsDeleteModalOpen} onConfirmAction={onDeleteConfirmAction} />
-
       <div className="ml-[20px] lg:ml-[300px]">
         <div className="relative w-[calc(100vw-70px)] lg:w-[calc(100vw-350px)]">
 
           <div className="my-2">
             <div className="flex items-center justify-between mb-2">
-              <p>Total Influencers : <span className="text-[20px]">{totalCount}</span></p>
-              <button onClick={() => setIsCreateModalOpen(true)} className="bg-[#1677ff] text-white hover:opacity-[0.8] ml-auto font-lg px-4 py-2 rounded-md">
-                {<UserAddOutlined style={{ marginRight: '4px' }} />}Create
+              <p>Total Providers : <span className="text-[20px]">{totalCount}</span></p>
+              <button onClick={onRefreshProviderAction} className="bg-[#1677ff] text-white hover:opacity-[0.8] ml-auto font-lg px-4 py-2 rounded-md">
+                {<ReloadOutlined style={{ marginRight: '4px' }} />}Refresh
               </button>
             </div>
             <Pagination
@@ -138,8 +99,7 @@ const InfluencerManage = ({
             <ManageTable
               data={tableData}
               onStatusChangeAction={onStatusChangeAction}
-              onDelete={onDelete}
-              onTransaction={onTransaction}
+              onOriginalStatusChangeAction={onOriginalStatusChangeAction}
               setOrderData={setOrderData}
             />
           </div>
@@ -161,4 +121,4 @@ const InfluencerManage = ({
   );
 };
 
-export default InfluencerManage;
+export default ProviderManage;

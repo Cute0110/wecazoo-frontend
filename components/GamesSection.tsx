@@ -21,13 +21,6 @@ const categories = [
   "All Games",
 ];
 
-const originalGamesInfo = [
-  "EVOLUTION",
-  "EVOPLAY",
-  "PRAGMATICLIVE",
-  "PRAGMATIC",
-]
-
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
@@ -59,7 +52,7 @@ const GamesSection = ({ allGamesData, selectedCategory, setSelectedCategory }: a
     } else if (category === "Live Casino") {
       setGames(allGamesData.filter((item: any) => item.type === "live"));
     } else if (category === "W Original") {
-      setGames(allGamesData.filter((item: any) => originalGamesInfo.includes(item.code)));
+      setGames(allGamesData.filter((item: any) => item.isOriginal == 1));
     } else if (category === "All Games") {
       setGames(allGamesData);
     } else {

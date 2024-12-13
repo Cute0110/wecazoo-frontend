@@ -104,7 +104,7 @@ const UserManage = ({
       <UserTransactionModal selectedUserData={selectedUserData} isModalOpen={isUserTransactionModalOpen} setIsModalOpen={setIsUserTransactionModalOpen} onUserTransactionConfirm={onUserTransactionConfirm} />
 
       <div className="ml-[20px] lg:ml-[300px]">
-        <div className="relative w-[calc(100vw-70px)] lg:w-[calc(100vw-340px)]">
+        <div className="relative w-[calc(100vw-70px)] lg:w-[calc(100vw-350px)]">
 
           <div className="my-4">
             <p className="my-6">Total Users : <span className="text-[20px]">{totalCount}</span></p>
