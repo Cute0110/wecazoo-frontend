@@ -45,8 +45,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         },
         {
           icon: (<FieldTimeOutlined />),
-          label: "Deposit Hsitories",
+          label: "Deposit Histories",
           route: "/admin/depositHistory",
+        },
+        {
+          icon: (<FieldTimeOutlined />),
+          label: "Withdraw Histories",
+          route: "/admin/withdrawHistory",
         },
       ],
     },

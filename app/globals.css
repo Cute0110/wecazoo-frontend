@@ -76,3 +76,31 @@ body {
 .ant-pagination-options {
   display: block !important;
 }
+
+.ant-select-selector {
+  background-color: #2a253a !important;
+  color: white !important;
+}
+
+.ant-select-arrow {
+  color: white !important;
+}
+
+.ant-select-dropdown {
+  background-color: #2a253a !important;
+  color: white !important;
+}
+
+.ant-select-item {
+  color: white !important;
+}
+
+.ant-select-item-option-active {
+  color: white !important;
+  background-color: #07001a !important;
+}
+
+.ant-select-item-option-selected {
+  color: white !important;
+  background-color: #07001a !important;
+}

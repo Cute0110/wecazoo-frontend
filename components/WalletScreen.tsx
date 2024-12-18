@@ -12,7 +12,7 @@ import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import { useAuth } from "@/lib/authContext";
 import { useState } from "react";
-import { notification } from 'antd';
+import { notification, Select } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import axiosInstance from "@/lib/action";
 import { eot, dot } from "@/lib/cryptoUtils";
@@ -33,6 +33,9 @@ const WalletScreen = () => {
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [withdrawWalletAddress, setWithdrawWalletAddress] = useState("");
   const [api, contextHolder] = notification.useNotification();
+  const [assetType, setAssetType] = useState(0);
+
+  const assetTypeArray = ["ERC 20", "TRC 20", "SOLANA"];
 
   const openNotification = (type: NotificationType, title: any, content: any, placement: NotificationPlacement) => {
     api[type]({
@@ -42,6 +45,10 @@ const WalletScreen = () => {
       placement,
     });
   };
+
+  const onSelectAsset = (value: any) => {
+    setAssetType(value);
+  }
 
   const onAmountMinClick = () => {
     setWithdrawAmount("5.00");
@@ -95,7 +102,7 @@ const WalletScreen = () => {
 
   const withdrawAction = async (amount: any, address: any) => {
     try {
-      const response = await axiosInstance.post('/api/withdraw', eot({ amount: amount.toFixed(5), address: address }));
+      const response = await axiosInstance.post('/api/withdraw', eot({ amount: amount.toFixed(5), address: address, asset: assetTypeArray[assetType] }));
       const res = dot(response.data);
       if (res.status == 1) {
         setAuthData({ ...authData, balance: res.balance });
@@ -228,7 +235,20 @@ const WalletScreen = () => {
                     </div>
                   </div>
                   <div>
-                    <h2 className="text-muted font-lg">Your Wallet Address(Only ERC20 or TRC20)</h2>
+                    <h2 className="text-muted font-lg asset-panel">Choose asset</h2>
+                    <div className="flex flex-col my-4 gap-3">
+                      <Select
+                        placeholder="Select asset"
+                        value={assetType}
+                        style={{backgroundColor: "#2a253a", color: "white", height: "50px"}}
+                        className="w-full lg:w-[50%]"
+                        options={assetTypeArray.map((item: any, index: any) => ({ label: item, value: index }))}
+                        onSelect={onSelectAsset}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <h2 className="text-muted font-lg">Your Wallet Address</h2>
                     <div className="flex flex-col my-4 gap-3">
                       <input
                         type="withdrawWalletAddress"
