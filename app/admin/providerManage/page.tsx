@@ -51,6 +51,8 @@ const ProviderManagePage = () => {
 
           if (res.status == 1) {
             setOriginalData({ data: res.data, count: res.totalCount, pageNum: res.start + 1, pageCount: res.length })
+          } else {
+            openNotification("error", "Error", res.msg, "topRight");
           }
           setIsLoading(false);
         }
@@ -67,7 +69,11 @@ const ProviderManagePage = () => {
       const result = await axiosInstance.post("api/get_all_providers", eot({ search, start: (start - 1) * length, length, order: orderData.order, dir: orderData.dir }));
       const res = dot(result.data);
 
-      setOriginalData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      if (res.status == 1) {
+        setOriginalData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
+      }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");
     } finally {
@@ -88,6 +94,8 @@ const ProviderManagePage = () => {
         }
         setOriginalData(tempUserData);
         openNotification('info', "Information", "Status has changed successfully!", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");
@@ -108,6 +116,8 @@ const ProviderManagePage = () => {
         }
         setOriginalData(tempUserData);
         openNotification('info', "Information", "Status has changed successfully!", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");

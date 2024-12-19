@@ -50,6 +50,8 @@ const WithdrawHistoryPage = () => {
 
           if (res.status == 1) {
             setOriginalData({ data: res.data, count: res.totalCount, pageNum: res.start + 1, pageCount: res.length })
+          } else {
+            openNotification("error", "Error", res.msg, "topRight");
           }
           setIsLoading(false);
         }
@@ -66,7 +68,11 @@ const WithdrawHistoryPage = () => {
       const result = await axiosInstance.post("api/get_withdraw_histories", eot({ search, start: (start - 1) * length, length, order: orderData.order, dir: orderData.dir }));
       const res = dot(result.data);
 
-      setOriginalData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      if (res.status == 1) {
+        setOriginalData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
+      }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");
     } finally {
@@ -88,6 +94,8 @@ const WithdrawHistoryPage = () => {
         }
         setOriginalData(tempUserData);
         openNotification('info', "Information", "Paid successfully!", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");

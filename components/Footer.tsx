@@ -124,6 +124,9 @@ const Footer = () => {
         <p className="flex justify-center items-center text-muted text-sm">
           Company registered and licensed in Costa Rica.
         </p>
+        <div className="flex justify-center mt-6">
+          <Image src={"images/BeGambleAware.jpg"} alt={"Be Gamble Aware"} width={200} height={100} />
+        </div>
       </div>
     </footer>
   );

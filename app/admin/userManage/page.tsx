@@ -50,6 +50,8 @@ const UserManagePage = () => {
 
           if (res.status == 1) {
             setUserData({ data: res.data, count: res.totalCount, pageNum: res.start + 1, pageCount: res.length })
+          } else {
+            openNotification("error", "Error", res.msg, "topRight");
           }
           setIsLoading(false);
         }
@@ -66,7 +68,11 @@ const UserManagePage = () => {
       const result = await axiosInstance.post("api/get_all_users", eot({ search, start: (start - 1) * length, length, order: orderData.order, dir: orderData.dir }));
       const res = dot(result.data);
 
-      setUserData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      if (res.status == 1) {
+        setUserData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
+      }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");
     } finally {
@@ -83,6 +89,8 @@ const UserManagePage = () => {
         const response = dot(resultData.data);
         setUserData({ data: response.data, count: response.totalCount, pageNum: (response.start / response.length) + 1, pageCount: response.length })
         openNotification('success', "Success", "User deleted successfully!", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");
@@ -128,6 +136,8 @@ const UserManagePage = () => {
         }
         setUserData(tempUserData);
         openNotification('info', "Information", "User status has changed successfully!", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");

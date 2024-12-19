@@ -10,11 +10,12 @@ import { useEffect, useState } from "react";
 import withAuth from '@/lib/withAuth';
 import axios from "axios";
 import axiosInstance from "@/lib/action";
-import { dot } from "@/lib/cryptoUtils";
+import { dot, eot } from "@/lib/cryptoUtils";
 import { notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import BonusMarket from "@/components/BonusMarket";
 import { useAuth } from "@/lib/authContext";
+import GameRow from "@/components/GameRow";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -22,7 +23,6 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error';
 const Home = () => {
   const { isAuthenticated } = useAuth();
   const [allGamesData, setAllGamesData] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("W Original");
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = (type: NotificationType, title: any, content: any, placement: NotificationPlacement) => {
@@ -38,10 +38,10 @@ const Home = () => {
     document.title = "Wecazoo";
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.post('/api/provider_list');
+        const response = await axiosInstance.post('/api/game_list', eot({start: 0, length: 0, search: 0, order: "order", dir: "asc"}));
         const res = dot(response.data);
         if (res.status == 1) {
-          setAllGamesData(res.providers);
+          setAllGamesData(res.data);
         } else {
           openNotification("error", "Error", res.msg, "topRight");
         }
@@ -53,16 +53,15 @@ const Home = () => {
     fetchData();
   }, []);
 
-  const onScrollTo = (categoryType: any, gameType: any) => {
-    const element = document.getElementById(gameType); // Replace with your target element's ID
+  const onScrollTo = (gameSection: any) => {
+    const element = document.getElementById(gameSection); // Replace with your target element's ID
     if (element) {
-      const top = element.getBoundingClientRect().top + window.scrollY;
+      const top = element.getBoundingClientRect().top + window.scrollY - 76;
       window.scrollTo({
         top: top,
         behavior: "smooth", // Adds smooth scrolling
       });
     }
-    setSelectedCategory(categoryType);
   }
 
   return (
@@ -74,13 +73,16 @@ const Home = () => {
         <main className="container py-8">
           <Hero />
 
+          
+          <div id="trending-games"><GameRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"}/></div>
+
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col md:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
               <BonusMarket />
               <HeroCard
                 title="Casino"
                 description="Dive in to our wide range of in-house games, live casino and slots to experience a thrilling casino adventure."
-                buttonText="Casino"
+                buttonText="Slots"
                 buttonTextSecondary="Live Casino"
                 imageSrc="/images/hero-card-bg-1.png"
                 iconType="casino"
@@ -140,7 +142,11 @@ const Home = () => {
             </div> */}
           </section>
 
-          <div id="game_section"><GamesSection allGamesData={allGamesData} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} /></div>
+          <div id="popular-games"><GameRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"}/></div>
+          <div id="profitable-games"><GameRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"}/></div>
+          <div id="favorite-games"><GameRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"}/></div>
+          <div id="live-games"><GameRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"}/></div>
+          <div id="slot-games"><GameRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"}/></div>
         </main>
 
         <Footer />

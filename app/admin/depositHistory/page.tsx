@@ -52,10 +52,13 @@ const DepositHistoryPage = () => {
 
           if (res.status == 1) {
             setOriginalData({ data: res.data, count: res.totalCount, pageNum: res.start + 1, pageCount: res.length })
+          } else {
+            openNotification("error", "Error", "Network error!", "topRight");
           }
           setIsLoading(false);
         }
       } catch (err) {
+        openNotification("error", "Error", "Network error!", "topRight");
         router.push("/");
       } finally {
       }
@@ -68,11 +71,14 @@ const DepositHistoryPage = () => {
       const result = await axiosInstance.post("api/get_deposit_histories", eot({ search, start: (start - 1) * length, length, order: orderData.order, dir: orderData.dir }));
       const res = dot(result.data);
 
-      setOriginalData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      if (res.status == 1) {
+        setOriginalData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      } else {
+        openNotification("error", "Error", "Network error!", "topRight");
+      }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");
     } finally {
-      setIsLoading(false);
     }
   }
 

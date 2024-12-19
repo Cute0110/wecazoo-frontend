@@ -50,6 +50,8 @@ const InfluencerManagePage = () => {
 
           if (res.status == 1) {
             setOriginalData({ data: res.data, count: res.totalCount, pageNum: res.start + 1, pageCount: res.length })
+          } else {
+            openNotification("error", "Error", res.msg, "topRight");
           }
           setIsLoading(false);
         }
@@ -66,7 +68,11 @@ const InfluencerManagePage = () => {
       const result = await axiosInstance.post("api/get_all_influencers", eot({ search, start: (start - 1) * length, length, order: orderData.order, dir: orderData.dir }));
       const res = dot(result.data);
 
-      setOriginalData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      if (res.status == 1) {
+        setOriginalData({ data: res.data, count: res.totalCount, pageNum: (res.start / res.length) + 1, pageCount: res.length })
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
+      }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");
     } finally {
@@ -102,6 +108,8 @@ const InfluencerManagePage = () => {
         const response = dot(resultData.data);
         setOriginalData({ data: response.data, count: response.totalCount, pageNum: (response.start / response.length) + 1, pageCount: response.length })
         openNotification('success', "Success", "Influencer deleted successfully!", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");
@@ -147,6 +155,8 @@ const InfluencerManagePage = () => {
         }
         setOriginalData(tempUserData);
         openNotification('info', "Information", "Status has changed successfully!", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
       }
     } catch (err) {
       openNotification('error', "Error", "error", "topRight");

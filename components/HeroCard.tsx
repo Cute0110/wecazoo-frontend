@@ -31,14 +31,14 @@ const HeroCard = ({
           <p className="text-white text-opacity-80 max-w-md">{description}</p>
         </div>
         <div className="flex gap-4 w-full">
-          <Button className="flex-1 flex gap-2 items-center justify-center text-sm font-semibold md:px-3.5 lg:px-[32px]" onClick={() => onScrollTo("Slots", "game_section")}>
+          <Button className="flex-1 flex gap-2 items-center justify-center text-sm font-semibold md:px-3.5 lg:px-[32px]" onClick={() => onScrollTo("slot-games")}>
             <FaDice className="w-5 h-5" />
             {buttonText}
           </Button>
           <Button
             variant="secondary"
             className="flex-1 flex gap-2 items-center justify-center text-sm font-semibold md:px-3.5 lg:px-[32px]"
-            onClick={() => onScrollTo("Live Casino", "game_section")}
+            onClick={() => onScrollTo("live-games")}
           >
             <PiPokerChipFill className="w-5 h-5" />
             {buttonTextSecondary}

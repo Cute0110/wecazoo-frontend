@@ -96,23 +96,23 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
       <li>
         <div
           className="flex items-center text-foreground text-sm font-medium whitespace-nowrap cursor-pointer"
-          onClick={() => onScrollTo("All Games", "game_section")}
+          onClick={() => onScrollTo("popular-games")}
         >
           All Games
         </div>
       </li>
       <li>
         <div
-          onClick={() => onScrollTo("Slots", "game_section")}
+          onClick={() => onScrollTo("slot-games")}
           className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
         >
           <FaDice size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Slot</span>
+          <span className="text-sm">Slots</span>
         </div>
       </li>
       <li>
         <div
-          onClick={() => onScrollTo("Live Casino", "game_section")}
+          onClick={() => onScrollTo("live-games")}
           className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
         >
           <PiPokerChipFill size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
@@ -138,7 +138,7 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
   return (
     <>
       <AuthModal isModalOpen={isAuthModalOpen} onModalClose={onModalClose} modalType={isAuthModalType} />
-      <header className="h-fit bg-[#130D25]">
+      <header className="fixed w-full z-50 h-fit bg-[#130D25]">
         <div className="container flex justify-between items-center py-4 px-10 md:px-6 gap-4">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">

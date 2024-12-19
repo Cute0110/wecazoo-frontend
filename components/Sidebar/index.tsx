@@ -38,11 +38,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           label: "Manage User",
           route: "/admin/userManage",
         },
-        {
-          icon: (<ProductOutlined />),
-          label: "Manage Provider",
-          route: "/admin/providerManage",
-        },
+        // {
+        //   icon: (<ProductOutlined />),
+        //   label: "Manage Provider",
+        //   route: "/admin/providerManage",
+        // },
         {
           icon: (<FieldTimeOutlined />),
           label: "Deposit Histories",
