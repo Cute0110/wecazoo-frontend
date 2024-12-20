@@ -17,6 +17,7 @@ import BonusMarket from "@/components/BonusMarket";
 import { useAuth } from "@/lib/authContext";
 import GamesRow from "@/components/GamesRow";
 import BetInfoSection from "@/components/BetInfoSection";
+import MoonPay from "@/components/MoonPay";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -142,6 +143,10 @@ const Home = () => {
               />
             </div> */}
           </section>
+
+          <div className="w-full">
+            <MoonPay />
+          </div>
 
           <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"}/></div>
           <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"}/></div>
