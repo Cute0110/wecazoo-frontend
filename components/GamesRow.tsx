@@ -18,7 +18,7 @@ import PlayGameModal from "./Modals/PlayGameModal";
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
-const GamesSection = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
+const GamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
   const [games, setGames] = useState([]);
   const [isSlotGameModalOpen, setIsSlotGameModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -171,4 +171,4 @@ const GamesSection = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
   );
 };
 
-export default GamesSection;
+export default GamesRow;

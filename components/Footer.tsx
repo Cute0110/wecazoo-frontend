@@ -9,23 +9,35 @@ import { useState } from "react";
 import AboutUs from "./Modals/AboutUs";
 import CustomerSupport from "./Modals/CustomerSupport";
 import PrivacyPolicy from "./Modals/PrivacyPolicy";
+import FAQs from "./Modals/FAQs";
+import FairGameOdds from "./Modals/FairGameOdds";
+import TermsConditions from "./Modals/TermsConditions";
 
-const Footer = () => {
+const Footer = ({onScrollTo} : any) => {
   const [isAboutUsModalOpen, setIsAboutUsModalOpen] = useState(false);
   const [isCSModalOpen, setIsCSModalOpen] = useState(false);
   const [isPolicyModalOpen, setIsPolicyModalOpen] = useState(false);
+  const [isFaqsModalOpen, setIsFaqsModalOpen] = useState(false);
+  const [isFGOModalOpen, setIsFGOModalOpen] = useState(false);
+  const [isTCModalOpen, setIsTCModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
 
   const onModalClose = () => {
     setIsAboutUsModalOpen(false);
     setIsCSModalOpen(false);
     setIsPolicyModalOpen(false);
+    setIsFaqsModalOpen(false);
+    setIsFGOModalOpen(false);
+    setIsTCModalOpen(false);
   }
   return (
     <footer className="bg-[#130D25] mt-12">
       <AboutUs isModalOpen={isAboutUsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <CustomerSupport isModalOpen={isCSModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <PrivacyPolicy isModalOpen={isPolicyModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
+      <FAQs isModalOpen={isFaqsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
+      <FairGameOdds isModalOpen={isFGOModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
+      <TermsConditions isModalOpen={isTCModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <section className="container bg-[#D9D9D9CC] rounded-[10px] py-4 px-2 overflow-hidden w-[95%] lg:w-full">
         <CryptoCarousel />
       </section>
@@ -49,7 +61,10 @@ const Footer = () => {
               <h3 className="font-bold text-lg">About</h3>
               <ul className="text-muted flex flex-col gap-6 justify-start">
                 <li className="hover:text-primary transition-colors">
-                  <span className="cursor-pointer" onClick={() => {setIsAboutUsModalOpen(true); setModalTitle("About Us");}}>About Us</span>
+                  <span className="cursor-pointer" onClick={() => { setIsAboutUsModalOpen(true); setModalTitle("About Us"); }}>About Us</span>
+                </li>
+                <li className="hover:text-primary transition-colors">
+                  <span className="cursor-pointer" onClick={() => { setIsFGOModalOpen(true); setModalTitle("Fair Game Odds"); }}>Fair Game Odds</span>
                 </li>
               </ul>
             </div>
@@ -57,7 +72,10 @@ const Footer = () => {
               <h3 className="font-bold text-lg">Support</h3>
               <ul className="text-muted flex flex-col gap-6 justify-start">
                 <li className="hover:text-primary transition-colors">
-                <span className="cursor-pointer" onClick={() => {setIsCSModalOpen(true); setModalTitle("Customer Support");}}>Customer Support</span>
+                  <span className="cursor-pointer" onClick={() => { setIsCSModalOpen(true); setModalTitle("Customer Support"); }}>Customer Support</span>
+                </li>
+                <li className="hover:text-primary transition-colors">
+                  <span className="cursor-pointer" onClick={() => { setIsFaqsModalOpen(true); setModalTitle("FAQs"); }}>FAQs</span>
                 </li>
               </ul>
             </div>
@@ -65,7 +83,21 @@ const Footer = () => {
               <h3 className="font-bold text-lg">Policy</h3>
               <ul className="text-muted flex flex-col gap-6 justify-start">
                 <li className="hover:text-primary transition-colors">
-                <span className="cursor-pointer" onClick={() => {setIsPolicyModalOpen(true); setModalTitle("Privacy Policy");}}>Privacy Policy</span>
+                  <span className="cursor-pointer" onClick={() => { setIsPolicyModalOpen(true); setModalTitle("Privacy Policy"); }}>Privacy Policy</span>
+                </li>
+                <li className="hover:text-primary transition-colors">
+                  <span className="cursor-pointer" onClick={() => { setIsTCModalOpen(true); setModalTitle("Terms & Conditions"); }}>Terms & Conditions</span>
+                </li>
+              </ul>
+            </div>
+            <div className="flex flex-col gap-6">
+              <h3 className="font-bold text-lg">Games</h3>
+              <ul className="text-muted flex flex-col gap-6 justify-start">
+                <li className="hover:text-primary transition-colors">
+                  <span className="cursor-pointer" onClick={() => onScrollTo("slot-games")}>Slots</span>
+                </li>
+                <li className="hover:text-primary transition-colors">
+                  <span className="cursor-pointer" onClick={() => onScrollTo("live-games")}>Live Casino</span>
                 </li>
               </ul>
             </div>

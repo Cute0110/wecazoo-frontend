@@ -104,3 +104,29 @@ body {
   color: white !important;
   background-color: #07001a !important;
 }
+
+.bet-info-section {
+  .ant-table-wrapper {
+    width: 100%;
+  }
+  .ant-table-tbody {
+    .ant-table-cell {
+      background-color: #0d3832;
+      color: lightgray;
+      border: none;
+      font-size: 15px;
+    }
+    .ant-table-cell-row-hover {
+      background-color: #0d3832 !important;
+    }
+  }
+  .ant-table-thead {
+    .ant-table-cell {
+      background-color: #148F53;
+      color: white;
+      border: none;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+}
