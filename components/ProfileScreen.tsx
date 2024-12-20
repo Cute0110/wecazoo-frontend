@@ -27,7 +27,7 @@ const ProfileScreen = () => {
   return (
     <>
       {isAuthenticated ?
-        <div className="container flex flex-col py-8">
+        <div className="container flex flex-col py-8 pt-[100px]">
         <AboutLockedBalance isModalOpen={isModalOpen} onModalClose={onModalClose} modalTitle={"About Locked Balance"} />
           <h1 className="text-2xl font-bold mb-4 px-3">My Profile</h1>
           <Tabs

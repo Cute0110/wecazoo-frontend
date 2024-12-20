@@ -134,7 +134,7 @@ const WalletScreen = () => {
     <>
       {contextHolder}
       {isAuthenticated ?
-        <div className="container flex flex-col py-8">
+        <div className="container flex flex-col py-8 pt-[100px]">
           <h1 className="text-2xl font-bold mb-4 px-3">Wallet</h1>
           <Tabs
             defaultValue="deposit"
@@ -149,10 +149,10 @@ const WalletScreen = () => {
                 <BiMoneyWithdraw className="mr-2 text-lg md:text-xl" />
                 <span className="text-sm md:text-base">Withdraw</span>
               </TabsTrigger>
-              <TabsTrigger value="transaction">
+              {/* <TabsTrigger value="transaction">
                 <RiExchangeDollarLine className="mr-2 text-lg md:text-xl" />
                 <span className="text-sm md:text-base">Transaction</span>
-              </TabsTrigger>
+              </TabsTrigger> */}
             </TabsList>
             {/* tab content */}
             <div className="w-full lg:max-w-4xl xl:max-w-6xl">
@@ -267,7 +267,7 @@ const WalletScreen = () => {
                   </div>
                 </div>
               </TabsContent>
-              <TabsContent value="transaction">
+              {/* <TabsContent value="transaction">
                 <div className="bg-[#130D25] flex flex-col px-4 py-8 md:p-8 gap-8 justify-center">
                   <div className="flex gap-4 items-start w-fit">
                     <div className="flex flex-col gap-4">
@@ -328,7 +328,7 @@ const WalletScreen = () => {
                     </table>
                   </div>
                 </div>
-              </TabsContent>
+              </TabsContent> */}
             </div>
           </Tabs>
         </div> :
