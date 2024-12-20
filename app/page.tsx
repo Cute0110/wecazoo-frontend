@@ -18,6 +18,7 @@ import { useAuth } from "@/lib/authContext";
 import GamesRow from "@/components/GamesRow";
 import BetInfoSection from "@/components/BetInfoSection";
 import MoonPay from "@/components/MoonPay";
+import CarPlay from "@/components/CarPlay";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -40,7 +41,7 @@ const Home = () => {
     document.title = "Wecazoo";
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.post('/api/game_list', eot({start: 0, length: 0, search: 0, order: "order", dir: "asc"}));
+        const response = await axiosInstance.post('/api/game_list', eot({ start: 0, length: 0, search: 0, order: "order", dir: "asc" }));
         const res = dot(response.data);
         if (res.status == 1) {
           setAllGamesData(res.data);
@@ -75,8 +76,8 @@ const Home = () => {
         <main className="container py-8">
           <Hero />
 
-          
-          <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"}/></div>
+
+          <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} /></div>
 
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col md:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
@@ -145,19 +146,20 @@ const Home = () => {
           </section>
 
           <div className="w-full">
-            <MoonPay />
+            <CarPlay onScrollTo={onScrollTo} />
           </div>
 
-          <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"}/></div>
-          <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"}/></div>
-          <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"}/></div>
-          <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"}/></div>
-          <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"}/></div>
+          <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
+          <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"} /></div>
+          <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div>
+          <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"} /></div>
+          <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
+          <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
 
           <BetInfoSection />
         </main>
 
-        <Footer onScrollTo={onScrollTo}/>
+        <Footer onScrollTo={onScrollTo} />
       </div>
     </>
   );

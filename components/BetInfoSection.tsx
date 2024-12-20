@@ -16,7 +16,7 @@ interface DataType {
 const BetInfoSection = () => {
   const [betInfoData, setBetInfoData]: any = useState([]);
   const betInfoLength = 5;
-  const randomRate = [2, 10, 3, 10, 4, 10, 2, 100, 3, 100, 10, 4, 5, 10, 1000];
+  const randomRate = [2, 10, 3, 10, 4, 10, 2, 100, 3, 100, 10, 4, 5, 10, 500];
 
   const getRandomNumber = (digits: number): string => {
     return Array.from({ length: digits }, () => Math.floor(Math.random() * 10)).join('');
@@ -34,11 +34,11 @@ const BetInfoSection = () => {
 
     const userName = "wecazoo_" + firstTwoNumbers + middleChars + lastThreeNumbers;
     const betDate = moment().format("HH:mm");
-    const betAmount = Math.random() * randomRate[(Math.floor(Math.random() * 10000)) % 15];
+    const betAmount = (Math.floor(Math.random() * 10)) % 2 == 0 ? Math.random() * randomRate[(Math.floor(Math.random() * 10000)) % 15] : Math.floor(Math.random() * randomRate[(Math.floor(Math.random() * 10000)) % 15]);
     const multiType = [-1, 0, 1 + Math.random() * randomRate[(Math.floor(Math.random() * 10000)) % 15]];
     const multiplierVal = multiType[(Math.floor(Math.random() * 10000)) % 3];
-    const payoutAmount = (betAmount * multiplierVal);
-    return { key: userName, user: userName, time: betDate, bet: betAmount.toFixed(2), multiplier: multiplierVal.toFixed(2), payout: payoutAmount.toFixed(2) };
+    const payoutAmount = ((betAmount == 0 ? betAmount + 1 : betAmount) * multiplierVal);
+    return { key: userName, user: userName, time: betDate, bet: betAmount == 0 ? (betAmount + 1).toFixed(1) : betAmount.toFixed(1), multiplier: multiplierVal.toFixed(1), payout: payoutAmount.toFixed(1) };
   }
 
   const timerFunc = () => {
@@ -101,7 +101,7 @@ const BetInfoSection = () => {
       title: 'Time',
       dataIndex: 'time',
       key: 'time',
-      width: 80,
+      width: 100,
       ellipsis: true, // Enable text truncation
       render: (time) => (
         <span>{time}</span>
@@ -111,7 +111,7 @@ const BetInfoSection = () => {
       title: 'Bet',
       dataIndex: 'bet',
       key: 'bet',
-      width: 80,
+      width: 100,
       ellipsis: true, // Enable text truncation
       render: (bet) => (
         <span>$ {bet}</span>
@@ -121,7 +121,7 @@ const BetInfoSection = () => {
       title: 'Multiplier',
       dataIndex: 'multiplier',
       key: 'multiplier',
-      width: 80,
+      width: 100,
       ellipsis: true, // Enable text truncation
       render: (multiplier) => (
         <span>{`${multiplier <= 0 ? "-" : "X " + multiplier}`}</span>
@@ -141,10 +141,11 @@ const BetInfoSection = () => {
 
   return (
     <>
-      <div className='bet-info-section' >
+      <div className='container bet-info-section' >
         <Table
           columns={columns}
           dataSource={betInfoData}
+          scroll={{ x: `${betInfoData.length == 0 ? "1200px" : "max-content"}` }} 
           pagination={false}
         />
       </div>

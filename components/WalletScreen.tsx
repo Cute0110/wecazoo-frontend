@@ -19,6 +19,7 @@ import { eot, dot } from "@/lib/cryptoUtils";
 import Web3 from 'web3';
 import { isAddress } from 'web3-validator';
 import AboutLockedBalance from "./Modals/AboutLockedBalance";
+import GuideBuyCyrpto from "./Modals/GuideBuyCrypto";
 
 const web3 = new Web3();
 
@@ -34,6 +35,7 @@ const WalletScreen = () => {
   const [withdrawWalletAddress, setWithdrawWalletAddress] = useState("");
   const [api, contextHolder] = notification.useNotification();
   const [assetType, setAssetType] = useState(0);
+  const [isGuideBuyCryptoModalOpen, setIsGuideBuyCryptoModalOpen] = useState(false);
 
   const assetTypeArray = ["ERC 20", "TRC 20", "SOLANA"];
 
@@ -80,6 +82,10 @@ const WalletScreen = () => {
     } else {
       openNotification("warning", "Warning", "Input correct value!", "topRight");
     }
+  }
+
+  const onModalClose = () => {
+    setIsGuideBuyCryptoModalOpen(false);
   }
 
   const onWithdrawClick = () => {
@@ -135,6 +141,7 @@ const WalletScreen = () => {
       {contextHolder}
       {isAuthenticated ?
         <div className="container flex flex-col py-8 pt-[100px]">
+          <GuideBuyCyrpto isModalOpen={isGuideBuyCryptoModalOpen} onModalClose={onModalClose} modalTitle={"Buy Crypto"} />
           <h1 className="text-2xl font-bold mb-4 px-3">Wallet</h1>
           <Tabs
             defaultValue="deposit"
@@ -179,6 +186,7 @@ const WalletScreen = () => {
                         required
                       />
                       <Button onClick={onDepositClick}>Deposit</Button>
+                      <Button onClick={() => {setIsGuideBuyCryptoModalOpen(true)}}>Buy Crypto</Button>
                     </div>
                   </div>
                   <div>
