@@ -95,6 +95,14 @@ const ManageTable = ({data, onWithdrawAction, setOrderData} : any) => {
       width: 100,
     },
     {
+      title: 'Type',
+      dataIndex: 'type',
+      key: 'type',
+      onCell: () => ({
+        style: { minWidth: '150px' }, // Set min-width for the first column in tbody
+      }),
+    },
+    {
       title: <HeadTitle title={"Amount"} sortDir={sentAmountDir} onSortClick={onSortClick}/>,
       dataIndex: 'amount',
       key: 'amount',

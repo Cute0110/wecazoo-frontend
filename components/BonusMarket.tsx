@@ -18,8 +18,8 @@ const BonusMarket: React.FC = () => {
     <>
       <AuthModal isModalOpen={isAuthModalOpen} onModalClose={onModalClose} modalType={isAuthModalType} />
 
-      <div className="relative w-full lg:w-[50%] h-[400px] overflow-hidden rounded-t-lg rounded-b-lg sm:rounded-b-none">
-        <Image src="/images/bonusBack.jpg" alt="bonus" fill className="object-cover z-0" />
+      <div className="relative w-full lg:w-[50%] h-[300px] lg:h-[400px] overflow-hidden rounded-t-lg rounded-b-lg sm:rounded-b-none">
+        {/* <Image src="/images/bonusBack.jpg" alt="bonus" fill className="object-cover z-0" /> */}
         <div className="absolute top-0 w-full h-full">
           <div className="flex items-center justify-center w-full h-full">
             <div className="ml-4">
@@ -31,7 +31,7 @@ const BonusMarket: React.FC = () => {
                   GET <span className="text-primary text-[30px]">100$</span> FOR FREE
                 </h1>
               </div>
-              {isAuthenticated ? '' : <Button className="text-sm w-fit bg-[#1bb96b]" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>Claim Now</Button>}
+              {isAuthenticated ? '' : <Button className="text-sm w-fit bg-[#1bb96b] mt-2" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>Claim Now</Button>}
             </div>
             <div className="">
               <Image

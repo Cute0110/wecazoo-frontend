@@ -85,7 +85,7 @@ const PrivacyPolicy = ({ isModalOpen, onModalClose, modalTitle }: any) => {
               8. Contact Us
             </div>
             <div className='text-white text-lg mt-2 ml-4'>
-              If you have any questions or concerns about this Privacy Policy, please contact us at Email: <span className='text-[#1bb96b]'>wecazoo@proton.me</span><br />
+              If you have any questions or concerns about this Privacy Policy, please contact us at Email: <span className='text-[#1bb96b]'>support@wecazoo.com</span><br />
               By using Wecazoo, you agree to this Privacy Policy.
             </div>
           </div>

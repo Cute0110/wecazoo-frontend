@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Logo from "@/public/wecazoo-logo.svg";
 import { FaFacebookF } from "react-icons/fa";
-import { FaInstagram, FaXTwitter, FaTelegram } from "react-icons/fa6";
+import { FaInstagram, FaXTwitter, FaTelegram, FaYoutube } from "react-icons/fa6";
 import CryptoCarousel from "./CryptoCarousel";
 import { useState } from "react";
 import AboutUs from "./Modals/AboutUs";
@@ -38,7 +38,7 @@ const Footer = ({onScrollTo} : any) => {
       <FAQs isModalOpen={isFaqsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <FairGameOdds isModalOpen={isFGOModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <TermsConditions isModalOpen={isTCModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
-      <section className="container bg-[#D9D9D9CC] rounded-[10px] py-4 px-2 overflow-hidden w-[95%] lg:w-full">
+      <section className="container bg-[#0d3832] rounded-[10px] py-4 px-2 overflow-hidden w-[95%] lg:w-full">
         <CryptoCarousel />
       </section>
 
@@ -139,6 +139,17 @@ const Footer = ({onScrollTo} : any) => {
                     <p className="hidden md:block">Instagram</p>
                   </a>
                 </li>
+                <li className="group">
+                  <a
+                    href="https://youtube.com/@wecazoo?feature=shared"
+                    className="flex items-center gap-2 group-hover:text-primary transition-colors"
+                  >
+                    <div className="w-[48px] h-[48px] md:w-[24px] md:h-[24px] rounded-full bg-muted flex items-center justify-center group-hover:bg-primary transition-colors">
+                      <FaYoutube className="text-2xl md:text-sm text-background group-hover:text-white transition-colors" />
+                    </div>
+                    <p className="hidden md:block">Youtube</p>
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -155,6 +166,9 @@ const Footer = ({onScrollTo} : any) => {
         </p>
         <p className="flex justify-center items-center text-muted text-sm">
           Company registered and licensed in Costa Rica.
+        </p>
+        <p className="flex justify-center items-center text-muted text-sm">
+          Our Emails: support@wecazoo.com | team@wecazoo.com
         </p>
         <div className="flex justify-center mt-6">
           <Image src={"images/BeGambleAware.jpg"} alt={"Be Gamble Aware"} width={200} height={100} />

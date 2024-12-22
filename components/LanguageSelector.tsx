@@ -25,17 +25,17 @@ import {
 
 const languages = [
   { code: "EN", name: "English", Flag: GB },
-  { code: "FR", name: "Français", Flag: FR },
-  { code: "DE", name: "Deutsch", Flag: DE },
-  { code: "ES", name: "Español", Flag: ES },
-  { code: "RU", name: "Русский", Flag: RU },
-  { code: "SV", name: "Svenska", Flag: SE },
-  { code: "NO", name: "Norsk", Flag: NO },
-  { code: "DA", name: "Dansk", Flag: DK },
-  { code: "FI", name: "Suomi", Flag: FI },
-  { code: "ET", name: "Eesti", Flag: EE },
-  { code: "LV", name: "Latviešu", Flag: LV },
-  { code: "LT", name: "Lietuvių", Flag: LT },
+  // { code: "FR", name: "Français", Flag: FR },
+  // { code: "DE", name: "Deutsch", Flag: DE },
+  // { code: "ES", name: "Español", Flag: ES },
+  // { code: "RU", name: "Русский", Flag: RU },
+  // { code: "SV", name: "Svenska", Flag: SE },
+  // { code: "NO", name: "Norsk", Flag: NO },
+  // { code: "DA", name: "Dansk", Flag: DK },
+  // { code: "FI", name: "Suomi", Flag: FI },
+  // { code: "ET", name: "Eesti", Flag: EE },
+  // { code: "LV", name: "Latviešu", Flag: LV },
+  // { code: "LT", name: "Lietuvių", Flag: LT },
 ];
 
 const LanguageSelector = () => {

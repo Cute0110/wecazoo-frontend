@@ -130,3 +130,21 @@ body {
     }
   }
 }
+
+.ant-drawer {
+  .ant-drawer-body {
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    background-color: #0d3832 !important;
+  }
+  .ant-drawer-header {
+    border-top: 1px solid white;
+    background-color: #060019;
+    color: white;
+  }
+
+  .ant-drawer-close {
+    color: white !important;
+  }
+}

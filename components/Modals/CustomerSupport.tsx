@@ -20,7 +20,7 @@ const CustomerSupport = ({ isModalOpen, onModalClose, modalTitle }: any) => {
           <div>
             <div>
               <div className='text-muted text-lg mt-4'>
-                Customer Support Email: <span className='text-[#1bb96b]'>wecazoo@proton.me</span>
+                Customer Support Email: <span className='text-[#1bb96b]'>support@wecazoo.com</span>
               </div>
               <div className='text-muted text-lg mt-4'>
                 We will email you as soon as possible within 24-48h of your issue or request, thank you for your patience.

@@ -20,6 +20,7 @@ const cryptoIcons = [
   { src: "/images/coins/dogecoin.jpg", alt: "Dogecoin" },
   { src: "/images/coins/ripple.jpg", alt: "Ripple" },
   { src: "/images/coins/solana.jpg", alt: "Solana" },
+  { src: "/images/coins/pol.png", alt: "POL" },
 ];
 
 export default function CryptoCarousel() {

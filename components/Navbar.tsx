@@ -120,13 +120,13 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
         </div>
       </li>
       <li>
-        <Link
-          href="#"
-          className="flex items-center text-[#B98D1B] whitespace-nowrap"
+        <div
+          onClick={() => onScrollTo("sport_section")}
+          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
         >
           <PiShieldStarFill size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
           <span className="text-sm">Promotion</span>
-        </Link>
+        </div>
       </li>
     </>
   );

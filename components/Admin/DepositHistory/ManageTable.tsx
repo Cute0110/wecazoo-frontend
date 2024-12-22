@@ -87,6 +87,14 @@ const ManageTable = ({data, onStatusChangeAction, onOriginalStatusChangeAction, 
       width: 100,
     },
     {
+      title: 'Type',
+      dataIndex: 'type',
+      key: 'type',
+      onCell: () => ({
+        style: { minWidth: '150px' }, // Set min-width for the first column in tbody
+      }),
+    },
+    {
       title: <HeadTitle title={"Sent Amount"} sortDir={sentAmountDir} onSortClick={onSortClick}/>,
       dataIndex: 'sentAmount',
       key: 'sentAmount',
