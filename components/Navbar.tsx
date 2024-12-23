@@ -25,6 +25,7 @@ import {
   SettingsIcon,
   UserIcon,
   WalletIcon,
+  RadarIcon,
   Home,
 } from "lucide-react";
 
@@ -50,6 +51,15 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
         >
           <Home size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
           <span className="text-sm">Home</span>
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/casino"
+          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
+        >
+          <RadarIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
+          <span className="text-sm">Casino</span>
         </Link>
       </li>
       <li>
@@ -94,12 +104,7 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
   const NavLinks = () => (
     <>
       <li>
-        <Link
-          className="flex items-center text-lg font-semibold whitespace-nowrap cursor-pointer p-2 rounded-lg text-[#fff] bg-[#1bb96b] hover:bg-[#FFF] hover:text-[#1bb96b]"
-          href="/casino"
-        >
-          Casino Page
-        </Link>
+        <Button className="text-sm w-fit bg-[url('/images/casinoBtn.jpg')] bg-cover bg-center h-[35px] lg:h-[42px]" onClick={() => { router.push("/casino") }}>Casino</Button>
       </li>
       {/* <li>
         <div
@@ -151,66 +156,68 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
           </Link>
 
           {/* Desktop Navigation */}
-          {isNavLinksHidden ? "" :
-            <nav className="flex flex-grow-0">
-              <ul className="flex gap-4 xl:gap-6 items-center">
-                <NavLinks />
-              </ul>
-            </nav>
-          }
-          
-          {/* Mobile Menu */}
-          <div className="lg:hidden flex">
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-foreground/60 hover:text-foreground/80 hover:bg-[#1F1635] transition-colors"
-                >
-                  <Menu />
-                </Button>
-              </SheetTrigger>
+          <div className="flex items-center gap-4 justify-end">
+            {isNavLinksHidden ? "" :
+              <nav className="flex flex-grow-0">
+                <ul className="flex gap-4 xl:gap-6 items-center">
+                  <NavLinks />
+                </ul>
+              </nav>
+            }
 
-              <SheetContent side="right" className="w-[280px] sm:w-[400px]">
-                <nav className="flex flex-col gap-4 mt-8">
-                  {!isAuthenticated ? "" : <><div className="flex items-center gap-x-2 mr-1">
-                    <Image src={authData?.avatarURL} alt={authData?.avatarURL} width={32} height={32} className="rounded-full"></Image>
-                    <span>USDT {authData?.balance.toFixed(2)}$</span>
-                  </div>
-                    <div className="border-t-[1px] border-slate-200 w-full h-[1px]"></div>
-                    <ul className="flex flex-col gap-4">
-                      <UserActionLinks />
-                    </ul>
-                  </>}
-                  <LanguageSelector />
-                  {!isAuthenticated ? <>
-                    <Button variant="outline" className="w-full" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(true) }}>
-                      Login
-                    </Button>
-                    <Button className="w-full" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>Sign Up</Button>
-                  </> : ""}
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
+            {/* Mobile Menu */}
+            <div className="lg:hidden flex">
+              <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-foreground/60 hover:text-foreground/80 hover:bg-[#1F1635] transition-colors"
+                  >
+                    <Menu />
+                  </Button>
+                </SheetTrigger>
 
-          {/* User Actions (Desktop) */}
-          <div className="hidden lg:flex flex-shrink-0 items-center space-x-4">
-            {/* <Search className="text-2xl font-semibold text-[#808792]/60 hover:text-[#808792]/100 hover:cursor-pointer" /> */}
-            <LanguageSelector />
-            {!isAuthenticated ? (
-              <div className="flex gap-4">
-                <Button variant="outline" size="sm" className="" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(true) }}>
-                  Login
-                </Button>
-                <Button size="sm" className="border border-primary" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>
-                  Sign Up
-                </Button>
-              </div>
-            ) : (
-              <UserActions />
-            )}
+                <SheetContent side="right" className="w-[280px] sm:w-[400px]">
+                  <nav className="flex flex-col gap-4 mt-8">
+                    {!isAuthenticated ? "" : <><div className="flex items-center gap-x-2 mr-1">
+                      <Image src={authData?.avatarURL} alt={authData?.avatarURL} width={32} height={32} className="rounded-full"></Image>
+                      <span>USDT {authData?.balance.toFixed(2)}$</span>
+                    </div>
+                      <div className="border-t-[1px] border-slate-200 w-full h-[1px]"></div>
+                      <ul className="flex flex-col gap-4">
+                        <UserActionLinks />
+                      </ul>
+                    </>}
+                    <LanguageSelector />
+                    {!isAuthenticated ? <>
+                      <Button variant="outline" className="w-full" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(true) }}>
+                        Login
+                      </Button>
+                      <Button className="w-full" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>Sign Up</Button>
+                    </> : ""}
+                  </nav>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* User Actions (Desktop) */}
+            <div className="hidden lg:flex flex-shrink-0 items-center space-x-4">
+              {/* <Search className="text-2xl font-semibold text-[#808792]/60 hover:text-[#808792]/100 hover:cursor-pointer" /> */}
+              <LanguageSelector />
+              {!isAuthenticated ? (
+                <div className="flex gap-4">
+                  <Button variant="outline" size="sm" className="" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(true) }}>
+                    Login
+                  </Button>
+                  <Button size="sm" className="border border-primary" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>
+                    Sign Up
+                  </Button>
+                </div>
+              ) : (
+                <UserActions />
+              )}
+            </div>
           </div>
         </div>
       </header>

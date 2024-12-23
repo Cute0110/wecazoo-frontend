@@ -102,7 +102,7 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
         <>
             {contextHolder}
             <Modal centered open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
-                <div className="flex flex-col items-center bg-[#060019] h-[500px]">
+                <div className="flex flex-col items-center bg-[#060019]">
                     <div className="w-full max-w-xl h-full bg-[#060019] rounded-lg shadow-md p-12">
                         <form onSubmit={handleSubmit}>
                             <h2 className="text-white text-2xl font-medium text-center mb-4">
@@ -195,7 +195,7 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                                             htmlFor="promoCode"
                                             className="block mb-2  text-white font-semibold"
                                         >
-                                            Promo Code(option)
+                                            Promo Code : (optional)
                                         </label>
                                         <input
                                             type="promoCode"

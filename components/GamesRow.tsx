@@ -131,8 +131,8 @@ const GamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
         </div> */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
-            <Image src={`images/gameTypes/${gameSectionType}.png`} alt={sectionTitle} width={40} height={40} />
-            <h2 className="text-xl lg:text-3xl font-bold ml-2">{sectionTitle}</h2>
+            <img src={`images/gameTypes/${gameSectionType}.png`} alt={sectionTitle} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" />
+            <h2 className="text-md lg:text-3xl font-bold ml-2">{sectionTitle}</h2>
           </div>
 
         </div>

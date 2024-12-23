@@ -14,6 +14,9 @@ import { dot, eot } from "@/lib/cryptoUtils";
 import { Drawer, notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import PlayGameModal from "./Modals/PlayGameModal";
+import {
+  Search
+} from "lucide-react";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -120,17 +123,23 @@ const SearchGamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) =>
           modalTitle={modalTitle}
           launchURL={launchURL} 
         />
-        <div>
-          <h2 className="text-3xl font-bold ml-2 text-center mb-2">{sectionTitle}</h2>
-          <div className="flex gap-4 w-full justify-center pt-6 md:pt-0">
+        <div className="relative">
+          <div className="absolute top-[50%] left-[20px] -translate-y-[50%]">
+            <Search />
+          </div>
+          <div className="flex gap-4 w-full justify-center">
             <input
-              placeholder="Search..."
+              placeholder="Search Games..."
               value={searchVal}
               onChange={onSearchValueChange}
-              className="w-[50%] p-2 border rounded-xl bg-[#2A253A]"
+              className="w-full pr-2 pl-12 py-2 border rounded-[50px] bg-[#2A253A]"  
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  onSearch(); // Call your onSearch function
+                }
+              }}
               required
             />
-            <Button onClick={onSearch}>Search</Button>
           </div>
         </div>
         <Drawer title="Search results" height={"330px"} placement={"bottom"} onClose={onSearchPanelClose} open={isSearchPanelOpen}>
