@@ -6,6 +6,7 @@ import { notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import axiosInstance from "@/lib/action";
 import { eot, dot } from "@/lib/cryptoUtils";
+import Footer from "./Footer";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -40,6 +41,17 @@ const BonusScreen = () => {
 
   const onGetLvUpBonus = () => {
   }
+  
+  const onScrollTo = (gameSection: any) => {
+    const element = document.getElementById(gameSection); // Replace with your target element's ID
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({
+        top: top,
+        behavior: "smooth", // Adds smooth scrolling
+      });
+    }
+  }
   return (
     <>
       {contextHolder}
@@ -65,7 +77,9 @@ const BonusScreen = () => {
           </div>
         </div> :
         <div></div>}
+      <Footer onScrollTo={onScrollTo} />
     </>
+
   );
 };
 

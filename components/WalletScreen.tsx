@@ -20,6 +20,7 @@ import Web3 from 'web3';
 import { isAddress } from 'web3-validator';
 import AboutLockedBalance from "./Modals/AboutLockedBalance";
 import GuideBuyCyrpto from "./Modals/GuideBuyCrypto";
+import Footer from "./Footer";
 
 const web3 = new Web3();
 
@@ -136,6 +137,17 @@ const WalletScreen = () => {
     }
   }
 
+  const onScrollTo = (gameSection: any) => {
+    const element = document.getElementById(gameSection); // Replace with your target element's ID
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({
+        top: top,
+        behavior: "smooth", // Adds smooth scrolling
+      });
+    }
+  }
+
   return (
     <>
       {contextHolder}
@@ -186,7 +198,7 @@ const WalletScreen = () => {
                         required
                       />
                       <Button onClick={onDepositClick}>Deposit</Button>
-                      <Button onClick={() => {setIsGuideBuyCryptoModalOpen(true)}}>Buy Crypto</Button>
+                      <Button onClick={() => { setIsGuideBuyCryptoModalOpen(true) }}>Buy Crypto</Button>
                     </div>
                   </div>
                   <div>
@@ -248,7 +260,7 @@ const WalletScreen = () => {
                       <Select
                         placeholder="Select asset"
                         value={assetType}
-                        style={{backgroundColor: "#2a253a", color: "white", height: "50px"}}
+                        style={{ backgroundColor: "#2a253a", color: "white", height: "50px" }}
                         className="w-full lg:w-[50%]"
                         options={assetTypeArray.map((item: any, index: any) => ({ label: item, value: index }))}
                         onSelect={onSelectAsset}
@@ -341,6 +353,7 @@ const WalletScreen = () => {
           </Tabs>
         </div> :
         <div></div>}
+      <Footer onScrollTo={onScrollTo} />
     </>
   );
 };

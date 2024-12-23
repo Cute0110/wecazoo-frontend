@@ -94,14 +94,14 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
   const NavLinks = () => (
     <>
       <li>
-        <div
-          className="flex items-center text-foreground text-sm font-medium whitespace-nowrap cursor-pointer"
-          onClick={() => onScrollTo("popular-games")}
+        <Link
+          className="flex items-center text-lg font-semibold whitespace-nowrap cursor-pointer p-2 rounded-lg text-[#fff] bg-[#1bb96b] hover:bg-[#FFF] hover:text-[#1bb96b]"
+          href="/casino"
         >
-          All Games
-        </div>
+          Casino Page
+        </Link>
       </li>
-      <li>
+      {/* <li>
         <div
           onClick={() => onScrollTo("slot-games")}
           className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
@@ -127,7 +127,7 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
           <PiShieldStarFill size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
           <span className="text-sm">Promotion</span>
         </div>
-      </li>
+      </li> */}
     </>
   );
 
@@ -150,6 +150,15 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
             />
           </Link>
 
+          {/* Desktop Navigation */}
+          {isNavLinksHidden ? "" :
+            <nav className="flex flex-grow-0">
+              <ul className="flex gap-4 xl:gap-6 items-center">
+                <NavLinks />
+              </ul>
+            </nav>
+          }
+          
           {/* Mobile Menu */}
           <div className="lg:hidden flex">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -185,15 +194,6 @@ const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
               </SheetContent>
             </Sheet>
           </div>
-
-          {/* Desktop Navigation */}
-          {isNavLinksHidden ? "" :
-            <nav className="hidden lg:flex flex-grow-0">
-              <ul className="flex gap-4 xl:gap-6 items-center">
-                <NavLinks />
-              </ul>
-            </nav>
-          }
 
           {/* User Actions (Desktop) */}
           <div className="hidden lg:flex flex-shrink-0 items-center space-x-4">

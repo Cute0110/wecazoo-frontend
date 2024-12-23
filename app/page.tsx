@@ -15,6 +15,7 @@ import CarPlay from "@/components/CarPlay";
 import SearchGamesRow from "@/components/SearchGamesRow";
 import HamiltonSection from "@/components/HamiltonSection";
 import RaffleSection from "@/components/RaffleSection";
+import TrendingGames from "@/components/TrendingGames";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -82,19 +83,9 @@ const Home = () => {
             </div>
           </section>
 
-          <div className="container flex flex-row w-full">
+          <div className="container flex flex-row w-full mb-[20px]">
             <CarPlay onScrollTo={onScrollTo} />
           </div>
-
-          <div id="search-games"><SearchGamesRow allGamesData={allGamesData} gameSectionType={"isAll"} sectionTitle={"Search Games"} /></div>
-
-          <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
-          <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"} /></div>
-          <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div>
-          <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"} /></div>
-          <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
-          <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
-
           <BetInfoSection />
         </main>
 

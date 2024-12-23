@@ -16,6 +16,7 @@ import { useAuth } from "@/lib/authContext";
 import { useState } from "react";
 import { FaArrowUp, FaQuestionCircle } from "react-icons/fa";
 import AboutLockedBalance from "./Modals/AboutLockedBalance";
+import Footer from "./Footer";
 
 const ProfileScreen = () => {
   const { isAuthenticated, authData } = useAuth();
@@ -23,6 +24,16 @@ const ProfileScreen = () => {
 
   const onModalClose = () => {
     setIsModalOpen(false);
+  }
+  const onScrollTo = (gameSection: any) => {
+    const element = document.getElementById(gameSection); // Replace with your target element's ID
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({
+        top: top,
+        behavior: "smooth", // Adds smooth scrolling
+      });
+    }
   }
   return (
     <>
@@ -258,6 +269,7 @@ const ProfileScreen = () => {
           </Tabs>
         </div> : <></>
       }
+      <Footer onScrollTo={onScrollTo} />
     </>
   );
 };
