@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -14,6 +14,14 @@ import { dot, eot } from "@/lib/cryptoUtils";
 import { notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import PlayGameModal from "./Modals/PlayGameModal";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -30,7 +38,7 @@ const GamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
   const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
-    const tempData = allGamesData.filter((item : any) => item[gameSectionType] == true);
+    const tempData = allGamesData.filter((item: any) => item[gameSectionType] == true);
     if (gameSectionType == "isPopular" || gameSectionType == "isLive") {
       tempData.sort((a: any, b: any) => b.order - a.order);
     }
@@ -97,6 +105,16 @@ const GamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
     }
   }
 
+  const autoplayPlugin = React.useRef(
+    Autoplay({ delay: 1500, stopOnInteraction: false })
+  );
+
+  const carouselOptions = {
+    align: "start" as const,
+    loop: false,
+    skipSnaps: true,
+  };
+
   return (
     <>
       {contextHolder}
@@ -110,13 +128,49 @@ const GamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
           launchURL={launchURL} />
         {/* <div className="w-full rounded-t-[10px] bg-[#1BB96B] h-18 md:h-20 font-semibold text-[35px] flex items-center pl-6">
           Trending Games
-        </div> */}        
-        <div className="flex items-center mb-6">
-          <Image src={`images/gameTypes/${gameSectionType}.png`} alt={sectionTitle} width={40} height={40}/>
-          <h2 className="text-3xl font-bold ml-2">{sectionTitle}</h2>
+        </div> */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center">
+            <Image src={`images/gameTypes/${gameSectionType}.png`} alt={sectionTitle} width={40} height={40} />
+            <h2 className="text-xl lg:text-3xl font-bold ml-2">{sectionTitle}</h2>
+          </div>
+
         </div>
 
-        <ScrollArea className="w-full whitespace-nowrap rounded-[10px] bg-[#1BB96B4D] p-4">
+        {/* bg-[#1BB96B4D] */}
+        <Carousel
+          opts={carouselOptions}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {games.map((game: any, index) => (
+              <CarouselItem
+                key={index}
+                className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/4 2xl:basis-1/6 relative group cursor-pointer p-0"
+                onClick={() => onGameClick(game.providerCode, game.gameCode, game.name, game.type)}
+              >
+                <img
+                  src={game.imageUrl}
+                  alt={game.name}
+                  className="rounded-lg mx-auto w-[100px] h-[140px] lg:w-[200px] lg:h-[270px]"
+                />
+                <div className="absolute mx-auto w-[100px] h-[140px] lg:w-[200px] lg:h-[270px] inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75 flex flex-col items-center justify-end p-4">
+                  <div className="absolute bottom-0 left-0 w-full bg-white/85 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0 px-2 py-3.5 text-center">
+                    <span className="text-sm font-bold text-background">
+                      {game.name}
+                    </span>
+                  </div>
+                  <div className="absolute top-2 right-2 rounded-full p-1 md:p-1.5 lg:p-2">
+                    <CgPlayButtonO size={24} className="text-white/90" />
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+        {/* <ScrollArea className="w-full whitespace-nowrap rounded-[10px] p-4">
           <div>
 
             {games.length > 0 ? (
@@ -165,7 +219,7 @@ const GamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
             )}
           </div>
           <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        </ScrollArea> */}
       </section>
     </>
   );
