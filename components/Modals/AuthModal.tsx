@@ -195,13 +195,13 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                                             htmlFor="promoCode"
                                             className="block mb-2  text-white font-semibold"
                                         >
-                                            Promo Code : (optional)
+                                            Promo Code (optional)
                                         </label>
                                         <input
                                             type="promoCode"
                                             id="promoCode"
                                             name="promoCode"
-                                            placeholder="Received code from influencer"
+                                            placeholder="Promo Code"
                                             value={formData.promoCode}
                                             onChange={handleInputChange}
                                             className="w-full p-2 border rounded-xl"
