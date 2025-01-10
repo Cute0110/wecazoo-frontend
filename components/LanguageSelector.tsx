@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import {
   GB,
   DE,
@@ -50,9 +50,9 @@ const LanguageSelector = () => {
             {selectedLanguage.code}
           </span>
         </div>
-        <ChevronDown size={16} />
+        <ChevronUp size={16} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="absolute right-0 sm:right-10 md:-right-8 mt-2 w-fit bg-background border border-gray-600">
+      <DropdownMenuContent className="absolute right-0 sm:right-10 md:-left-9 bottom-full mb-7 w-fit bg-background border border-gray-600">
         {languages.map((lang) => (
           <DropdownMenuItem
             className="cursor-pointer"

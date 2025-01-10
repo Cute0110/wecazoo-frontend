@@ -13,7 +13,7 @@ import FAQs from "./Modals/FAQs";
 import FairGameOdds from "./Modals/FairGameOdds";
 import TermsConditions from "./Modals/TermsConditions";
 
-const Footer = ({onScrollTo} : any) => {
+const Footer = ({ onScrollTo }: any) => {
   const [isAboutUsModalOpen, setIsAboutUsModalOpen] = useState(false);
   const [isCSModalOpen, setIsCSModalOpen] = useState(false);
   const [isPolicyModalOpen, setIsPolicyModalOpen] = useState(false);
@@ -31,7 +31,7 @@ const Footer = ({onScrollTo} : any) => {
     setIsTCModalOpen(false);
   }
   return (
-    <footer className="bg-[#130D25] mt-12">
+    <footer className="bg-[#130D25] mt-12 sm:mr-[280px]">
       <AboutUs isModalOpen={isAboutUsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <CustomerSupport isModalOpen={isCSModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <PrivacyPolicy isModalOpen={isPolicyModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
@@ -166,6 +166,9 @@ const Footer = ({onScrollTo} : any) => {
         </p>
         <p className="flex justify-center items-center text-muted text-sm">
           Company registered and licensed in Costa Rica.
+        </p>
+        <p className="flex justify-center items-center text-muted text-sm">
+          C. 88, San José, Geroma, Costa Rica 10101
         </p>
         <p className="flex justify-center items-center text-muted text-sm">
           Our Emails: support@wecazoo.com | team@wecazoo.com

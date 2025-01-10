@@ -21,6 +21,7 @@ import { isAddress } from 'web3-validator';
 import AboutLockedBalance from "./Modals/AboutLockedBalance";
 import GuideBuyCyrpto from "./Modals/GuideBuyCrypto";
 import Footer from "./Footer";
+import DepositPaymentDialog from "./Modals/DepositPaymentDialog";
 
 const web3 = new Web3();
 
@@ -37,6 +38,8 @@ const WalletScreen = () => {
   const [api, contextHolder] = notification.useNotification();
   const [assetType, setAssetType] = useState(0);
   const [isGuideBuyCryptoModalOpen, setIsGuideBuyCryptoModalOpen] = useState(false);
+  const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
+  const [paymentUrl, setPaymentUrl] = useState("");
 
   const assetTypeArray = ["ERC 20", "TRC 20", "SOLANA"];
 
@@ -124,11 +127,11 @@ const WalletScreen = () => {
 
   const onCreateInvoice = async (amount: any) => {
     try {
-
       const response = await axiosInstance.post('/api/createInvoice', eot({ price: amount.toFixed(5), currency: "USD" }));
       const res = dot(response.data);
       if (res.status == 1) {
-        window.open(res.url, '_blank');
+        setPaymentUrl(res.url);
+        setIsPaymentDialogOpen(true);
       } else {
         openNotification("error", "Error", res.msg, "topRight");
       }
@@ -136,6 +139,11 @@ const WalletScreen = () => {
       openNotification("error", "Error", "Token expired or network error", "topRight");
     }
   }
+
+  const handleClosePaymentDialog = () => {
+    setIsPaymentDialogOpen(false);
+    setPaymentUrl("");
+  };
 
   const onScrollTo = (gameSection: any) => {
     const element = document.getElementById(gameSection); // Replace with your target element's ID
@@ -153,6 +161,11 @@ const WalletScreen = () => {
       {contextHolder}
       {isAuthenticated ?
         <div className="container flex flex-col py-8 pt-[100px]">
+          <DepositPaymentDialog
+            isOpen={isPaymentDialogOpen}
+            onClose={handleClosePaymentDialog}
+            paymentUrl={paymentUrl}
+          />
           <GuideBuyCyrpto isModalOpen={isGuideBuyCryptoModalOpen} onModalClose={onModalClose} modalTitle={"Buy Crypto"} />
           <h1 className="text-2xl font-bold mb-4 px-3">Wallet</h1>
           <Tabs

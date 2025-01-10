@@ -142,10 +142,11 @@ const BetInfoSection = () => {
   return (
     <>
       <div className='container bet-info-section' >
+        <h2 className="text-md lg:text-3xl font-bold ml-2">Recent Bets</h2>
         <Table
           columns={columns}
           dataSource={betInfoData}
-          scroll={{ x: `${betInfoData.length == 0 ? "1200px" : "max-content"}` }} 
+          scroll={{ x: `${betInfoData.length == 0 ? "1200px" : "max-content"}` }}
           pagination={false}
         />
       </div>

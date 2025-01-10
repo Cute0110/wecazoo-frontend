@@ -53,7 +53,7 @@ const UserActions = () => {
       <DropdownMenuTrigger className="flex items-center text-sm outline-none relative group">
         <div className="flex items-center gap-x-2 mr-1">
           <Image src={authData?.avatarURL} alt={authData?.avatarURL} width={32} height={32} className="rounded-full"></Image>
-          <span>USDT {authData?.balance.toFixed(2)}$</span>
+          <span>USD {authData?.balance.toFixed(2)}$</span>
         </div>
         <ChevronDown
           size={16}

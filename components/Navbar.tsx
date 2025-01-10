@@ -1,226 +1,170 @@
 "use client";
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Logo from "@/public/wecazoo-logo.svg";
 import LanguageSelector from "./LanguageSelector";
-import { MdLiveTv } from "react-icons/md";
-import { FaDice } from "react-icons/fa6";
-import { PiPokerChipFill, PiShieldStarFill } from "react-icons/pi";
-import { IoGameController } from "react-icons/io5";
+import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Router } from "lucide-react";
-import UserActions from "@/components/UserActions";
 import AuthModal from "./Modals/AuthModal";
 import { useAuth } from "@/lib/authContext";
-import {
-  ArrowDownIcon,
-  ChevronDown,
-  GiftIcon,
-  ListIcon,
-  LogOutIcon,
-  SettingsIcon,
-  UserIcon,
-  WalletIcon,
-  RadarIcon,
-  Home,
-} from "lucide-react";
 
-const Navbar = ({ isNavLinksHidden, onScrollTo }: any) => {
+const Navbar = ({ isNavLinksHidden }: any) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isAuthModalType, setIsAuthModalType] = useState(true);
   const { isAuthenticated, setIsAuthenticated, authData } = useAuth();
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const onLogOutClick = () => {
     setIsAuthenticated(false);
     localStorage.removeItem('authToken');
     router.push("/");
-  }
+  };
 
-  const UserActionLinks = () => (
-    <>
-      <li>
-        <Link
-          href="/"
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
-        >
-          <Home size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Home</span>
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/casino"
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
-        >
-          <RadarIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Casino</span>
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/profile"
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
-        >
-          <UserIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Profile</span>
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/wallet"
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
-        >
-          <WalletIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Wallet</span>
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/bonus"
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap"
-        >
-          <GiftIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Bonus</span>
-        </Link>
-      </li>
-      <li>
-        <div
-          className="flex items-center text-foreground text-sm font-medium whitespace-nowrap cursor-pointer"
-          onClick={onLogOutClick}
-        >
-          <LogOutIcon size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          Log Out
+  const SidebarContent = () => (
+    <div className="flex flex-col h-full p-6">
+      {isAuthenticated && (
+        <div className="mb-6">
+          <div className="flex items-center gap-x-2">
+            <span className="text-white">USD {authData?.balance.toFixed(2)}$</span>
+          </div>
+          <div className="border-t border-gray-700 mt-4" />
         </div>
-      </li>
-    </>
+      )}
+
+      <nav className="flex-1 space-y-4">
+        <Link href="/" className="flex items-center text-gray-300 hover:text-white">
+          <Home className="w-5 h-5 mr-3" />
+          <span>Home</span>
+        </Link>
+        <Link href="/casino" className="flex items-center text-gray-300 hover:text-white">
+          <RadarIcon className="w-5 h-5 mr-3" />
+          <span>Casino</span>
+        </Link>
+        {isAuthenticated && (
+          <>
+            <Link href="/profile" className="flex items-center text-gray-300 hover:text-white">
+              <UserIcon className="w-5 h-5 mr-3" />
+              <span>Profile</span>
+            </Link>
+            <Link href="/wallet" className="flex items-center text-gray-300 hover:text-white">
+              <WalletIcon className="w-5 h-5 mr-3" />
+              <span>Wallet</span>
+            </Link>
+            <Link href="/bonus" className="flex items-center text-gray-300 hover:text-white">
+              <GiftIcon className="w-5 h-5 mr-3" />
+              <span>Bonus</span>
+            </Link>
+            <Link href="/vip" className="flex items-center text-gray-300 hover:text-white">
+              <GiftIcon className="w-5 h-5 mr-3" />
+              <span>VIP</span>
+            </Link>
+            <button onClick={onLogOutClick} className="flex items-center text-gray-300 hover:text-white">
+              <LogOutIcon className="w-5 h-5 mr-3" />
+              <span>Log Out</span>
+            </button>
+          </>
+        )}
+      </nav>
+
+      <div className="mt-auto space-y-4">
+        <LanguageSelector />
+        {!isAuthenticated && (
+          <div className="space-y-2">
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => {
+                setIsAuthModalOpen(true);
+                setIsAuthModalType(true);
+              }}
+            >
+              Login
+            </Button>
+            <Button
+              className="w-full"
+              onClick={() => {
+                setIsAuthModalOpen(true);
+                setIsAuthModalType(false);
+              }}
+            >
+              Sign Up
+            </Button>
+          </div>
+        )}
+      </div>
+    </div>
   );
-
-  const NavLinks = () => (
-    <>
-      <li>
-        <Button className="text-sm w-fit bg-[url('/images/casinoBtn.jpg')] bg-cover bg-center h-[35px] lg:h-[42px]" onClick={() => { router.push("/casino") }}>Casino</Button>
-      </li>
-      {/* <li>
-        <div
-          onClick={() => onScrollTo("slot-games")}
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
-        >
-          <FaDice size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Slots</span>
-        </div>
-      </li>
-      <li>
-        <div
-          onClick={() => onScrollTo("live-games")}
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
-        >
-          <PiPokerChipFill size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Live Casino</span>
-        </div>
-      </li>
-      <li>
-        <div
-          onClick={() => onScrollTo("sport_section")}
-          className="flex items-center text-muted hover:text-foreground transition-colors whitespace-nowrap cursor-pointer"
-        >
-          <PiShieldStarFill size={20} className="mr-1.5 xl:mr-2 flex-shrink-0" />
-          <span className="text-sm">Promotion</span>
-        </div>
-      </li> */}
-    </>
-  );
-
-  const onModalClose = () => {
-    setIsAuthModalOpen(false);
-  }
 
   return (
     <>
-      <AuthModal isModalOpen={isAuthModalOpen} onModalClose={onModalClose} modalType={isAuthModalType} />
-      <header className="fixed w-full z-50 h-fit bg-[#130D25]">
-        <div className="container flex justify-between items-center py-4 px-10 md:px-6 gap-4">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <Image
-              priority
-              src={Logo}
-              alt="Wecazoo Logo"
-              className="h-9 lg:h-11 w-auto"
-            />
-          </Link>
+      <AuthModal
+        isModalOpen={isAuthModalOpen}
+        onModalClose={() => setIsAuthModalOpen(false)}
+        modalType={isAuthModalType}
+      />
+      <div className="flex">
+        <div className="flex-1">
+          <header className="fixed top-0 left-0 right-0 z-40 bg-[#130D25] shadow-lg">
+            <div className="mx-auto sm:mr-[280px] px-4 py-4 flex items-center justify-between">
+              <Link href="/" className="flex-shrink-0">
+                <Image priority src={Logo} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto" />
+              </Link>
 
-          {/* Desktop Navigation */}
-          <div className="flex items-center gap-4 justify-end">
-            {isNavLinksHidden ? "" :
-              <nav className="flex flex-grow-0">
-                <ul className="flex gap-4 xl:gap-6 items-center">
-                  <NavLinks />
-                </ul>
-              </nav>
-            }
-
-            {/* Mobile Menu */}
-            <div className="lg:hidden flex">
-              <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                <SheetTrigger asChild>
+              <div className="flex items-center gap-4">
+                {!isNavLinksHidden && (
                   <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-foreground/60 hover:text-foreground/80 hover:bg-[#1F1635] transition-colors"
+                    className="text-sm bg-[url('/images/casinoBtn.jpg')] bg-cover bg-center h-[35px] lg:h-[42px]"
+                    onClick={() => router.push("/casino")}
                   >
-                    <Menu />
+                    Casino
                   </Button>
-                </SheetTrigger>
+                )}
 
-                <SheetContent side="right" className="w-[280px] sm:w-[400px]">
-                  <nav className="flex flex-col gap-4 mt-8">
-                    {!isAuthenticated ? "" : <><div className="flex items-center gap-x-2 mr-1">
-                      <Image src={authData?.avatarURL} alt={authData?.avatarURL} width={32} height={32} className="rounded-full"></Image>
-                      <span>USDT {authData?.balance.toFixed(2)}$</span>
-                    </div>
-                      <div className="border-t-[1px] border-slate-200 w-full h-[1px]"></div>
-                      <ul className="flex flex-col gap-4">
-                        <UserActionLinks />
-                      </ul>
-                    </>}
-                    <LanguageSelector />
-                    {!isAuthenticated ? <>
-                      <Button variant="outline" className="w-full" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(true) }}>
-                        Login
+                {isMobile ? (
+                  <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                    <SheetTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-white hover:bg-[#1F1635] transition-colors"
+                      >
+                        <Menu className="w-6 h-6" />
                       </Button>
-                      <Button className="w-full" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>Sign Up</Button>
-                    </> : ""}
-                  </nav>
-                </SheetContent>
-              </Sheet>
+                    </SheetTrigger>
+                    <SheetContent
+                      side="right"
+                      className="w-[280px] border-l border-gray-800 bg-[#1F1635]"
+                    >
+                      <SidebarContent />
+                    </SheetContent>
+                  </Sheet>
+                ) : null}
+              </div>
             </div>
-
-            {/* User Actions (Desktop) */}
-            <div className="hidden lg:flex flex-shrink-0 items-center space-x-4">
-              {/* <Search className="text-2xl font-semibold text-[#808792]/60 hover:text-[#808792]/100 hover:cursor-pointer" /> */}
-              <LanguageSelector />
-              {!isAuthenticated ? (
-                <div className="flex gap-4">
-                  <Button variant="outline" size="sm" className="" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(true) }}>
-                    Login
-                  </Button>
-                  <Button size="sm" className="border border-primary" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>
-                    Sign Up
-                  </Button>
-                </div>
-              ) : (
-                <UserActions />
-              )}
-            </div>
-          </div>
+          </header>
         </div>
-      </header>
+
+        {/* Permanent Desktop Sidebar */}
+        {!isMobile && (
+          <div className="fixed right-0 top-0 h-full w-[280px] bg-[#1F1635] z-50 border-l border-gray-800">
+            <SidebarContent />
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -86,7 +86,6 @@ const CreateModal = ({ isModalOpen, setIsModalOpen, modalTitle, onCreate }: any)
                                         placeholder="Generate promo code"
                                         value={promoCodeVal}
                                         className="p-2 border rounded-xl bg-[#FFF] text-black cursor-not-allowed"
-                                        disabled={true}
                                     />
                                     <button onClick={onCodeGenerate} type="button" className="rounded-md ml-2 border border-1 border-[#4cbb17] px-3 py-2 text-sm font-semibold text-[#4cbb17] hover:bg-[#4cbb17] hover:text-white">
                                         Generate
