@@ -27,6 +27,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      </head>
       <body className={`${openSans.variable} ${montserrat.variable} font-sans`}>
         <AuthProvider>
           {children}

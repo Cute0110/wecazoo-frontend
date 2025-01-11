@@ -48,9 +48,9 @@ const Navbar = ({ isNavLinksHidden }: any) => {
       <nav className="flex-1 space-y-4">
         {isAuthenticated && (
           <>
-            <Link href="/vip" className="flex items-center text-gray-300 hover:text-white">
+            <Link href="/vip" className="flex items-center text-gray-300 hover:text-white w-[70%]">
               <img
-                src="/images/vip.jpg"
+                src="/images/vip.png"
                 alt={`VIP`}
                 className="w-full h-auto rounded-lg"
               />
@@ -78,6 +78,10 @@ const Navbar = ({ isNavLinksHidden }: any) => {
             <Link href="/bonus" className="flex items-center text-gray-300 hover:text-white">
               <GiftIcon className="w-5 h-5 mr-3" />
               <span>Bonus</span>
+            </Link>
+            <Link href="/vip" className="flex items-center text-gray-300 hover:text-white">
+              <GiftIcon className="w-5 h-5 mr-3" />
+              <span>VIP</span>
             </Link>
             <button onClick={onLogOutClick} className="flex items-center text-gray-300 hover:text-white">
               <LogOutIcon className="w-5 h-5 mr-3" />
@@ -128,7 +132,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
           <header className="fixed top-0 left-0 right-0 z-40 bg-[#130D25] shadow-lg">
             <div className="mx-auto md:mr-[280px] px-4 py-4 flex items-center justify-between">
               <Link href="/" className="flex-shrink-0">
-                <Image priority src={Logo} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto" />
+                <Image priority src={Logo} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto ml-0 sm:ml-12 md-ml:24 lg:ml-36" />
               </Link>
 
               <div className="flex items-center gap-4">
