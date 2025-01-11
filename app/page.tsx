@@ -70,7 +70,7 @@ const Home = () => {
       <div className="min-h-screen bg-background text-foreground">
         <Navbar isNavLinksHidden={false} onScrollTo={onScrollTo} />
 
-        <main className="py-8 !ml-6 !sm:mr-[280px]">
+        <main className="py-8 !ml-6 md:mr-[280px]">
           <Hero />
 
 

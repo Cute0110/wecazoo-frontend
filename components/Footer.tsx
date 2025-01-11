@@ -31,7 +31,7 @@ const Footer = ({ onScrollTo }: any) => {
     setIsTCModalOpen(false);
   }
   return (
-    <footer className="bg-[#130D25] mt-12 sm:mr-[280px]">
+    <footer className="bg-[#130D25] mt-12 md:mr-[280px]">
       <AboutUs isModalOpen={isAboutUsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <CustomerSupport isModalOpen={isCSModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <PrivacyPolicy isModalOpen={isPolicyModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />

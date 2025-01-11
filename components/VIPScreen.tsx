@@ -5,7 +5,13 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import VIPCard from '@/components/VIPCard';
 import axiosInstance from "@/lib/action";
 import { dot } from '@/lib/cryptoUtils';
-// import { dot, eot } from "@/lib/cryptoUtils";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
 
 interface VIPLevel {
   name: string;
@@ -62,9 +68,15 @@ const VIPScreen: React.FC = () => {
     fetchUserVIPData();
   }, []);
 
+  const carouselOptions = {
+    align: "start" as const,
+    loop: false,
+    skipSnaps: true,
+  };
+
   return (
     <div className="min-h-screen bg-green-900 bg-opacity-10 p-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto md:mr-[280px]">
         {/* User's Current VIP Status */}
         <Card className="mb-8 bg-gradient-to-r from-green-800 to-green-900 text-white">
           <CardHeader>
@@ -96,7 +108,28 @@ const VIPScreen: React.FC = () => {
         <div className="relative">
           <h2 className="text-2xl font-bold mb-4 text-green-100">VIP Levels</h2>
           <div className="overflow-x-auto">
-            <div className="flex space-x-6 pb-6">
+            <Carousel
+              opts={carouselOptions}
+              className="w-full"
+            >
+              <CarouselContent className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8">
+                {vipLevels.map((level: any, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="basis-1/1 sm:basis-1/2 md:basis-1/3 lg:gap-4 relative group cursor-pointer p-0"
+                  >
+                    <VIPCard
+                      key={level.name}
+                      imageSrc={level.image}
+                      levelName={level.name}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+            {/* <div className="flex space-x-6 pb-6">
               {vipLevels.map((level) => (
                 <VIPCard
                   key={level.name}
@@ -104,7 +137,7 @@ const VIPScreen: React.FC = () => {
                   levelName={level.name}
                 />
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
 

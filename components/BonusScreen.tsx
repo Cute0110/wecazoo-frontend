@@ -56,7 +56,7 @@ const BonusScreen = () => {
     <>
       {contextHolder}
       {isAuthenticated ?
-        <div className="container flex flex-col py-8 pt-[100px] sm:mr-[280px]">
+        <div className="container flex flex-col py-8 pt-[100px] md:mr-[280px]">
           <h1 className="text-2xl font-bold mb-4 px-3">Get Bonus</h1>
 
           <div className="bg-[#130D25] flex flex-col p-5 md:p-6 gap-8">

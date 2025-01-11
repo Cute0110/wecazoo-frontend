@@ -54,10 +54,10 @@ const ProfileScreen = () => {
                 <MdOutlineLockPerson className="mr-2 text-lg md:text-xl" />
                 <span className="text-sm md:text-base">Privacy & Security</span>
               </TabsTrigger>
-              <TabsTrigger value="verification">
+              {/* <TabsTrigger value="verification">
                 <MdVerifiedUser className="mr-2 text-lg md:text-xl" />
                 <span className="text-sm md:text-base">Verification</span>
-              </TabsTrigger>
+              </TabsTrigger> */}
               <TabsTrigger value="closeAccount">
                 <RiDeleteBin2Line className="mr-2 text-lg md:text-xl" />
                 <span className="text-sm md:text-base">Close Account</span>
