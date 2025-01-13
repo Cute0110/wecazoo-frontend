@@ -99,6 +99,14 @@ const UserManageTable = ({data, onUserStatusChangeAction, onDeleteUser, onClickU
       }),
     },
     {
+      title: <HeadTitle title={"Influencer Name"} />,
+      dataIndex: 'influencerName',
+      key: 'influencerName',
+      onCell: () => ({
+        style: { minWidth: '150px' }, // Set min-width for the first column in tbody
+      }),
+    },
+    {
       title: <HeadTitle title={"Email Address"} sortDir={emailAddressDir} onSortClick={onSortClick}/>,
       dataIndex: 'emailAddress',
       key: 'emailAddress',
