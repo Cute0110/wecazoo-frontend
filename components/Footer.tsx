@@ -50,9 +50,19 @@ const Footer = ({ onScrollTo }: any) => {
               priority
               src={Logo}
               alt="Wecazoo Logo"
-              className="h-20 md:h-24 xl:h-44 w-auto"
+              className="h-20 md:h-24 xl:h-36 w-auto"
             />
           </a>
+        </div>
+        <div className="flex justify-center mt-6">
+          <Image
+            src={"images/footer.png"}
+            alt={"Be Gamble Aware"}
+            width={0}
+            height={100}
+            className="w-full max-w-full md:max-w-[80%] h-auto"
+            priority
+          />
         </div>
         {/* Footer Links */}
         <div className="flex flex-col md:flex-row gap-6 lg:gap-12">
@@ -173,16 +183,6 @@ const Footer = ({ onScrollTo }: any) => {
         <p className="flex justify-center items-center text-muted text-sm">
           Our Emails: support@wecazoo.com | team@wecazoo.com
         </p>
-        <div className="flex justify-center mt-6">
-          <Image
-            src={"images/footer.png"}
-            alt={"Be Gamble Aware"}
-            width={0}
-            height={100}
-            style={{ width: '100%', height: 'auto' }}
-            priority
-          />
-        </div>
       </div>
     </footer>
   );
