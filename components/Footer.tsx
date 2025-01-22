@@ -38,9 +38,9 @@ const Footer = ({ onScrollTo }: any) => {
       <FAQs isModalOpen={isFaqsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <FairGameOdds isModalOpen={isFGOModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <TermsConditions isModalOpen={isTCModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
-      <section className="container bg-[#0d3832] rounded-[10px] py-4 px-2 overflow-hidden w-[95%] lg:w-full">
+      {/* <section className="container bg-[#0d3832] rounded-[10px] py-4 px-2 overflow-hidden w-[95%] lg:w-full">
         <CryptoCarousel />
-      </section>
+      </section> */}
 
       <div className="container flex flex-col xl:flex-row justify-between items-normal xl:items-center px-8 md:px-10 lg:px-16 xl:px-24 py-10 gap-y-6">
         {/* Logo */}
@@ -174,7 +174,14 @@ const Footer = ({ onScrollTo }: any) => {
           Our Emails: support@wecazoo.com | team@wecazoo.com
         </p>
         <div className="flex justify-center mt-6">
-          <Image src={"images/BeGambleAware.jpg"} alt={"Be Gamble Aware"} width={200} height={100} />
+          <Image
+            src={"images/footer.png"}
+            alt={"Be Gamble Aware"}
+            width={0}
+            height={100}
+            style={{ width: '100%', height: 'auto' }}
+            priority
+          />
         </div>
       </div>
     </footer>
