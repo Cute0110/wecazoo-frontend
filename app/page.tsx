@@ -41,6 +41,7 @@ const Home = () => {
         const response = await axiosInstance.post('/api/game_list', eot({ start: 0, length: 0, search: 0, order: "order", dir: "asc" }));
         const res = dot(response.data);
         if (res.status == 1) {
+          console.log(res.data);
           setAllGamesData(res.data);
         } else {
           openNotification("error", "Error", res.msg, "topRight");
@@ -86,7 +87,7 @@ const Home = () => {
           <div className="container flex flex-row w-full mb-[20px]">
             <CarPlay onScrollTo={onScrollTo} />
           </div>
-          <BetInfoSection />
+          <BetInfoSection allGamesData={allGamesData} />
         </main>
 
         <Footer onScrollTo={onScrollTo} />
