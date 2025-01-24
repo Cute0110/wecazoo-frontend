@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Logo from "@/public/wecazoo-logo.svg";
 import LanguageSelector from "./LanguageSelector";
-import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu } from "lucide-react";
+import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu, Headphones } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import AuthModal from "./Modals/AuthModal";
 import { useAuth } from "@/lib/authContext";
@@ -48,7 +48,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
       <nav className="flex-1 space-y-4">
         {isAuthenticated && (
           <>
-            <Link href="/vip" className="flex items-center text-gray-300 hover:text-white w-[70%]">
+            <Link href="/vip" className="flex items-center text-gray-300 hover:text-white w-[80%]">
               <img
                 src="/images/vip.png"
                 alt={`VIP`}
@@ -83,6 +83,10 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               <GiftIcon className="w-5 h-5 mr-3" />
               <span>VIP</span>
             </Link>
+            {/* <Link href="/vip" className="flex items-center text-gray-300 hover:text-white">
+              <Headphones className="w-5 h-5 mr-3" />
+              <span>24/7 Support</span>
+            </Link> */}
             <button onClick={onLogOutClick} className="flex items-center text-gray-300 hover:text-white">
               <LogOutIcon className="w-5 h-5 mr-3" />
               <span>Log Out</span>

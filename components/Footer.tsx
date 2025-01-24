@@ -50,7 +50,7 @@ const Footer = ({ onScrollTo }: any) => {
               priority
               src={Logo}
               alt="Wecazoo Logo"
-              className="h-20 md:h-24 xl:h-36 w-auto"
+              className="h-20 md:h-30 xl:h-40 w-auto"
             />
           </a>
         </div>
@@ -60,7 +60,7 @@ const Footer = ({ onScrollTo }: any) => {
             alt={"Be Gamble Aware"}
             width={0}
             height={100}
-            className="w-full max-w-full md:max-w-[80%] h-auto"
+            className="w-full max-w-full md:max-w-[90%] h-auto"
             priority
           />
         </div>

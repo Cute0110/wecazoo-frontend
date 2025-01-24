@@ -11,6 +11,7 @@ interface DataType {
   key: React.Key;
   no: number;
   userCode: string;
+  influencerName: string;
   emailAddress: string;
   balance: number;
   status: boolean;

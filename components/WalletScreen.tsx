@@ -215,7 +215,7 @@ const WalletScreen = () => {
                     </div>
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold">Amount</h2>
+                    <h2 className="text-xl font-semibold">Suggested Amount</h2>
                     <div className="flex flex-col my-4 gap-3">
                       {depositAmountArray.map((amount, index) => (
                         <div key={index} className="flex items-center justify-between bg-[#2A253A] rounded-[10px] px-6 py-5 md:py-4">
@@ -245,7 +245,7 @@ const WalletScreen = () => {
                     <p className="font-semibold text-lg">${authData.balance.toFixed(5)}</p>
                   </div>
                   <div>
-                    <h2 className="text-muted font-lg">Withdraw Amount</h2>
+                    <h2 className="text-muted font-lg">Withdraw Amount In USDT</h2>
                     <div className="flex flex-col my-4 gap-3">
                       <input
                         type="withdrawAmount"
@@ -268,7 +268,7 @@ const WalletScreen = () => {
                     </div>
                   </div>
                   <div>
-                    <h2 className="text-muted font-lg asset-panel">Choose asset</h2>
+                    <h2 className="text-muted font-lg asset-panel">Choose Network</h2>
                     <div className="flex flex-col my-4 gap-3">
                       <Select
                         placeholder="Select asset"
