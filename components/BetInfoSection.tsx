@@ -167,7 +167,7 @@ const BetInfoSection = ({allGamesData} : any) => {
           <h2 className="text-md lg:text-3xl font-bold ml-2">Recent Bets</h2>
         </div>
         <Table
-          className="text-md lg:text-3xl font-bold ml-2"
+          className="text-md lg:text-3xl font-bold ml-2 mt-4"
           columns={columns}
           dataSource={betInfoData}
           scroll={{ x: `${betInfoData.length == 0 ? "1200px" : "max-content"}` }}

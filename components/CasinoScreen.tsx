@@ -121,7 +121,7 @@ const CasinoScreen = () => {
           <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
           <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
 
-          <BetInfoSection />
+          <BetInfoSection allGamesData={allGamesData} />
 
         </main>
 
