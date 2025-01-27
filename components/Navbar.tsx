@@ -148,7 +148,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
 
         <div className="flex-1">
           <header className="fixed top-0 left-0 right-0 z-40 bg-[#130D25] shadow-lg">
-            <div className={`mx-auto px-4 py-4 flex items-center justify-between ${!isMobile ? (isSidebarCollapsed ? 'ml-20' : 'ml-[280px]') : ''}`}>
+            <div className={`mx-auto px-4 py-4 flex items-center justify-between ${!isMobile ? (isSidebarCollapsed ? 'ml-[180px]' : 'ml-[340px]') : ''}`}>
               <Link href="/" className="flex-shrink-0">
                 <Image priority src={Logo} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto" />
               </Link>

@@ -124,7 +124,7 @@ const CasinoScreen = () => {
               <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
               <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
             </div>) : (<div>
-              <GamesAll allGamesData={allGamesData.filter((item : any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={"Searched Games"} />
+              <GamesAll allGamesData={allGamesData.filter((item : any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={""} />
             </div>)
           }
           <BetInfoSection allGamesData={allGamesData} />

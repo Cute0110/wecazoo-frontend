@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
   return (
     <>
       <AuthModal isModalOpen={isAuthModalOpen} onModalClose={onModalClose} modalType={isAuthModalType} />
-      <section className="flex flex-col gap-8 px-4 md:px-10 mb-10 mt-[76px]">
+      <section className="flex flex-col flex-grow gap-8 px-4 md:px-10 mb-6 mt-[76px]">
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
             <div className="flex flex-col gap-1 md:gap-2.5">
@@ -28,19 +28,31 @@ const Hero: React.FC = () => {
                 UP TO <span className="text-primary">$20,000</span>
               </h1>
             </div>
-            {isAuthenticated ? '' : <Button className="text-sm w-fit" onClick={() => { setIsAuthModalOpen(true); setIsAuthModalType(false) }}>Create Account</Button>}
+            {isAuthenticated ? '' : (
+              <Button
+                className="text-sm w-fit"
+                onClick={() => {
+                  setIsAuthModalOpen(true);
+                  setIsAuthModalType(false);
+                }}
+              >
+                Create Account
+              </Button>
+            )}
           </div>
-          <div>
+          <div className="w-full sm:w-auto"> {/* Adjust width here */}
             <Image
               src="/images/hero.png"
               alt="Hero image"
               width={1000}
               height={500}
               priority
+              className="w-full" // Make image full width on mobile
             />
           </div>
         </div>
       </section>
+
     </>
   );
 };

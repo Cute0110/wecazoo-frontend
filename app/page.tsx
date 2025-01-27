@@ -68,14 +68,16 @@ const Home = () => {
   return (
     <>
       {contextHolder}
-      <div className="min-h-screen bg-background text-foreground md:max-w-[95%] md:ml-[5%]">
+      <div className="min-h-screen bg-background text-foreground">
         <Navbar isNavLinksHidden={false} onScrollTo={onScrollTo} />
 
         <main
           className={`py-8 ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}
         >
-          <Hero />
 
+          <div className="md:container flex flex-row w-full">
+            <Hero />
+          </div>
 
           <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} /></div>
 
@@ -86,14 +88,14 @@ const Home = () => {
             </div>
           </section>
 
-          <div className="container flex flex-row w-full mb-[20px]">
+          <div className="md:container flex flex-row w-full">
             <CarPlay onScrollTo={onScrollTo} />
           </div>
           <BetInfoSection allGamesData={allGamesData} />
-        </main>
+        </main >
 
         <Footer onScrollTo={onScrollTo} />
-      </div>
+      </div >
     </>
   );
 }
