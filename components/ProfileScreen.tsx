@@ -13,14 +13,43 @@ import { TbEdit } from "react-icons/tb";
 import { CgToggleOff } from "react-icons/cg";
 import { BsPassport } from "react-icons/bs";
 import { useAuth } from "@/lib/authContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaArrowUp, FaQuestionCircle } from "react-icons/fa";
 import AboutLockedBalance from "./Modals/AboutLockedBalance";
 import Footer from "./Footer";
+import axiosInstance from "@/lib/action";
+import { dot, eot } from "@/lib/cryptoUtils";
+
+import { notification } from 'antd';
+import type { NotificationArgsProps } from 'antd';
+
+type NotificationPlacement = NotificationArgsProps['placement'];
+type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 const ProfileScreen = () => {
   const { isAuthenticated, authData } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userName, setUserName] = useState('');
+
+  const [api, contextHolder] = notification.useNotification();
+
+  useEffect(
+    () => {
+      if (authData) {
+        setUserName(authData.userName);
+      }
+    },
+    [authData]
+  )
+
+  const openNotification = (type: NotificationType, title: any, content: any, placement: NotificationPlacement) => {
+    api[type]({
+      message: title,
+      description: content,
+      duration: 2,
+      placement,
+    });
+  };
 
   const onModalClose = () => {
     setIsModalOpen(false);
@@ -35,11 +64,52 @@ const ProfileScreen = () => {
       });
     }
   }
+
+  const onSaveUserName = async () => {
+    // Validate the username before proceeding
+    if (!isValidUsername(userName)) {
+      openNotification("error", "Error", "Invalid username. It must be at least 3 characters long and contain no spaces.", "topRight");
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post('/api/user_name_change', eot({ "id": authData.id, userName }), {
+        withCredentials: true,
+      });
+
+      const res = dot(response.data);
+
+      if (res.status == 1) {
+        openNotification("success", "Success", "User name updated successfully", "topRight");
+      } else {
+        openNotification("error", "Error", res.msg, "topRight");
+      }
+    } catch (error) {
+      openNotification("error", "Error", "An error occurred while updating the username.", "topRight");
+    }
+  }
+
+  // Helper function to validate the username
+  function isValidUsername(username : any) {
+    // Check if the username is at least 3 characters long
+    if (username.length < 3) {
+      return false;
+    }
+
+    // Check if the username contains any spaces
+    if (username.includes(' ')) {
+      return false;
+    }
+
+    return true;
+  }
+
   return (
     <>
+      {contextHolder}
       {isAuthenticated ?
         <div className="container flex flex-col py-8 pt-[100px]">
-        <AboutLockedBalance isModalOpen={isModalOpen} onModalClose={onModalClose} modalTitle={"About Locked Balance"} />
+          <AboutLockedBalance isModalOpen={isModalOpen} onModalClose={onModalClose} modalTitle={"About Locked Balance"} />
           <h1 className="text-2xl font-bold mb-4 px-3">My Profile</h1>
           <Tabs
             defaultValue="account"
@@ -67,9 +137,14 @@ const ProfileScreen = () => {
             <div className="container w-full">
               <TabsContent value="account">
                 <div className="bg-[#130D25] flex flex-col p-4 md:p-8 gap-8 w-full lg:max-w-4xl">
-                  <div className="w-full flex flex-col gap-1.5">
-                    <label className="text-muted font-medium">User Name</label>
-                    <input className="flex items-center justify-between bg-[#2A253A] rounded-[10px] py-3.5 px-4" value={authData.userName} disabled={true} />
+                  <div className="w-full flex gap-4">
+                    <div className="flex-1 flex flex-col gap-1.5">
+                      <label className="text-muted font-medium">User Name</label>
+                      <input className="flex items-center justify-between bg-[#2A253A] rounded-[10px] py-3.5 px-4" value={userName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserName(e.target.value)} />
+                    </div>
+                    <button className="self-end bg-green-500 hover:bg-green-600 text-white rounded-[10px] px-6 py-3.5" onClick={onSaveUserName}>
+                      Save
+                    </button>
                   </div>
                   <div className="w-full flex flex-col gap-1.5">
                     <label className="text-muted font-medium">Email Address</label>
@@ -81,7 +156,7 @@ const ProfileScreen = () => {
                       <input className="flex items-center justify-between bg-[#2A253A] rounded-[10px] py-3.5 px-4" value={authData.balance} disabled={true} />
                     </div>
                     <div className="w-full flex flex-col gap-1.5">
-                      <label className="text-muted font-medium flex items-center">Locked Balance($) <FaQuestionCircle className="ml-2 cursor-pointer" onClick={() => setIsModalOpen(true)}/></label>
+                      <label className="text-muted font-medium flex items-center">Locked Balance($) <FaQuestionCircle className="ml-2 cursor-pointer" onClick={() => setIsModalOpen(true)} /></label>
                       <input className="flex items-center justify-between bg-[#2A253A] rounded-[10px] py-3.5 px-4" value={authData.lockedBalance} disabled={true} />
                     </div>
                     <div className="w-full flex flex-col gap-1.5">

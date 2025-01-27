@@ -148,3 +148,15 @@ body {
     color: white !important;
   }
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#1a1b25];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[#2a2b35] rounded-full;
+}

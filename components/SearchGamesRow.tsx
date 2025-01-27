@@ -15,13 +15,14 @@ import { Drawer, notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import PlayGameModal from "./Modals/PlayGameModal";
 import {
-  Search
+  CalendarSearch,
+  Search, X
 } from "lucide-react";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
-const SearchGamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
+const SearchGamesRow = ({ allGamesData, gameSectionType, sectionTitle, setSearchValue }: any) => {
   const [games, setGames] = useState([]);
   const [isSlotGameModalOpen, setIsSlotGameModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -109,6 +110,12 @@ const SearchGamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) =>
 
   const onSearchValueChange = (e: any) => {
     setSearchVal(e.target.value);
+    setSearchValue(e.target.value);
+  }
+
+  const onClearSearch = () => {
+    setSearchVal('');
+    setSearchValue('');
   }
 
   return (
@@ -133,14 +140,17 @@ const SearchGamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) =>
               value={searchVal}
               onChange={onSearchValueChange}
               className="w-full pr-2 pl-12 py-2 border rounded-[50px] bg-[#2A253A]"  
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  onSearch(); // Call your onSearch function
-                }
-              }}
+              // onKeyDown={(e) => {
+              //   if (e.key === "Enter") {
+              //     onSearch(); // Call your onSearch function
+              //   }
+              // }}
               required
             />
           </div>
+          {searchVal != '' && (<div className="absolute top-[50%] right-[20px] -translate-y-[50%]">
+            <X onClick={onClearSearch} />
+          </div>)}
         </div>
         <Drawer title="Search results" height={"330px"} placement={"bottom"} onClose={onSearchPanelClose} open={isSearchPanelOpen}>
             <div className="w-full">

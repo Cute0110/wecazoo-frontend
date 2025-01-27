@@ -13,6 +13,8 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 
+import { useAuth } from "@/lib/authContext";
+
 interface VIPLevel {
   name: string;
   image: string;
@@ -32,6 +34,9 @@ const VIPScreen: React.FC = () => {
     weekly_wager: 0,
     monthly_wager: 0
   });
+
+  
+  const { isSidebarCollapsed } = useAuth();
 
   const vipLevels: VIPLevel[] = [
     { name: 'Bronze I', image: '/images/vip/bronze-1.jpg' },
@@ -76,7 +81,7 @@ const VIPScreen: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-green-900 bg-opacity-10 p-4">
-      <div className="max-w-7xl mx-auto md:mr-[280px]">
+      <div className={`max-w-7xl ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}>
         {/* User's Current VIP Status */}
         <Card className="mb-8 bg-gradient-to-r from-green-800 to-green-900 text-white">
           <CardHeader>

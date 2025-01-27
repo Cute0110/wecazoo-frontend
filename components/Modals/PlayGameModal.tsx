@@ -15,8 +15,8 @@ const SlotGamesList = ({ isModalOpen, onModalClose, isLoading, modalTitle, launc
 
   return (
     <>
-      <Modal title={modalTitle} centered open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null} width="80vw">
-        <div style={{ height: "80vh" }}>
+      <Modal title={modalTitle} centered open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null} width="90vw" className='!p-1'>
+        <div style={{ height: "85vh" }}>
           {isLoading ? <Loader /> :
             <iframe src={launchURL} width="100%" height="100%"></iframe>
           }

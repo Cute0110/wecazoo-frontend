@@ -21,7 +21,7 @@ type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 const Home = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isSidebarCollapsed } = useAuth();
   const [allGamesData, setAllGamesData] = useState([]);
   const [api, contextHolder] = notification.useNotification();
 
@@ -68,10 +68,12 @@ const Home = () => {
   return (
     <>
       {contextHolder}
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-background text-foreground md:max-w-[95%] md:ml-[5%]">
         <Navbar isNavLinksHidden={false} onScrollTo={onScrollTo} />
 
-        <main className="py-8 !ml-6 md:mr-[280px]">
+        <main
+          className={`py-8 ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}
+        >
           <Hero />
 
 

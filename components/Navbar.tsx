@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Logo from "@/public/wecazoo-logo.svg";
 import LanguageSelector from "./LanguageSelector";
-import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu, Headphones } from "lucide-react";
+import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu, ChevronLeft, ChevronRight } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import AuthModal from "./Modals/AuthModal";
 import { useAuth } from "@/lib/authContext";
@@ -16,7 +16,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isAuthModalType, setIsAuthModalType] = useState(true);
-  const { isAuthenticated, setIsAuthenticated, authData } = useAuth();
+  const { isAuthenticated, setIsAuthenticated, authData, isSidebarCollapsed, setIsSidebarCollapsed } = useAuth();
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
@@ -36,7 +36,17 @@ const Navbar = ({ isNavLinksHidden }: any) => {
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full p-6">
-      {isAuthenticated && (
+      <button 
+        onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        className="absolute -right-3 top-6 bg-[#130D25] p-2 w-6 h-20 flex items-center justify-center rounded-r-lg border-r border-t border-b border-gray-700 hover:bg-[#1a1229] transition-colors duration-200 hidden lg:flex shadow-lg"
+      >
+        {isSidebarCollapsed ? 
+          <ChevronRight className="w-4 h-4 text-gray-300 hover:text-white" /> : 
+          <ChevronLeft className="w-4 h-4 text-gray-300 hover:text-white" />
+        }
+      </button>
+
+      {isAuthenticated && !isSidebarCollapsed && (
         <div className="mb-6">
           <div className="flex items-center gap-x-2">
             <span className="text-white">USD {authData?.balance.toFixed(2)}$</span>
@@ -46,81 +56,78 @@ const Navbar = ({ isNavLinksHidden }: any) => {
       )}
 
       <nav className="flex-1 space-y-4">
-        {isAuthenticated && (
-          <>
-            <Link href="/vip" className="flex items-center text-gray-300 hover:text-white w-[80%]">
-              <img
-                src="/images/vip.png"
-                alt={`VIP`}
-                className="w-full h-auto rounded-lg"
-              />
-            </Link>
-          </>)
-        }
+        {isAuthenticated && !isSidebarCollapsed && (
+          <Link href="/vip" className="flex items-center text-gray-300 hover:text-white w-[80%]">
+            <img
+              src="/images/vip.png"
+              alt="VIP"
+              className="w-full h-auto rounded-lg"
+            />
+          </Link>
+        )}
+        
         <Link href="/" className="flex items-center text-gray-300 hover:text-white">
           <Home className="w-5 h-5 mr-3" />
-          <span>Home</span>
+          {!isSidebarCollapsed && <span>Home</span>}
         </Link>
         <Link href="/casino" className="flex items-center text-gray-300 hover:text-white">
           <RadarIcon className="w-5 h-5 mr-3" />
-          <span>Casino</span>
+          {!isSidebarCollapsed && <span>Casino</span>}
         </Link>
         {isAuthenticated && (
           <>
             <Link href="/profile" className="flex items-center text-gray-300 hover:text-white">
               <UserIcon className="w-5 h-5 mr-3" />
-              <span>Profile</span>
+              {!isSidebarCollapsed && <span>Profile</span>}
             </Link>
             <Link href="/wallet" className="flex items-center text-gray-300 hover:text-white">
               <WalletIcon className="w-5 h-5 mr-3" />
-              <span>Wallet</span>
+              {!isSidebarCollapsed && <span>Wallet</span>}
             </Link>
             <Link href="/bonus" className="flex items-center text-gray-300 hover:text-white">
               <GiftIcon className="w-5 h-5 mr-3" />
-              <span>Bonus</span>
+              {!isSidebarCollapsed && <span>Bonus</span>}
             </Link>
             <Link href="/vip" className="flex items-center text-gray-300 hover:text-white">
               <GiftIcon className="w-5 h-5 mr-3" />
-              <span>VIP</span>
+              {!isSidebarCollapsed && <span>VIP</span>}
             </Link>
-            {/* <Link href="/vip" className="flex items-center text-gray-300 hover:text-white">
-              <Headphones className="w-5 h-5 mr-3" />
-              <span>24/7 Support</span>
-            </Link> */}
             <button onClick={onLogOutClick} className="flex items-center text-gray-300 hover:text-white">
               <LogOutIcon className="w-5 h-5 mr-3" />
-              <span>Log Out</span>
+              {!isSidebarCollapsed && <span>Log Out</span>}
             </button>
           </>
         )}
       </nav>
 
-      <div className="mt-auto space-y-4">
-        <LanguageSelector />
-        {!isAuthenticated && (
-          <div className="space-y-2">
-            <Button
-              variant="outline"
-              className="w-full"
-              onClick={() => {
-                setIsAuthModalOpen(true);
-                setIsAuthModalType(true);
-              }}
-            >
-              Login
-            </Button>
-            <Button
-              className="w-full"
-              onClick={() => {
-                setIsAuthModalOpen(true);
-                setIsAuthModalType(false);
-              }}
-            >
-              Sign Up
-            </Button>
-          </div>
-        )}
-      </div>
+      {!isSidebarCollapsed && (
+        <div className="mt-auto space-y-4">
+          <LanguageSelector />
+          {!isAuthenticated && (
+            <div className="space-y-2">
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  setIsAuthModalOpen(true);
+                  setIsAuthModalType(true);
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                className="w-full"
+                onClick={() => {
+                  setIsAuthModalOpen(true);
+                  setIsAuthModalType(false);
+                }}
+              >
+                Sign Up
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 
@@ -132,11 +139,18 @@ const Navbar = ({ isNavLinksHidden }: any) => {
         modalType={isAuthModalType}
       />
       <div className="flex">
+        {/* Permanent Desktop Sidebar */}
+        {!isMobile && (
+          <div className={`fixed left-0 top-0 h-full bg-[#1F1635] z-50 border-r border-gray-800 transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-[280px]'}`}>
+            <SidebarContent />
+          </div>
+        )}
+
         <div className="flex-1">
           <header className="fixed top-0 left-0 right-0 z-40 bg-[#130D25] shadow-lg">
-            <div className="mx-auto md:mr-[280px] px-4 py-4 flex items-center justify-between">
+            <div className={`mx-auto px-4 py-4 flex items-center justify-between ${!isMobile ? (isSidebarCollapsed ? 'ml-20' : 'ml-[280px]') : ''}`}>
               <Link href="/" className="flex-shrink-0">
-                <Image priority src={Logo} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto ml-0 sm:ml-12 md-ml:24 lg:ml-36" />
+                <Image priority src={Logo} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto" />
               </Link>
 
               <div className="flex items-center gap-4">
@@ -149,7 +163,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
                   </Button>
                 )}
 
-                {isMobile ? (
+                {isMobile && (
                   <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>
                       <Button
@@ -161,24 +175,17 @@ const Navbar = ({ isNavLinksHidden }: any) => {
                       </Button>
                     </SheetTrigger>
                     <SheetContent
-                      side="right"
-                      className="w-[280px] border-l border-gray-800 bg-[#1F1635]"
+                      side="left"
+                      className="w-[280px] border-r border-gray-800 bg-[#1F1635]"
                     >
                       <SidebarContent />
                     </SheetContent>
                   </Sheet>
-                ) : null}
+                )}
               </div>
             </div>
           </header>
         </div>
-
-        {/* Permanent Desktop Sidebar */}
-        {!isMobile && (
-          <div className="fixed right-0 top-0 h-full w-[280px] bg-[#1F1635] z-50 border-l border-gray-800">
-            <SidebarContent />
-          </div>
-        )}
       </div>
     </>
   );

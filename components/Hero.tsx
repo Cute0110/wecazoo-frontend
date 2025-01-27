@@ -34,8 +34,8 @@ const Hero: React.FC = () => {
             <Image
               src="/images/hero.png"
               alt="Hero image"
-              width={500}
-              height={300}
+              width={1000}
+              height={500}
               priority
             />
           </div>

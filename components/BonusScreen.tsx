@@ -12,7 +12,7 @@ type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 const BonusScreen = () => {
-  const { isAuthenticated, authData, setAuthData } = useAuth();
+  const { isAuthenticated, authData, setAuthData, isSidebarCollapsed } = useAuth();
   const [api, contextHolder] = notification.useNotification();
 
   const openNotification = (type: NotificationType, title: any, content: any, placement: NotificationPlacement) => {
@@ -56,7 +56,7 @@ const BonusScreen = () => {
     <>
       {contextHolder}
       {isAuthenticated ?
-        <div className="container flex flex-col py-8 pt-[100px] md:mr-[280px]">
+        <div className={`container flex flex-col py-8 pt-[100px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}>
           <h1 className="text-2xl font-bold mb-4 px-3">Get Bonus</h1>
 
           <div className="bg-[#130D25] flex flex-col p-5 md:p-6 gap-8">

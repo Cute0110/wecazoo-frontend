@@ -18,7 +18,7 @@ const AboutUs = ({ isModalOpen, onModalClose, modalTitle }: any) => {
       <Modal title={modalTitle} centered open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null} width="700px">
         <div className='h-[40vh] overflow-y-auto'>
           <div>
-            <Image src="/images/hero.png" width={350} height={350} alt="hero" className='mx-auto rounded-md'></Image>
+            <Image src="/images/hero.png" width={600} height={350} alt="hero" className='mx-auto rounded-md'></Image>
             <div>
               <div className='text-muted text-lg'>
                 At Wecazoo, we bring the excitement of the casino world right to your fingertips, offering a thrilling gaming experience with top-notch security, fair play, and an extensive selection of games designed to entertain and reward.

@@ -17,6 +17,7 @@ import HamiltonSection from "@/components/HamiltonSection";
 import RaffleSection from "@/components/RaffleSection";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "./ui/button";
+import GamesAll from "@/components/GamesAll";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -33,9 +34,10 @@ const categories = [
 
 
 const CasinoScreen = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isSidebarCollapsed } = useAuth();
   const [allGamesData, setAllGamesData] = useState([]);
   const [api, contextHolder] = notification.useNotification();
+  const [searchValue, setSearchValue] = useState('');
 
   const openNotification = (type: NotificationType, title: any, content: any, placement: NotificationPlacement) => {
     api[type]({
@@ -82,7 +84,7 @@ const CasinoScreen = () => {
       {contextHolder}
       <div className="min-h-screen bg-background text-foreground">
 
-        <main className="py-8 mt-[76px] !ml-6 md:mr-[280px]">
+        <main className={`py-8 mt-[76px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}>
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col lg:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
               <HamiltonSection />
@@ -90,7 +92,7 @@ const CasinoScreen = () => {
             </div>
           </section>
 
-          <div id="search-games"><SearchGamesRow allGamesData={allGamesData} gameSectionType={"isAll"} sectionTitle={"Search Games"} /></div>
+          <div id="search-games"><SearchGamesRow allGamesData={allGamesData} gameSectionType={"isAll"} sectionTitle={"Search Games"} setSearchValue={setSearchValue} /></div>
 
           <div className="container">
             <ScrollArea className="w-full whitespace-nowrap rounded-[50px] bg-[#130d25] h-18 md:h-20 px-2">
@@ -112,15 +114,19 @@ const CasinoScreen = () => {
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
           </div>
-
-          <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} /></div>
-          <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
-          <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"} /></div>
-          <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div>
-          <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"} /></div>
-          <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
-          <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
-
+          {searchValue == '' ?
+            (<div>
+              <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} /></div>
+              <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
+              <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"} /></div>
+              <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div>
+              <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"} /></div>
+              <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
+              <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
+            </div>) : (<div>
+              <GamesAll allGamesData={allGamesData.filter((item : any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={"Searched Games"} />
+            </div>)
+          }
           <BetInfoSection allGamesData={allGamesData} />
 
         </main>

@@ -12,6 +12,7 @@ import PrivacyPolicy from "./Modals/PrivacyPolicy";
 import FAQs from "./Modals/FAQs";
 import FairGameOdds from "./Modals/FairGameOdds";
 import TermsConditions from "./Modals/TermsConditions";
+import { useAuth } from "@/lib/authContext";
 
 const Footer = ({ onScrollTo }: any) => {
   const [isAboutUsModalOpen, setIsAboutUsModalOpen] = useState(false);
@@ -21,6 +22,7 @@ const Footer = ({ onScrollTo }: any) => {
   const [isFGOModalOpen, setIsFGOModalOpen] = useState(false);
   const [isTCModalOpen, setIsTCModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
+  const { isSidebarCollapsed } = useAuth();
 
   const onModalClose = () => {
     setIsAboutUsModalOpen(false);
@@ -31,7 +33,7 @@ const Footer = ({ onScrollTo }: any) => {
     setIsTCModalOpen(false);
   }
   return (
-    <footer className="bg-[#130D25] mt-12 md:mr-[280px]">
+    <footer className={`bg-[#130D25] mt-12 ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}>
       <AboutUs isModalOpen={isAboutUsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <CustomerSupport isModalOpen={isCSModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <PrivacyPolicy isModalOpen={isPolicyModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
