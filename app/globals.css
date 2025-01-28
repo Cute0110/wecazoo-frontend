@@ -111,7 +111,7 @@ body {
   }
   .ant-table-tbody {
     .ant-table-cell {
-      background-color: #0d3832;
+      /* background-color: #0d3832; */
       color: lightgray;
       border: none;
       font-size: 15px;

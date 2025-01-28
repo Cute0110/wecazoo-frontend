@@ -116,7 +116,7 @@ const GamesAll = ({ allGamesData, sectionTitle }: any) => {
           </div>
 
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-10 sm:gap-12 md:gap-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-10 sm:gap-12 md:gap-16">
           {games
             .filter((game: any) => game.status) // Exclude games with status 0
             .map((game: any, index) => (

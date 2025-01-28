@@ -76,7 +76,7 @@ const BetInfoSection = ({allGamesData} : any) => {
     const timer = setInterval(timerFunc, 1000);
 
     return () => {
-      clearInterval(timer); // Clear the interval when the component unmounts
+      clearInterval(timer);
     };
   }, [allGamesData]);
 
@@ -97,7 +97,7 @@ const BetInfoSection = ({allGamesData} : any) => {
           </span>
         </div>
       ),
-      ellipsis: true, // Enable text truncation
+      ellipsis: true,
     },
     {
       title: 'User',
@@ -115,14 +115,14 @@ const BetInfoSection = ({allGamesData} : any) => {
           </span>
         </div>
       ),
-      ellipsis: true, // Enable text truncation
+      ellipsis: true,
     },
     {
       title: 'Time',
       dataIndex: 'time',
       key: 'time',
       width: 100,
-      ellipsis: true, // Enable text truncation
+      ellipsis: true,
       render: (time) => (
         <span>{time}</span>
       )
@@ -132,7 +132,7 @@ const BetInfoSection = ({allGamesData} : any) => {
       dataIndex: 'bet',
       key: 'bet',
       width: 100,
-      ellipsis: true, // Enable text truncation
+      ellipsis: true,
       render: (bet) => (
         <span>$ {bet}</span>
       )
@@ -142,7 +142,7 @@ const BetInfoSection = ({allGamesData} : any) => {
       dataIndex: 'multiplier',
       key: 'multiplier',
       width: 100,
-      ellipsis: true, // Enable text truncation
+      ellipsis: true,
       render: (multiplier) => (
         <span>{`${multiplier <= 0 ? "" : "X " + multiplier}`}</span>
       )
@@ -152,7 +152,7 @@ const BetInfoSection = ({allGamesData} : any) => {
       dataIndex: 'payout',
       key: 'payout',
       width: 80,
-      ellipsis: true, // Enable text truncation
+      ellipsis: true,
       render: (payout, record) => (
         <span className={`${record.multiplier <= 0 ? "" : "text-[#00FF00]"}`}>$ {record.multiplier < 0 ? "0.0" :payout}</span>
       )
@@ -161,7 +161,7 @@ const BetInfoSection = ({allGamesData} : any) => {
 
   return (
     <>
-      <div className='container bet-info-section' >
+      <div className='container bet-info-section'>
         <div className="flex items-center">
           <img src={`images/bet.png`} alt={"Recent Bets"} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" />
           <h2 className="text-md lg:text-3xl font-bold ml-2">Recent Bets</h2>
@@ -172,8 +172,23 @@ const BetInfoSection = ({allGamesData} : any) => {
           dataSource={betInfoData}
           scroll={{ x: `${betInfoData.length == 0 ? "1200px" : "max-content"}` }}
           pagination={false}
+          rowClassName={(record, index) => (index % 2 === 0 ? '!bg-[#2a0f57]' : '!bg-[#1a0a35]')}
         />
       </div>
+      <style jsx global>{`
+        .ant-table {
+          background: transparent !important;
+        }
+        .ant-table-tbody > tr > td {
+          border-bottom: none !important;
+        }
+        .ant-table-tbody > tr:last-child > td:first-child {
+          border-bottom-left-radius: 8px !important;
+        }
+        .ant-table-tbody > tr:last-child > td:last-child {
+          border-bottom-right-radius: 8px !important;
+        }
+      `}</style>
     </>
   )
 }
