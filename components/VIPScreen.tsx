@@ -81,7 +81,7 @@ const VIPScreen: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-green-900 bg-opacity-10 p-4">
-      <div className={`max-w-7xl ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}>
+      <div className={`max-w-7xl ${isSidebarCollapsed ? 'md:ml-[180px]' : 'md:ml-[350px]'}`}>
         {/* User's Current VIP Status */}
         <Card className="mb-8 bg-gradient-to-r from-green-800 to-green-900 text-white">
           <CardHeader>

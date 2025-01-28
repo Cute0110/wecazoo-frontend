@@ -31,7 +31,7 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error';
 const depositAmountArray = [25, 50, 100, 200, 500, 1000];
 
 const WalletScreen = () => {
-  const { isAuthenticated, authData, setAuthData } = useAuth();
+  const { isAuthenticated, authData, setAuthData, isSidebarCollapsed } = useAuth();
   const [depositAmount, setDepositAmount] = useState("");
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [withdrawWalletAddress, setWithdrawWalletAddress] = useState("");
@@ -160,7 +160,7 @@ const WalletScreen = () => {
     <>
       {contextHolder}
       {isAuthenticated ?
-        <div className="container flex flex-col py-8 pt-[100px]">
+        <div className={`container flex flex-col py-8 pt-[100px] ${isSidebarCollapsed ? 'md:ml-[180px]' : 'md:ml-[350px]'}`}>
           <DepositPaymentDialog
             isOpen={isPaymentDialogOpen}
             onClose={handleClosePaymentDialog}

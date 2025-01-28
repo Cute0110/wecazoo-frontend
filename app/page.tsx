@@ -72,14 +72,15 @@ const Home = () => {
         <Navbar isNavLinksHidden={false} onScrollTo={onScrollTo} />
 
         <main
-          className={`py-8 ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}
+          className={`py-8 ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`} // Added transform and scale
         >
-
           <div className="md:container flex flex-row w-full">
             <Hero />
           </div>
 
-          <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} /></div>
+          <div id="trending-games">
+            <GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} />
+          </div>
 
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col lg:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
@@ -91,8 +92,10 @@ const Home = () => {
           <div className="md:container flex flex-row w-full">
             <CarPlay onScrollTo={onScrollTo} />
           </div>
+
           <BetInfoSection allGamesData={allGamesData} />
-        </main >
+        </main>
+
 
         <Footer onScrollTo={onScrollTo} />
       </div >

@@ -169,20 +169,20 @@ const Footer = ({ onScrollTo }: any) => {
       </div>
 
       {/* Copyright */}
-      <div className="py-6 bg-[#2A253A]">
-        <p className="flex justify-center items-center text-muted text-sm">
+      <div className="p-6 bg-[#2A253A]">
+        <p className="flex justify-center items-center text-muted text-sm mb-2">
           Wecazoo Crypto Casino and Wecazoo.com are owned and operated by Wecazoo Games S.A., a company registered and licensed in Costa Rica.
         </p>
-        <p className="flex justify-center items-center text-muted text-sm">
+        <p className="flex justify-center items-center text-muted text-sm mb-2">
           The registered office of Wecazoo Games S.A. is located at C. 88, San José, Geroma, Costa Rica 10101.
         </p>
-        <p className="flex justify-center items-center text-muted text-sm">
+        <p className="flex justify-center items-center text-muted text-sm mb-2">
           For any inquiries or support, please contact us via email at support@wecazoo.com or team@wecazoo.com.
         </p>
-        <p className="flex justify-center items-center text-muted text-sm">
+        <p className="flex justify-center items-center text-muted text-sm mb-2">
           © 2025 Wecazoo Games S.A. Wecazoo.com. All rights reserved.
         </p>
-        <p className="flex justify-center items-center text-muted text-sm">
+        <p className="flex justify-center items-center text-muted text-sm mb-2">
           Wecazoo.com operates in accordance with Costa Rican gaming regulations.
         </p>
       </div>

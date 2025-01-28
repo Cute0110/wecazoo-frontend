@@ -27,7 +27,7 @@ type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 const ProfileScreen = () => {
-  const { isAuthenticated, authData } = useAuth();
+  const { isAuthenticated, authData, isSidebarCollapsed } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userName, setUserName] = useState('');
 
@@ -108,7 +108,7 @@ const ProfileScreen = () => {
     <>
       {contextHolder}
       {isAuthenticated ?
-        <div className="container flex flex-col py-8 pt-[100px]">
+        <div className={`container flex flex-col py-8 pt-[100px] ${isSidebarCollapsed ? 'md:ml-[180px]' : 'md:ml-[350px]'}`}>
           <AboutLockedBalance isModalOpen={isModalOpen} onModalClose={onModalClose} modalTitle={"About Locked Balance"} />
           <h1 className="text-2xl font-bold mb-4 px-3">My Profile</h1>
           <Tabs
