@@ -82,7 +82,7 @@ const CasinoScreen = () => {
   return (
     <>
       {contextHolder}
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-background text-foreground transform scale-90">
 
         <main className={`py-8 mt-[76px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}>
           <section className="container mb-8">
