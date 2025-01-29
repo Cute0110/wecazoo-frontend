@@ -31,10 +31,10 @@ const CarPlay = ({ onScrollTo }: any) => {
         <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-center">
           <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
             <div className="flex flex-col gap-1 md:gap-2.5">
-              <h2 className="text-xl sm:text-3xl lg:text-6xl font-extrabold max-w-lg">
+              <h2 className="text-3xl sm:text-3xl lg:text-6xl font-extrabold max-w-lg">
                 JOIN CRYPTO'S MOST
               </h2>
-              <h2 className="text-xl sm:text-3xl lg:text-6xl font-extrabold max-w-lg">
+              <h2 className="text-3xl sm:text-3xl lg:text-6xl font-extrabold max-w-lg">
                 REWARDING CASINO
               </h2>
             </div>
@@ -46,7 +46,7 @@ const CarPlay = ({ onScrollTo }: any) => {
               width={1000}
               height={500}
               priority
-              className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-2/5" // Make image full width on mobile
+              className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2" // Make image full width on mobile
             />
           </div>
         </div>

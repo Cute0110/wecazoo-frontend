@@ -72,7 +72,7 @@ const Home = () => {
         <Navbar isNavLinksHidden={false} onScrollTo={onScrollTo} />
 
         <main
-          className={`py-8 ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`} // Added transform and scale
+          className={`mt-[-40px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`} // Added transform and scale
         >
           <div className="md:container flex flex-row w-full">
             <Hero />
