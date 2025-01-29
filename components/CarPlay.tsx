@@ -28,21 +28,18 @@ const CarPlay = ({ onScrollTo }: any) => {
     <>
       <AuthModal isModalOpen={isAuthModalOpen} onModalClose={onModalClose} modalType={isAuthModalType} />
       <section className="flex flex-col flex-grow gap-8 px-4 md:px-10 mb-6">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-center">
           <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
             <div className="flex flex-col gap-1 md:gap-2.5">
               <h2 className="text-xl sm:text-3xl lg:text-6xl font-extrabold max-w-lg">
-                JOIN CRYPTO'S
-              </h2>
-              <h2 className="text-xl sm:text-3xl lg:text-6xl font-extrabold max-w-lg">
-                MOST
+                JOIN CRYPTO'S MOST
               </h2>
               <h2 className="text-xl sm:text-3xl lg:text-6xl font-extrabold max-w-lg">
                 REWARDING CASINO
               </h2>
             </div>
           </div>
-          <div className="w-[60%] sm:w-auto flex justify-end"> {/* Adjust width here */}
+          <div className="w-full sm:w-auto flex justify-end"> {/* Adjust width here */}
             <Image
               src="/images/reward.png"
               alt="Hero image"

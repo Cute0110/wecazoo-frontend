@@ -82,9 +82,9 @@ const CasinoScreen = () => {
   return (
     <>
       {contextHolder}
-      <div className="min-h-screen bg-background text-foreground transform scale-90">
+      <div className="min-h-screen bg-background text-foreground">
 
-        <main className={`mt-[-60px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'}`}>
+        <main className={`mt-[-60px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`}>
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col lg:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
               <HamiltonSection />

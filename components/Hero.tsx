@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
     <>
       <AuthModal isModalOpen={isAuthModalOpen} onModalClose={onModalClose} modalType={isAuthModalType} />
       <section className="flex flex-col flex-grow gap-8 px-4 md:px-10 mb-6">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-center">
           <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
             <div className="flex flex-col gap-1 md:gap-2.5">
               <p className="text-[10px] sm:text-xs md:text-sm lg:text-xl xl:text-2xl font-light uppercase">
