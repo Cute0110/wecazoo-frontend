@@ -16,6 +16,8 @@ import SearchGamesRow from "@/components/SearchGamesRow";
 import HamiltonSection from "@/components/HamiltonSection";
 import RaffleSection from "@/components/RaffleSection";
 import TrendingGames from "@/components/TrendingGames";
+import WelcomeScreen from "@/components/WelcomeScreen";
+import FAQ from "@/components/WecazooFAQ";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -84,6 +86,7 @@ const Home = () => {
 
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col lg:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
+              <WelcomeScreen />
               <HamiltonSection />
               <RaffleSection />
             </div>
@@ -94,9 +97,8 @@ const Home = () => {
           </div>
 
           <BetInfoSection allGamesData={allGamesData} />
+          <FAQ />
         </main>
-
-
         <Footer onScrollTo={onScrollTo} />
       </div >
     </>

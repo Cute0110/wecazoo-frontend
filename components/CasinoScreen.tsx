@@ -18,6 +18,7 @@ import RaffleSection from "@/components/RaffleSection";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "./ui/button";
 import GamesAll from "@/components/GamesAll";
+import FAQ from "@/components/WecazooFAQ";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -128,7 +129,7 @@ const CasinoScreen = () => {
             </div>)
           }
           <BetInfoSection allGamesData={allGamesData} />
-
+          <FAQ />
         </main>
 
         <Footer onScrollTo={onScrollTo} />

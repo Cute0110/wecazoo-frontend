@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "./ui/button";
 import { Icon } from "@iconify/react";
-import { ChevronDown, ChevronDownIcon, CopyIcon } from "lucide-react";
+import { ChevronDown, ChevronDownIcon, CopyIcon, WalletIcon } from "lucide-react";
 import Image from "next/image";
 import { FaArrowUp, FaQuestionCircle } from "react-icons/fa";
 import { RiExchangeDollarLine } from "react-icons/ri";
@@ -22,6 +22,7 @@ import AboutLockedBalance from "./Modals/AboutLockedBalance";
 import GuideBuyCyrpto from "./Modals/GuideBuyCrypto";
 import Footer from "./Footer";
 import DepositPaymentDialog from "./Modals/DepositPaymentDialog";
+import Link from "next/link";
 
 const web3 = new Web3();
 
@@ -74,6 +75,10 @@ const WalletScreen = () => {
 
   const handleWalletAddressInputChange = (e: any) => {
     setWithdrawWalletAddress(e.target.value);
+  }
+
+  const openDepositSite = () => {
+    window.open("https://changelly.com/buy-crypto", "_blank");
   }
 
   const onDepositClick = () => {
@@ -190,14 +195,25 @@ const WalletScreen = () => {
             <div className="w-full lg:max-w-4xl xl:max-w-6xl">
               <TabsContent value="deposit">
                 <div className="bg-[#130D25] flex flex-col p-5 md:p-6 gap-8">
-                  <div className="flex flex-col md:flex-row justify-center items-center md:justify-between gap-6 divide-y divide-gray-500/50 md:divide-none">
-                    <div className="flex">
+                <h2 className="text-xl font-semibold">Deposit Crypto</h2>
+                  <div className="flex flex-col justify-center items-center md:justify-between gap-6 divide-y divide-gray-500/50 md:divide-none">
+                    <div className="flex flex-row">
                       <div className="pr-4">
                         <span className="text-muted whitespace-nowrap text-sm flex items-center">
                           Your Balance
                         </span>
                         <p className="text-sm md:text-base font-medium">${authData.balance.toFixed(2)}</p>
                       </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <Button onClick={openDepositSite} className="w-full md:w-[40%] mx-auto"><WalletIcon className="w-5 h-5 mr-3" />Buy Crypto</Button>
+                      <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex items-center text-gray-300 hover:text-white w-[90%] md:w-[40%] mx-auto" style={{ "marginTop": '20px' }}>
+                        <img
+                          src="/images/pay.png"
+                          alt="VIP"
+                          className="w-full h-auto rounded-lg"
+                        />
+                      </Link>
                     </div>
                     <div className="flex gap-4 w-full justify-center pt-6 md:pt-0">
                       <input
@@ -207,11 +223,10 @@ const WalletScreen = () => {
                         placeholder="Input Deposit Amount"
                         value={depositAmount}
                         onChange={handleDepositAmountInputChange}
-                        className="w-[50%] p-2 border rounded-xl bg-[#2A253A]"
+                        className="w-full p-2 border rounded-xl bg-[#2A253A]"
                         required
                       />
                       <Button onClick={onDepositClick}>Deposit</Button>
-                      <Button onClick={() => { setIsGuideBuyCryptoModalOpen(true) }}>Buy Crypto</Button>
                     </div>
                   </div>
                   <div>

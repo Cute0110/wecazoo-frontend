@@ -139,7 +139,7 @@ const ProfileScreen = () => {
                 <div className="bg-[#130D25] flex flex-col p-4 md:p-8 gap-8 w-full lg:max-w-4xl">
                   <div className="w-full flex gap-4">
                     <div className="flex-1 flex flex-col gap-1.5">
-                      <label className="text-muted font-medium">User Name</label>
+                      <label className="text-muted font-medium">Username</label>
                       <input className="flex items-center justify-between bg-[#2A253A] rounded-[10px] py-3.5 px-4" value={userName} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserName(e.target.value)} />
                     </div>
                     <button className="self-end bg-green-500 hover:bg-green-600 text-white rounded-[10px] px-6 py-3.5" onClick={onSaveUserName}>

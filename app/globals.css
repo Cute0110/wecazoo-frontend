@@ -164,3 +164,69 @@ body {
 ::-webkit-scrollbar-thumb {
   @apply bg-[#2a2b35] rounded-full;
 }
+
+.faq-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.faq-title {
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Override Ant Design Collapse styles */
+.ant-collapse {
+  background: #1f1635 !important;
+  border: none !important;
+}
+
+.ant-collapse > .ant-collapse-item {
+  border-bottom: 1px solid #2a2a2a !important;
+  margin-bottom: 8px;
+}
+
+.ant-collapse > .ant-collapse-item:first-child .ant-collapse-header {
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+}
+
+.ant-collapse > .ant-collapse-item:last-child {
+  border-bottom: none !important;
+}
+
+.ant-collapse-header {
+  background: #1f1635 !important;
+  color: white !important;
+  padding: 16px 20px !important;
+}
+
+.ant-collapse-content {
+  background: #130d25 !important;
+  color: #a0a0a0 !important;
+}
+
+.ant-collapse-content-box {
+  padding: 16px 20px !important;
+}
+
+.collapse-icon {
+  color: white;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.collapse-icon.rotate {
+  transform: rotate(180deg);
+}
+
+/* Hover effects */
+.ant-collapse-header:hover {
+  background: #130d25 !important;
+}

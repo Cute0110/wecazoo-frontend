@@ -161,7 +161,7 @@ const BetInfoSection = ({allGamesData} : any) => {
 
   return (
     <>
-      <div className='container bet-info-section'>
+      <div className='container bet-info-section mt-4'>
         <div className="flex items-center">
           <img src={`images/bet.png`} alt={"Recent Bets"} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" />
           <h2 className="text-md lg:text-3xl font-bold ml-2">Recent Bets</h2>

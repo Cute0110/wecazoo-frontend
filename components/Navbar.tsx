@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Logo from "@/public/wecazoo-logo.svg";
 import LanguageSelector from "./LanguageSelector";
-import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu, ChevronLeft, ChevronRight, Headset } from "lucide-react";
+import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu, ChevronLeft, ChevronRight, Headset, DiamondIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import AuthModal from "./Modals/AuthModal";
 import { useAuth } from "@/lib/authContext";
@@ -101,7 +101,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               {!isSidebarCollapsed && <span>Bonus</span>}
             </Link>
             <Link href="/vip" className="flex items-center text-gray-300 hover:text-white">
-              <GiftIcon className="w-5 h-5 mr-3" />
+              <DiamondIcon className="w-5 h-5 mr-3" />
               {!isSidebarCollapsed && <span>VIP</span>}
             </Link>
             <Link href="#" onClick={() => setIsModalOpen(true)} className="flex items-center text-gray-300 hover:text-white">
@@ -116,7 +116,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               <WalletIcon className="w-5 h-5 mr-3" /><span>Buy Crypto</span>
             </Link>}
             {!isSidebarCollapsed && (
-              <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex items-center text-gray-300 hover:text-white w-[80%]">
+              <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex items-center text-gray-300 hover:text-white w-[90%]" style={{"marginTop": '20px'}}>
                 <img
                   src="/images/pay.png"
                   alt="VIP"
