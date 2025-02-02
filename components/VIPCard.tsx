@@ -1,20 +1,22 @@
-import Image from "next/image";
-
 interface VIPCardProps {
   imageSrc: string;
   levelName: string;
+  rakeBack: string;
+  className?: string;
 }
 
-const VIPCard: React.FC<VIPCardProps> = ({ imageSrc, levelName }) => {
+const VIPCard: React.FC<VIPCardProps> = ({ imageSrc, levelName, rakeBack, className }) => {
   return (
-    <div className="flex-none max-w-[350px] transition-transform duration-300 hover:scale-105">
-      <Image
+    <div className="relative group">
+      <img
         src={imageSrc}
-        alt={`VIP ${levelName}`}
-        width={400}
-        height={400}
-        className="w-full h-auto rounded-lg"
+        alt={levelName}
+        className={`rounded-lg ${className}`}
       />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 rounded-b-lg">
+        <h3 className="text-xl font-bold text-white">{levelName}</h3>
+        <p className="text-yellow-300">Rake Back: {rakeBack}</p>
+      </div>
     </div>
   );
 };

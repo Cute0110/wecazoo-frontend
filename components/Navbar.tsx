@@ -6,10 +6,13 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Logo from "@/public/wecazoo-logo.svg";
 import LanguageSelector from "./LanguageSelector";
-import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu, ChevronLeft, ChevronRight } from "lucide-react";
+import { Home, RadarIcon, UserIcon, WalletIcon, GiftIcon, LogOutIcon, Menu, ChevronLeft, ChevronRight, Headset } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import AuthModal from "./Modals/AuthModal";
 import { useAuth } from "@/lib/authContext";
+import { ChatBubbleIcon } from "@radix-ui/react-icons";
+
+import CustomerSupport from "./Modals/CustomerSupport";
 
 const Navbar = ({ isNavLinksHidden }: any) => {
   const router = useRouter();
@@ -18,6 +21,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
   const [isAuthModalType, setIsAuthModalType] = useState(true);
   const { isAuthenticated, setIsAuthenticated, authData, isSidebarCollapsed, setIsSidebarCollapsed } = useAuth();
   const [isMobile, setIsMobile] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,27 +40,31 @@ const Navbar = ({ isNavLinksHidden }: any) => {
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full p-6">
-      <button 
+      <button
         onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         className="absolute -right-3 top-6 bg-[#130D25] p-2 w-6 h-20 flex items-center justify-center rounded-r-lg border-r border-t border-b border-gray-700 hover:bg-[#1a1229] transition-colors duration-200 hidden lg:flex shadow-lg"
       >
-        {isSidebarCollapsed ? 
-          <ChevronRight className="w-4 h-4 text-gray-300 hover:text-white" /> : 
+        {isSidebarCollapsed ?
+          <ChevronRight className="w-4 h-4 text-gray-300 hover:text-white" /> :
           <ChevronLeft className="w-4 h-4 text-gray-300 hover:text-white" />
         }
       </button>
 
-      {isAuthenticated && !isSidebarCollapsed && (
+      <CustomerSupport isModalOpen={isModalOpen} onModalClose={() => setIsModalOpen(false)} modalTitle="Customer Support" />
+
+      {/* {isAuthenticated && !isSidebarCollapsed && (
         <div className="mb-6">
-          <div className="flex items-center gap-x-2">
-            <span className="text-white">USD {authData?.balance.toFixed(2)}$</span>
+          <div className="flex items-center">
+            <span style={{ fontFamily: 'League Spartan, sans-serif' }} className="text-white text-xl font-medium">
+              ${authData?.balance.toFixed(2)}
+            </span>
           </div>
           <div className="border-t border-gray-700 mt-4" />
         </div>
-      )}
+      )} */}
 
       <nav className="flex-1 space-y-4">
-        {isAuthenticated && !isSidebarCollapsed && (
+        {/* {isAuthenticated && !isSidebarCollapsed && (
           <Link href="/vip" className="flex items-center text-gray-300 hover:text-white w-[80%]">
             <img
               src="/images/vip.png"
@@ -64,8 +72,8 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               className="w-full h-auto rounded-lg"
             />
           </Link>
-        )}
-        
+        )} */}
+
         <Link href="/" className="flex items-center text-gray-300 hover:text-white">
           <Home className="w-5 h-5 mr-3" />
           {!isSidebarCollapsed && <span>Home</span>}
@@ -80,6 +88,10 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               <UserIcon className="w-5 h-5 mr-3" />
               {!isSidebarCollapsed && <span>Profile</span>}
             </Link>
+            <Link href="/" className="flex items-center text-gray-300 hover:text-white">
+              <ChatBubbleIcon className="w-5 h-5 mr-3" />
+              {!isSidebarCollapsed && <span>Chat</span>}
+            </Link>
             <Link href="/wallet" className="flex items-center text-gray-300 hover:text-white">
               <WalletIcon className="w-5 h-5 mr-3" />
               {!isSidebarCollapsed && <span>Wallet</span>}
@@ -92,10 +104,26 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               <GiftIcon className="w-5 h-5 mr-3" />
               {!isSidebarCollapsed && <span>VIP</span>}
             </Link>
+            <Link href="#" onClick={() => setIsModalOpen(true)} className="flex items-center text-gray-300 hover:text-white">
+              <Headset className="w-5 h-5 mr-3" />
+              {!isSidebarCollapsed && <span>24/7 Support</span>}
+            </Link>
             <button onClick={onLogOutClick} className="flex items-center text-gray-300 hover:text-white">
               <LogOutIcon className="w-5 h-5 mr-3" />
               {!isSidebarCollapsed && <span>Log Out</span>}
             </button>
+            {!isSidebarCollapsed && <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex flex-row bg-[#00bf62] p-2 rounded-lg cursor-pointer hover:bg-[#00bf62]/90 transition-colors w-full">
+              <WalletIcon className="w-5 h-5 mr-3" /><span>Buy Crypto</span>
+            </Link>}
+            {!isSidebarCollapsed && (
+              <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex items-center text-gray-300 hover:text-white w-[80%]">
+                <img
+                  src="/images/pay.png"
+                  alt="VIP"
+                  className="w-full h-auto rounded-lg"
+                />
+              </Link>
+            )}
           </>
         )}
       </nav>
@@ -153,16 +181,25 @@ const Navbar = ({ isNavLinksHidden }: any) => {
                 <Image priority src={Logo} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto" />
               </Link>
 
-              <div className="flex items-center gap-4">
-                {!isNavLinksHidden && (
-                  <Button
-                    className="text-sm bg-[url('/images/casinoBtn.jpg')] bg-cover bg-center h-[35px] lg:h-[42px]"
-                    onClick={() => router.push("/casino")}
-                  >
-                    Casino
-                  </Button>
-                )}
+              {/* Balance display for mobile */}
+              {isAuthenticated && (
+                <div className="flex items-center mx-4">
+                  <div className="bg-[#0b0911] rounded-lg flex items-center">
+                    <div className="px-4 py-2 flex items-center gap-2">
+                      <span style={{ fontFamily: 'League Spartan, sans-serif' }} className="text-white text-base">
+                        ${authData?.balance.toFixed(2)}
+                      </span>
+                    </div>
+                    <Link href="/wallet">
+                      <div className="bg-[#00bf62] p-2 rounded-lg cursor-pointer hover:bg-[#00bf62]/90 transition-colors">
+                        <WalletIcon className="w-5 h-5 text-white" />
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              )}
 
+              <div className="flex items-center gap-4">
                 {isMobile && (
                   <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>

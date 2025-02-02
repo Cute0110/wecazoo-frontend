@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { Modal } from "antd";
 import axiosInstance from "@/lib/action";
@@ -15,6 +15,7 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
     const [isLogin, setIsLogin] = useState(modalType);
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -24,7 +25,6 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
         ageConfirmation: false,
         emailConfirmation: false,
     });
-    // const router = useRouter();
     const { setIsAuthenticated, setAuthData } = useAuth();
     const [api, contextHolder] = notification.useNotification();
 
@@ -42,16 +42,18 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
     }, [modalType]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // Specify the type
         const { name, type, checked, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: type === "checkbox" ? checked : value, // Handle checkbox and text input
+            [name]: type === "checkbox" ? checked : value,
         }));
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        // Specify the type
         e.preventDefault();
 
         if (isLogin) {
@@ -73,7 +75,6 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
             }
         } else {
             try {
-
                 const response = await axiosInstance.post('/api/register', eot({ emailAddress: formData.email, password: formData.password, promoCode: formData.promoCode }));
                 const res = dot(response.data);
                 if (res.status == 1) {
@@ -86,8 +87,6 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                 openNotification('error', 'Error', "Network error!", 'topRight');
             }
         }
-
-        // Handle authentication logic here
     };
 
     const handleOk = () => {
@@ -108,29 +107,10 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                             <h2 className="text-white text-2xl font-medium text-center mb-4">
                                 {isLogin ? "Sign In" : "Sign Up"}
                             </h2>
-                            {/* {!isLogin && (
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="fullName"
-                                    className="block mb-2 text-white font-semibold"
-                                >
-                                    Full Name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="fullName"
-                                    name="fullName"
-                                    value={formData.fullName}
-                                    onChange={handleInputChange}
-                                    className="w-full p-2 border rounded-xl"
-                                    required
-                                />
-                            </div>
-                        )} */}
                             <div className="mb-4">
                                 <label
                                     htmlFor="email"
-                                    className="block mb-2  text-white font-semibold"
+                                    className="block mb-2 text-white font-semibold"
                                 >
                                     Email Address
                                 </label>
@@ -147,19 +127,32 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                             <div className="mb-4">
                                 <label
                                     htmlFor="password"
-                                    className="block mb-2  text-white font-semibold"
+                                    className="block mb-2 text-white font-semibold"
                                 >
                                     Password
                                 </label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleInputChange}
-                                    className="w-full p-2 border rounded-xl"
-                                    required
-                                />
+                                <div className="relative">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        id="password"
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleInputChange}
+                                        className="w-full p-2 border rounded-xl pr-10"
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={togglePasswordVisibility}
+                                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800"
+                                    >
+                                        {showPassword ? (
+                                            <EyeOff className="h-5 w-5" />
+                                        ) : (
+                                            <Eye className="h-5 w-5" />
+                                        )}
+                                    </button>
+                                </div>
                                 {isLogin && (
                                     <Link
                                         href="#"
@@ -169,36 +162,17 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                                     </Link>
                                 )}
                             </div>
-                            {/* {!isLogin && (
-                            <div className="mb-4">
-                                <label
-                                    htmlFor="confirmPassword"
-                                    className="block mb-2  text-white font-semibold"
-                                >
-                                    Confirm Password
-                                </label>
-                                <input
-                                    type="password"
-                                    id="confirmPassword"
-                                    name="confirmPassword"
-                                    value={formData.confirmPassword}
-                                    onChange={handleInputChange}
-                                    className="w-full p-2 border rounded-xl"
-                                    required
-                                />
-                            </div>
-                        )} */}
                             {!isLogin && (
                                 <div>
                                     <div className="mb-4">
                                         <label
                                             htmlFor="promoCode"
-                                            className="block mb-2  text-white font-semibold"
+                                            className="block mb-2 text-white font-semibold"
                                         >
                                             Promo Code (optional)
                                         </label>
                                         <input
-                                            type="promoCode"
+                                            type="text"
                                             id="promoCode"
                                             name="promoCode"
                                             placeholder="Promo Code"
@@ -206,28 +180,7 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                                             onChange={handleInputChange}
                                             className="w-full p-2 border rounded-xl"
                                         />
-                                        {isLogin && (
-                                            <Link
-                                                href="#"
-                                                className="text-sm text-[#1BB96B] block text-right font-semibold mt-1"
-                                            >
-                                                Forgot password?
-                                            </Link>
-                                        )}
                                     </div>
-                                    {/* <label
-                                    htmlFor="referralCode"
-                                    className="mb-1 flex items-center gap-1 cursor-pointer text-muted"
-                                >
-                                    <span className="">Enter Referral/Promo Code</span>
-                                    <ChevronDownIcon size={16} />
-                                </label>
-                                <input
-                                    id="referralCode"
-                                    type="text"
-                                    placeholder="Referral/Promo Code"
-                                    className="w-full p-2 border rounded-xl"
-                                /> */}
                                     <div className="flex items-center mt-4 mb-2">
                                         <input
                                             type="checkbox"
@@ -286,17 +239,6 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                                 </span>
                             </p>
                         }
-                        {/* <p className="mt-4 text-sm mx-auto max-w-md text-center text-white">
-                        By clicking {isLogin ? "Login" : "Sign Up"}, you agree to our{" "}
-                        <Link href="#" className="text-[#1BB96B]">
-                            terms of service{" "}
-                        </Link>
-                        and that you have read our{" "}
-                        <Link href="/privacy" className="text-[#1BB96B]">
-                            privacy policy
-                        </Link>
-                        .
-                    </p> */}
                     </div>
                 </div>
             </Modal>

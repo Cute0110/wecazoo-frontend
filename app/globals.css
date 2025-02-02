@@ -33,6 +33,10 @@ body {
   }
 }
 
+.play-game-modal .ant-modal-content {
+  background-color: #000 !important;
+}
+
 .ant-modal-content {
   border: 1px solid gray !important;
   background-color: #060019 !important;
