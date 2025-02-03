@@ -18,6 +18,7 @@ import RaffleSection from "@/components/RaffleSection";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "./ui/button";
 import GamesAll from "@/components/GamesAll";
+import WelcomeScreen from "@/components/WelcomeScreen";
 import FAQ from "@/components/WecazooFAQ";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
@@ -88,6 +89,7 @@ const CasinoScreen = () => {
         <main className={`mt-[-60px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`}>
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col lg:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
+              <WelcomeScreen />
               <HamiltonSection />
               <RaffleSection />
             </div>
@@ -125,7 +127,7 @@ const CasinoScreen = () => {
               <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
               <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
             </div>) : (<div>
-              <GamesAll allGamesData={allGamesData.filter((item : any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={""} />
+              <GamesAll allGamesData={allGamesData.filter((item: any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={""} />
             </div>)
           }
           <BetInfoSection allGamesData={allGamesData} />
