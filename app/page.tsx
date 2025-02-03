@@ -18,6 +18,7 @@ import RaffleSection from "@/components/RaffleSection";
 import TrendingGames from "@/components/TrendingGames";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import FAQ from "@/components/WecazooFAQ";
+import { MoreHorizontal } from "lucide-react";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -26,6 +27,8 @@ const Home = () => {
   const { isAuthenticated, isSidebarCollapsed } = useAuth();
   const [allGamesData, setAllGamesData] = useState([]);
   const [api, contextHolder] = notification.useNotification();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const openNotification = (type: NotificationType, title: any, content: any, placement: NotificationPlacement) => {
     api[type]({
@@ -53,7 +56,16 @@ const Home = () => {
       }
     };
 
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // 1024px is the lg breakpoint in Tailwind
+    };
+
+    checkMobile();
+
     fetchData();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const onScrollTo = (gameSection: any) => {
@@ -86,9 +98,38 @@ const Home = () => {
 
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col lg:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
-              <WelcomeScreen />
-              <HamiltonSection />
-              <RaffleSection />
+              {/* Mobile Welcome Screen */}
+              {isMobile && !isExpanded && <WelcomeScreen />}
+
+              {/* Desktop Layout */}
+              {(!isMobile || isExpanded) && (
+                <>
+                  <WelcomeScreen />
+                  <HamiltonSection />
+                  <RaffleSection />
+                </>
+              )}
+
+              {/* Expand button - Only visible on mobile when not expanded */}
+              {isMobile && !isExpanded && (
+                <button
+                  onClick={() => setIsExpanded(true)}
+                  className="p-2 bg-[#060019] rounded-full shadow-md hover:bg-[#130d25] transition-colors"
+                  aria-label="Show more sections"
+                >
+                  <MoreHorizontal className="w-6 h-6 text-white" />
+                </button>
+              )}
+
+              {/* Collapse button - Only visible on mobile when expanded */}
+              {isMobile && isExpanded && (
+                <button
+                  onClick={() => setIsExpanded(false)}
+                  className="mt-4 w-full py-2 px-4 bg-[#060019] rounded-md hover:bg-[#130d25] transition-colors text-white"
+                >
+                  Show less
+                </button>
+              )}
             </div>
           </section>
 
