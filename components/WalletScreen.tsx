@@ -207,7 +207,7 @@ const WalletScreen = () => {
                     </div>
                     <div className="flex flex-col">
                       <Button onClick={openDepositSite} className="w-full md:w-[35%] mx-auto"><WalletIcon className="w-5 h-5 mr-3" />Buy Crypto</Button>
-                      <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex items-center text-gray-300 hover:text-white w-[90%] md:w-[35%] mx-auto" style={{ "marginTop": '20px' }}>
+                      <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex items-center text-gray-300 hover:text-white w-[80%] md:w-[30%] mx-auto" style={{ "marginTop": '20px' }}>
                         <img
                           src="/images/pay.png"
                           alt="VIP"

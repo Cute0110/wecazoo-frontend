@@ -112,7 +112,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               <LogOutIcon className="w-5 h-5 mr-3" />
               {!isSidebarCollapsed && <span>Log Out</span>}
             </button>
-            {!isSidebarCollapsed && <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex flex-row bg-[#00bf62] p-2 rounded-lg cursor-pointer hover:bg-[#00bf62]/90 transition-colors w-full">
+            {!isSidebarCollapsed && <Link href="https://changelly.com/buy-crypto" target="_blank" style={{"marginTop": '30px'}} className="flex flex-row bg-[#00bf62] p-2 rounded-lg cursor-pointer hover:bg-[#00bf62]/90 transition-colors w-full">
               <WalletIcon className="w-5 h-5 mr-3" /><span>Buy Crypto</span>
             </Link>}
             {!isSidebarCollapsed && (
