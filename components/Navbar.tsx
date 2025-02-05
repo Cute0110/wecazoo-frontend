@@ -42,7 +42,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
     <div className="flex flex-col h-full p-6">
       <button
         onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        className="absolute -right-3 top-6 bg-[#130D25] p-2 w-6 h-20 flex items-center justify-center rounded-r-lg border-r border-t border-b border-gray-700 hover:bg-[#1a1229] transition-colors duration-200 hidden lg:flex shadow-lg"
+        className="absolute -right-3 top-6 bg-[#130D25] p-2 w-6 h-20 items-center justify-center rounded-r-lg border-r border-t border-b border-gray-700 hover:bg-[#1a1229] transition-colors duration-200 hidden lg:flex shadow-lg"
       >
         {isSidebarCollapsed ?
           <ChevronRight className="w-4 h-4 text-gray-300 hover:text-white" /> :

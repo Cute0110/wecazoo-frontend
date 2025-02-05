@@ -19,6 +19,7 @@ import TrendingGames from "@/components/TrendingGames";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import FAQ from "@/components/WecazooFAQ";
 import { MoreHorizontal } from "lucide-react";
+import ChatPanel from "@/components/ChatPanel";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -46,7 +47,6 @@ const Home = () => {
         const response = await axiosInstance.post('/api/game_list', eot({ start: 0, length: 0, search: 0, order: "order", dir: "asc" }));
         const res = dot(response.data);
         if (res.status == 1) {
-          console.log(res.data);
           setAllGamesData(res.data);
         } else {
           openNotification("error", "Error", res.msg, "topRight");
@@ -84,6 +84,7 @@ const Home = () => {
       {contextHolder}
       <div className="min-h-screen bg-background text-foreground">
         <Navbar isNavLinksHidden={false} onScrollTo={onScrollTo} />
+        <ChatPanel />
 
         <main
           className={`mt-[-40px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`} // Added transform and scale
