@@ -47,9 +47,12 @@ const ChatPanel: React.FC = () => {
   const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null);
   const [selectedMentionIndex, setSelectedMentionIndex] = useState<number>(-1);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
   // Refs
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
   const { isAuthenticated, authData } = useAuth();
@@ -65,6 +68,9 @@ const ChatPanel: React.FC = () => {
       socket.emit('groupMessage', { text: newMessage });
       setNewMessage('');
       setShowMentions(false);
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
     }
   };
 
@@ -120,19 +126,61 @@ const ChatPanel: React.FC = () => {
     setShowMentions(false);
   };
 
-  // Mobile detection effect
+  // Mobile detection and keyboard handling effect
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth < 768) {
+      const isMobileView = window.innerWidth < 768;
+      setIsMobile(isMobileView);
+      if (isMobileView && !isExpanded) {
         setIsExpanded(false);
+      }
+    };
+
+    // Handle visibility change
+    const handleVisibilityChange = () => {
+      if (document.hidden && isMobile) {
+        setIsKeyboardVisible(false);
+      }
+    };
+
+    // Handle keyboard visibility
+    const handleFocus = () => {
+      if (isMobile) {
+        setIsKeyboardVisible(true);
+        setTimeout(() => {
+          if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+          }
+          scrollToBottom();
+        }, 100);
+      }
+    };
+
+    const handleBlur = () => {
+      if (isMobile) {
+        setIsKeyboardVisible(false);
       }
     };
 
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    const inputElement = inputRef.current;
+    if (inputElement) {
+      inputElement.addEventListener('focus', handleFocus);
+      inputElement.addEventListener('blur', handleBlur);
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (inputElement) {
+        inputElement.removeEventListener('focus', handleFocus);
+        inputElement.removeEventListener('blur', handleBlur);
+      }
+    };
+  }, [isMobile, isExpanded]);
 
   // Socket setup effect
   useEffect(() => {
@@ -206,11 +254,15 @@ const ChatPanel: React.FC = () => {
   if (!isAuthenticated || !authData) return null;
 
   return (
-    <div className={`fixed transition-all duration-300 ease-in-out z-50 
-      ${isExpanded
-        ? 'w-full md:w-[320px] h-[80vh] md:h-screen right-0 bottom-0 md:top-0'
-        : 'w-12 h-12 right-6 bottom-6 md:right-6 md:bottom-6'}`}>
-
+    <div 
+      className={`fixed transition-all duration-300 ease-in-out z-50 
+        ${isExpanded
+          ? 'w-full md:w-[320px] right-0 bottom-0 md:top-0'
+          : 'w-12 h-12 right-6 bottom-6 md:right-6 md:bottom-6'}`}
+      style={{
+        height: isExpanded ? (isKeyboardVisible ? '100%' : '80vh') : '48px'
+      }}
+    >
       {/* Hide expand button on mobile */}
       {isExpanded && (
         <button
@@ -239,7 +291,7 @@ const ChatPanel: React.FC = () => {
               <h2 className="font-semibold text-lg">Group Chat</h2>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-400">
-                  {onlineUsers.length} online
+                  {onlineUsers.length + 20} online
                 </span>
                 {isMobile && (
                   <button
@@ -253,7 +305,10 @@ const ChatPanel: React.FC = () => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-2 md:p-4 space-y-4">
+            <div 
+              ref={chatContainerRef}
+              className="flex-1 overflow-y-auto p-2 md:p-4 space-y-4"
+            >
               {messages.map((message) => (
                 <div
                   key={message.id}
@@ -300,10 +355,14 @@ const ChatPanel: React.FC = () => {
             </div>
 
             {/* Input Form */}
-            <form onSubmit={handleSubmit} className="p-2 md:p-4 border-t border-gray-800">
+            <form 
+              onSubmit={handleSubmit} 
+              className="p-2 md:p-4 border-t border-gray-800 bg-[#1F1635]"
+            >
               <div className="relative flex space-x-2">
                 <div className="flex-1 relative">
                   <input
+                    ref={inputRef}
                     type="text"
                     value={newMessage}
                     onChange={handleInputChange}

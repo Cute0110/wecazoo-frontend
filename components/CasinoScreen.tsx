@@ -22,15 +22,17 @@ import WelcomeScreen from "@/components/WelcomeScreen";
 import FAQ from "@/components/WecazooFAQ";
 
 import { MoreHorizontal } from "lucide-react";
+import ProvidersRow from "./ProvidersRow";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 const categories = [
+  { label: "Zoo Originals", section: "original-games", type: "isOriginal" },
+  { label: "Zoo Improved RTP", section: "improved-games", type: "isImproved" },
   { label: "Trending Games", section: "trending-games", type: "isTrending" },
-  { label: "Popular Games", section: "popular-games", type: "isPopular" },
-  { label: "Most Profitable", section: "profitable-games", type: "isProfitable" },
-  { label: "Wecazoo Favorite", section: "favorite-games", type: "isFavorite" },
+  // { label: "Popular Games", section: "popular-games", type: "isPopular" },
+  // { label: "Most Profitable", section: "profitable-games", type: "isProfitable" },
   { label: "Live Casino", section: "live-games", type: "isLive" },
   { label: "Slots", section: "slot-games", type: "isSlot" },
   { label: "Very entertaining", section: "entertaining-games", type: "isEntertaining" },
@@ -40,6 +42,7 @@ const categories = [
 const CasinoScreen = () => {
   const { isAuthenticated, isSidebarCollapsed } = useAuth();
   const [allGamesData, setAllGamesData] = useState([]);
+  const [allProvidersData, setAllProvidersData] = useState([]);
   const [api, contextHolder] = notification.useNotification();
   const [searchValue, setSearchValue] = useState('');
 
@@ -63,6 +66,7 @@ const CasinoScreen = () => {
         const res = dot(response.data);
         if (res.status == 1) {
           setAllGamesData(res.data);
+          setAllProvidersData(res.providerData);
         } else {
           openNotification("error", "Error", res.msg, "topRight");
         }
@@ -162,13 +166,16 @@ const CasinoScreen = () => {
           </div>
           {searchValue == '' ?
             (<div>
+              <div id="original-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isOriginal"} sectionTitle={"Zoo Originals"} /></div>
+              <div id="improved-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isImproved"} sectionTitle={"Zoo Improved RTP"} /></div>
               <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} /></div>
-              <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
+              {/* <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
               <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"} /></div>
-              <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div>
+              <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div> */}
               <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"} /></div>
               <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
               <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
+              <div id="providers"><ProvidersRow allProvidersData={allProvidersData} /></div>
             </div>) : (<div>
               <GamesAll allGamesData={allGamesData.filter((item: any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={""} />
             </div>)

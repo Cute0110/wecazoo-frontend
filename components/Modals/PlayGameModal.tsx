@@ -38,20 +38,26 @@ const SlotGameList: React.FC<SlotGameListProps> = ({
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onModalClose}>
-      <DialogContent className="max-w-[100vw] h-[100vh] p-0 bg-gradient-to-b from-blue-900 to-black">
+      <DialogContent className="max-w-[100vw] h-[100vh] p-0">
         <div className="relative h-full w-full flex flex-col">
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-            <Image priority src={Logo} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto" />
+          {/* Header Bar */}
+          <div className="w-full h-16 bg-[#130D25] flex items-center justify-between px-4 z-20">
+            <Image
+              priority
+              src={Logo}
+              alt="Wecazoo Logo"
+              className="h-9 w-auto"
+            />
+            <Button
+              onClick={onModalClose}
+              className="rounded-full bg-white/10 hover:bg-white/20 p-2"
+            >
+              <X className="h-6 w-6 text-white" />
+            </Button>
           </div>
 
-          {/* <Button
-            onClick={onModalClose}
-            className="absolute top-4 right-4 z-10 rounded-full bg-white/10 hover:bg-white/20 p-2"
-          >
-            <X className="h-6 w-6 text-white" />
-          </Button> */}
-
-          <div className="flex-1 w-full h-full">
+          {/* Game Container */}
+          <div className="flex-1 w-full bg-gradient-to-b from-blue-900 to-black">
             {isLoading ? (
               <div className="h-full w-full flex items-center justify-center">
                 <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white" />
@@ -65,7 +71,8 @@ const SlotGameList: React.FC<SlotGameListProps> = ({
             )}
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 bg-black/50 py-4">
+          {/* Footer Bar */}
+          <div className="w-full bg-[#130D25] py-4">
             <h2 className="text-white text-center text-xl font-semibold">
               {modalTitle}
             </h2>
