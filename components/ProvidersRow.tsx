@@ -48,7 +48,7 @@ const ProvidersRow = ({ allProvidersData }: any) => {
   return (
     <>
       {contextHolder}
-      <section className="container my-20">
+      <section className="container my-10">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <img src={`images/gameTypes/provider.png`} alt={"Game Providers"} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" />
