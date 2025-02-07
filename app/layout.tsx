@@ -6,6 +6,7 @@ import "./globals.css";
 import Loader from "@/components/Loader";
 import { AuthProvider } from '@/lib/authContext'; // Import the AuthProvider
 import { useEffect, useState } from "react";
+import ChatPanel from "@/components/ChatPanel";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${openSans.variable} ${montserrat.variable} font-sans`}>
         <AuthProvider>
           {children}
+          <ChatPanel />
         </AuthProvider>
       </body>
     </html>

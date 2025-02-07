@@ -19,7 +19,6 @@ import TrendingGames from "@/components/TrendingGames";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import FAQ from "@/components/WecazooFAQ";
 import { MoreHorizontal } from "lucide-react";
-import ChatPanel from "@/components/ChatPanel";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -84,7 +83,6 @@ const Home = () => {
       {contextHolder}
       <div className="min-h-screen bg-background text-foreground">
         <Navbar isNavLinksHidden={false} onScrollTo={onScrollTo} />
-        <ChatPanel />
 
         <main
           className={`mt-[-40px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`} // Added transform and scale
