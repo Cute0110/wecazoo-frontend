@@ -70,9 +70,9 @@ const ProvidersRow = ({ allProvidersData }: any) => {
                 <img
                   src={game.imageUrl}
                   alt={game.name}
-                  className="rounded-lg mx-auto w-[100px] h-[70px] lg:w-[200px] lg:h-[130px]"
+                  className="rounded-lg mx-auto w-[110px] h-[40px] lg:w-[220px] lg:h-[80px]"
                 />
-                <div className="absolute mx-auto w-[100px] h-[70px] lg:w-[200px] lg:h-[120px] inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75 flex flex-col items-center justify-end p-4">
+                <div className="absolute mx-auto w-[110px] h-[40px] lg:w-[220px] lg:h-[80px] inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75 flex flex-col items-center justify-end p-4">
                   <div className="absolute bottom-0 left-0 w-full bg-white/85 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0 px-2 py-3.5 text-center">
                     <span className="text-sm font-bold text-background">
                       {game.name}
