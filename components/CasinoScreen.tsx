@@ -30,7 +30,7 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error';
 const categories = [
   { label: "Game Lobby", section: "isLobby", type: "provider" },
   { label: "Zoo Originals", section: "isOriginal", type: "isOriginal" },
-  { label: "Zoo Improved RTP", section: "isImproved", type: "isImproved" },
+  { label: "Improved RTP", section: "isImproved", type: "isImproved" },
   // { label: "Game Providers", section: "providers", type: "provider" },
   { label: "Trending Games", section: "isTrending", type: "isTrending" },
   // { label: "Popular Games", section: "popular-games", type: "isPopular" },
@@ -189,7 +189,7 @@ const CasinoScreen = () => {
           {searchValue == '' && filteredGameData.length == 0 ?
             (<div>
               <div id="original-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isOriginal"} sectionTitle={"Zoo Originals"} onViewAll={() => onShowGames("isOriginal")} /></div>
-              <div id="improved-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isImproved"} sectionTitle={"Zoo Improved RTP"} onViewAll={() => onShowGames("isImproved")} /></div>
+              <div id="improved-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isImproved"} sectionTitle={"Improved RTP"} onViewAll={() => onShowGames("isImproved")} /></div>
               <div id="providers"><ProvidersRow allProvidersData={allProvidersData} /></div>
               <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} onViewAll={() => onShowGames("isTrending")} /></div>
               {/* <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
