@@ -26,7 +26,7 @@ import Autoplay from "embla-carousel-autoplay";
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
-const GamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
+const GamesRow = ({ allGamesData, gameSectionType, sectionTitle, onViewAll }: any) => {
   const [games, setGames] = useState([]);
   const [isSlotGameModalOpen, setIsSlotGameModalOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -142,6 +142,7 @@ const GamesRow = ({ allGamesData, gameSectionType, sectionTitle }: any) => {
           opts={carouselOptions}
           className="w-full"
         >
+          {onViewAll && <Button className="absolute top-[-50px] right-[150px] !h-10 w-20 bg-[#1d1536] border-0 rounded-md" onClick={onViewAll}>View All</Button>}
           <CarouselContent className="-ml-4">
             {games.map((game: any, index) => (
               <CarouselItem

@@ -165,7 +165,7 @@ const ChatPanel: React.FC = () => {
     handleResize();
     window.addEventListener('resize', handleResize);
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    
+
     const inputElement = inputRef.current;
     if (inputElement) {
       inputElement.addEventListener('focus', handleFocus);
@@ -254,13 +254,13 @@ const ChatPanel: React.FC = () => {
   if (!isAuthenticated || !authData) return null;
 
   return (
-    <div 
+    <div
       className={`fixed transition-all duration-300 ease-in-out z-50 
         ${isExpanded
           ? 'w-full md:w-[320px] right-0 bottom-0 md:top-0'
           : 'w-12 h-12 right-6 bottom-6 md:right-6 md:bottom-6'}`}
       style={{
-        height: isExpanded ? (isKeyboardVisible ? '100%' : '80vh') : '48px'
+        height: isExpanded ? (isKeyboardVisible || !isMobile ? '100%' : '80vh') : '48px'
       }}
     >
       {/* Hide expand button on mobile */}
@@ -288,7 +288,7 @@ const ChatPanel: React.FC = () => {
           <div className="h-full flex flex-col opacity-100 transition-opacity duration-300">
             {/* Header */}
             <div className="p-4 border-b border-gray-800 flex justify-between items-center">
-              <h2 className="font-semibold text-lg">Group Chat</h2>
+              <h2 className="font-semibold text-lg">Player Chat</h2>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-400">
                   {onlineUsers.length + 20} online
@@ -305,7 +305,7 @@ const ChatPanel: React.FC = () => {
             </div>
 
             {/* Messages */}
-            <div 
+            <div
               ref={chatContainerRef}
               className="flex-1 overflow-y-auto p-2 md:p-4 space-y-4"
             >
@@ -355,8 +355,8 @@ const ChatPanel: React.FC = () => {
             </div>
 
             {/* Input Form */}
-            <form 
-              onSubmit={handleSubmit} 
+            <form
+              onSubmit={handleSubmit}
               className="p-2 md:p-4 border-t border-gray-800 bg-[#1F1635]"
             >
               <div className="relative flex space-x-2">

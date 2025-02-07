@@ -28,24 +28,27 @@ type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 const categories = [
-  { label: "Zoo Originals", section: "original-games", type: "isOriginal" },
-  { label: "Zoo Improved RTP", section: "improved-games", type: "isImproved" },
-  { label: "Game Providers", section: "providers", type: "provider" },
-  { label: "Trending Games", section: "trending-games", type: "isTrending" },
+  { label: "Game Lobby", section: "isLobby", type: "provider" },
+  { label: "Zoo Originals", section: "isOriginal", type: "isOriginal" },
+  { label: "Zoo Improved RTP", section: "isImproved", type: "isImproved" },
+  // { label: "Game Providers", section: "providers", type: "provider" },
+  { label: "Trending Games", section: "isTrending", type: "isTrending" },
   // { label: "Popular Games", section: "popular-games", type: "isPopular" },
   // { label: "Most Profitable", section: "profitable-games", type: "isProfitable" },
-  { label: "Live Casino", section: "live-games", type: "isLive" },
-  { label: "Slots", section: "slot-games", type: "isSlot" },
-  { label: "Very entertaining", section: "entertaining-games", type: "isEntertaining" },
+  { label: "Live Casino", section: "isLive", type: "isLive" },
+  { label: "Slots", section: "isSlot", type: "isSlot" },
+  { label: "Very entertaining", section: "isEntertaining", type: "isEntertaining" },
 ];
 
 
 const CasinoScreen = () => {
   const { isAuthenticated, isSidebarCollapsed } = useAuth();
   const [allGamesData, setAllGamesData] = useState([]);
+  const [filteredGameData, setFilteredGame] = useState([]);
   const [allProvidersData, setAllProvidersData] = useState([]);
   const [api, contextHolder] = notification.useNotification();
   const [searchValue, setSearchValue] = useState('');
+  const [selectedType, setSelectedType] = useState('isLobby');
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -88,17 +91,35 @@ const CasinoScreen = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const onScrollTo = (gameSection: any) => {
-    console.log(".......")
-    const element = document.getElementById(gameSection); // Replace with your target element's ID
-    if (element) {
-      const top = element.getBoundingClientRect().top + window.scrollY - 76;
-      window.scrollTo({
-        top: top,
-        behavior: "smooth", // Adds smooth scrolling
-      });
+  const onShowGames = (gameSection: any) => {
+    setSelectedType(gameSection);
+    if (gameSection === "isLobby") {
+      setFilteredGame([]);
+      return;
     }
-  }
+
+    const tempData = allGamesData.filter((item: any) => item[gameSection] == true);
+    if (gameSection == "isPopular" || gameSection == "isLive") {
+      tempData.sort((a: any, b: any) => b.order - a.order);
+    }
+
+    setFilteredGame(tempData);
+
+    // Wait for the next render cycle to complete
+    setTimeout(() => {
+      const element = document.getElementById("search-games");
+      if (element) {
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.offsetHeight : 76;
+        const top = element.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+        window.scrollTo({
+          top: top,
+          behavior: "smooth",
+        });
+      }
+    }, 0);
+  };
 
   return (
     <>
@@ -152,8 +173,8 @@ const CasinoScreen = () => {
                   <Button
                     key={item.label}
                     variant="link"
-                    className="text-white hover:no-underline text-lg md:text-2xl font-bold rounded-[50px] bg-[#07001a] hover:bg-zinc-300"
-                    onClick={() => onScrollTo(item.section)}
+                    className={`text-white hover:no-underline text-lg md:text-2xl font-bold rounded-[50px]  ${item.section === selectedType ? "bg-zinc-300" : "bg-[#07001a]"} hover:bg-zinc-300`}
+                    onClick={() => onShowGames(item.section)}
                   >
                     <div className="flex items-center">
                       <img src={`images/gameTypes/${item.type}.png`} alt={item.label} className="w-[25px] h-[25px] lg:w-[30px] lg:h-[30px]" />
@@ -165,27 +186,27 @@ const CasinoScreen = () => {
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
           </div>
-          {searchValue == '' ?
+          {searchValue == '' && filteredGameData.length == 0 ?
             (<div>
-              <div id="original-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isOriginal"} sectionTitle={"Zoo Originals"} /></div>
-              <div id="improved-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isImproved"} sectionTitle={"Zoo Improved RTP"} /></div>
+              <div id="original-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isOriginal"} sectionTitle={"Zoo Originals"} onViewAll={() => onShowGames("isOriginal")} /></div>
+              <div id="improved-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isImproved"} sectionTitle={"Zoo Improved RTP"} onViewAll={() => onShowGames("isImproved")} /></div>
               <div id="providers"><ProvidersRow allProvidersData={allProvidersData} /></div>
-              <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} /></div>
+              <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} onViewAll={() => onShowGames("isTrending")} /></div>
               {/* <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
               <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"} /></div>
               <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div> */}
-              <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"} /></div>
-              <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} /></div>
-              <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} /></div>
+              <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"} onViewAll={() => onShowGames("isLive")} /></div>
+              <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} onViewAll={() => onShowGames("isSlot")} /></div>
+              <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} onViewAll={() => onShowGames("isEntertaining")} /></div>
             </div>) : (<div>
-              <GamesAll allGamesData={allGamesData.filter((item: any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={""} />
+              <GamesAll allGamesData={filteredGameData.filter((item: any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={""} />
             </div>)
           }
           <BetInfoSection allGamesData={allGamesData} />
           <FAQ />
         </main>
 
-        <Footer onScrollTo={onScrollTo} />
+        <Footer onShowGames={onShowGames} />
       </div>
     </>
   );
