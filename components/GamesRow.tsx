@@ -142,7 +142,7 @@ const GamesRow = ({ allGamesData, gameSectionType, sectionTitle, onViewAll }: an
           opts={carouselOptions}
           className="w-full"
         >
-          {onViewAll && <Button className="absolute top-[-50px] right-[150px] !h-10 w-20 bg-[#1d1536] border-0 rounded-md" onClick={onViewAll}>View All</Button>}
+          {onViewAll && <Button className="font-bold absolute top-[-50px] right-[110px] sm:right-[120px] !h-10 w-20 bg-[#1d1536] border-0 rounded-md" onClick={onViewAll}>View All</Button>}
           <CarouselContent className="-ml-4">
             {games.map((game: any, index) => (
               <CarouselItem

@@ -173,7 +173,7 @@ const CasinoScreen = () => {
                   <Button
                     key={item.label}
                     variant="link"
-                    className={`text-white hover:no-underline text-lg md:text-2xl font-bold rounded-[50px]  ${item.section === selectedType ? "bg-zinc-300" : "bg-[#07001a]"} hover:bg-zinc-300`}
+                    className={`text-white hover:no-underline text-lg md:text-2xl font-bold rounded-[50px]  ${item.section === selectedType ? "bg-[#3c3c3fe6]" : "bg-[#07001a]"} hover:bg-zinc-300`}
                     onClick={() => onShowGames(item.section)}
                   >
                     <div className="flex items-center">
