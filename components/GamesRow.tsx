@@ -147,7 +147,7 @@ const GamesRow = ({ allGamesData, gameSectionType, sectionTitle, onViewAll }: an
             {games.map((game: any, index) => (
               <CarouselItem
                 key={index}
-                className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/4 2xl:basis-1/6 relative group cursor-pointer p-0"
+                className="basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/5 2xl:basis-1/6 relative group cursor-pointer p-0"
                 onClick={() => onGameClick(game.providerCode, game.gameCode, game.name, game.type)}
               >
                 <img

@@ -37,7 +37,7 @@ const categories = [
   // { label: "Most Profitable", section: "profitable-games", type: "isProfitable" },
   { label: "Live Casino", section: "isLive", type: "isLive" },
   { label: "Slots", section: "isSlot", type: "isSlot" },
-  { label: "Very entertaining", section: "isEntertaining", type: "isEntertaining" },
+  { label: "Entertaining", section: "isEntertaining", type: "isEntertaining" },
 ];
 
 
@@ -197,9 +197,10 @@ const CasinoScreen = () => {
               <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div> */}
               <div id="live-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isLive"} sectionTitle={"Live Casino"} onViewAll={() => onShowGames("isLive")} /></div>
               <div id="slot-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isSlot"} sectionTitle={"Slots"} onViewAll={() => onShowGames("isSlot")} /></div>
-              <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Very Entertaining"} onViewAll={() => onShowGames("isEntertaining")} /></div>
+              <div id="entertaining-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isEntertaining"} sectionTitle={"Entertaining"} onViewAll={() => onShowGames("isEntertaining")} /></div>
             </div>) : (<div>
-              <GamesAll allGamesData={filteredGameData.filter((item: any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={""} />
+              <GamesAll allGamesData={filteredGameData.length == 0 ? allGamesData.filter((item: any) => item.name.toLowerCase().includes(searchValue.toLowerCase())) :
+                filteredGameData.filter((item: any) => item.name.toLowerCase().includes(searchValue.toLowerCase()))} sectionTitle={""} />
             </div>)
           }
           <BetInfoSection allGamesData={allGamesData} />
