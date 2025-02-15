@@ -123,6 +123,21 @@ const UserManagePage = () => {
     }
   }
 
+  const onUserResetPasswordAction = async (id: any) => {
+    try {
+      const result = await axiosInstance.post("api/reset_password", eot({ userId: id }));
+      const res = dot(result.data);
+      if (res.status == 1) {
+        openNotification('success', "Success", "User Password Reset was successfully done!", "topRight");
+      } else {
+        openNotification('error', "Error", res.msg, "topRight");
+      }
+    } catch (err) {
+      openNotification('error', "Error", "error", "topRight");
+    } finally {
+    }
+  }
+
   const onUserStatusChangeAction = async (userID: any, status: any) => {
     try {
       const result = await axiosInstance.post("api/user_status_change", eot({ id: userID, status }));
@@ -156,6 +171,7 @@ const UserManagePage = () => {
             userData={userData}
             onGetTableDataAction={onGetTableDataAction}
             onUserTransactionAction={onUserTransactionAction}
+            onUserResetPasswordAction={onUserResetPasswordAction}
             onDeleteUserAction={onDeleteUserAction}
             onUserStatusChangeAction={onUserStatusChangeAction}
           />

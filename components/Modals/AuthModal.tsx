@@ -9,6 +9,7 @@ import { useAuth } from "@/lib/authContext";
 import { notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import { eot, dot } from '@/lib/cryptoUtils';
+import CustomerSupport from "./CustomerSupport";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -16,6 +17,7 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error';
 const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
     const [isLogin, setIsLogin] = useState(modalType);
     const [showPassword, setShowPassword] = useState(false);
+    const [showSupportModal, setShowSupportModal] = useState(false);
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -25,8 +27,13 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
         ageConfirmation: false,
         emailConfirmation: false,
     });
+
     const { setIsAuthenticated, setAuthData } = useAuth();
     const [api, contextHolder] = notification.useNotification();
+
+    useEffect(() => {
+        setIsLogin(modalType);
+    }, [modalType]);
 
     const openNotification = (type: NotificationType, title: any, content: any, placement: NotificationPlacement) => {
         api[type]({
@@ -36,10 +43,6 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
             placement,
         });
     };
-
-    useEffect(() => {
-        setIsLogin(modalType);
-    }, [modalType]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, type, checked, value } = e.target;
@@ -78,7 +81,7 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                 const response = await axiosInstance.post('/api/register', eot({ emailAddress: formData.email, password: formData.password, promoCode: formData.promoCode }));
                 const res = dot(response.data);
                 if (res.status == 1) {
-                    openNotification('success', 'Success', 'Registerd successfully!', 'topRight');
+                    openNotification('success', 'Success', 'Registered successfully!', 'topRight');
                     setIsLogin(true);
                 } else {
                     openNotification('error', 'Error', res.msg, 'topRight');
@@ -87,6 +90,11 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                 openNotification('error', 'Error', "Network error!", 'topRight');
             }
         }
+    };
+
+    const handleForgotPassword = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setShowSupportModal(true);
     };
 
     const handleOk = () => {
@@ -154,12 +162,12 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                                     </button>
                                 </div>
                                 {isLogin && (
-                                    <Link
-                                        href="#"
-                                        className="text-sm text-[#1BB96B] block text-right font-semibold mt-1"
+                                    <button
+                                        onClick={handleForgotPassword}
+                                        className="text-sm text-[#1BB96B] block text-right font-semibold mt-1 hover:text-[#148F53]"
                                     >
                                         Forgot password?
-                                    </Link>
+                                    </button>
                                 )}
                             </div>
                             {!isLogin && (
@@ -228,13 +236,13 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                         {isLogin ?
                             <p className="mt-4 text-sm mx-auto max-w-md text-center text-white">
                                 New to Wecazoo?{" "}
-                                <span onClick={() => setIsLogin(false)} className="text-[#1BB96B] cursor-pointer">
+                                <span onClick={() => setIsLogin(false)} className="text-[#1BB96B] cursor-pointer hover:text-[#148F53]">
                                     Create account
                                 </span>
                             </p> :
                             <p className="mt-4 text-sm mx-auto max-w-md text-center text-white">
                                 Already have an account?{" "}
-                                <span onClick={() => setIsLogin(true)} className="text-[#1BB96B] cursor-pointer">
+                                <span onClick={() => setIsLogin(true)} className="text-[#1BB96B] cursor-pointer hover:text-[#148F53]">
                                     Sign In
                                 </span>
                             </p>
@@ -242,6 +250,12 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                     </div>
                 </div>
             </Modal>
+
+            <CustomerSupport
+                isModalOpen={showSupportModal}
+                onModalClose={() => setShowSupportModal(false)}
+                modalTitle="Password Reset"
+            />
         </>
     );
 };

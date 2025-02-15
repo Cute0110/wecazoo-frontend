@@ -6,6 +6,9 @@ import {CheckOutlined, CloseOutlined, EditOutlined, UserAddOutlined, UserDeleteO
 import moment from 'moment';
 import { useRouter } from 'next/navigation';
 import HeadTitle from '../../ui/HeadTitle';
+import { CgPassword } from 'react-icons/cg';
+import { RiLockPasswordFill } from 'react-icons/ri';
+import { on } from 'events';
 
 interface DataType {
   key: React.Key;
@@ -21,7 +24,7 @@ interface DataType {
 const dirTypeArray = ["", "ASC", "DESC"];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
-const UserManageTable = ({data, onUserStatusChangeAction, onDeleteUser, onClickUserTransaction, setOrderData} : any) => {
+const UserManageTable = ({data, onUserStatusChangeAction, onDeleteUser, onResetPassword, onClickUserTransaction, setOrderData} : any) => {
 
   const [noDir, setNoDir] = useState(0); // 0: noSort, 1: asc, 2: desc
   const [userCodeDir, setUserCodeDir] = useState(0); // 0: noSort, 1: asc, 2: desc
@@ -70,10 +73,16 @@ const UserManageTable = ({data, onUserStatusChangeAction, onDeleteUser, onClickU
       onClickUserTransaction(record.key);
     }else if (key == 10) {
       onDeleteUser(record.key);
+    } else if (key == 2) {
+      onResetPassword(record.key);
     }
   };
   
   const actionMenus: any = [
+    {
+      label: <span className="text-[rgb(26,175,172,1)]"><RiLockPasswordFill className='mr-1'/> Reset Password</span>,
+      key: '2',
+    },
     {
       label: <span className="text-[rgb(26,175,172,1)]"><SwapOutlined className='mr-1'/> Transaction</span>,
       key: '1',

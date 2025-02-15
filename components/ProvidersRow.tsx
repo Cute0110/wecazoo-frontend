@@ -52,7 +52,7 @@ const ProvidersRow = ({ allProvidersData }: any) => {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <img src={`images/gameTypes/provider.png`} alt={"Game Providers"} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" />
-            <h2 className="text-md lg:text-3xl font-bold ml-2">Game Providers</h2>
+            <h2 className="text-md lg:text-2xl font-bold ml-2">Game Providers</h2>
           </div>
 
         </div>

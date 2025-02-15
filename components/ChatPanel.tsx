@@ -37,7 +37,6 @@ interface ClientToServerEvents {
 
 const ChatPanel: React.FC = () => {
   // State
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [onlineUsers, setOnlineUsers] = useState<User[]>([]);
   const [showMentions, setShowMentions] = useState(false);
@@ -55,7 +54,7 @@ const ChatPanel: React.FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Hooks
-  const { isAuthenticated, authData } = useAuth();
+  const { isAuthenticated, authData, isExpanded, setIsExpanded } = useAuth();
 
   // Functions
   const scrollToBottom = (): void => {
@@ -258,7 +257,7 @@ const ChatPanel: React.FC = () => {
       className={`fixed transition-all duration-300 ease-in-out z-50 
         ${isExpanded
           ? 'w-full md:w-[320px] right-0 bottom-0 md:top-0'
-          : 'w-12 h-12 right-6 bottom-6 md:right-6 md:bottom-6'}`}
+          : 'w-0 h-0 right-6 bottom-6 md:right-6 md:bottom-6'}`}
       style={{
         height: isExpanded ? (isKeyboardVisible || !isMobile ? '100%' : '80vh') : '48px'
       }}
@@ -284,7 +283,7 @@ const ChatPanel: React.FC = () => {
           }`}
         onClick={() => !isExpanded && setIsExpanded(true)}
       >
-        {isExpanded ? (
+        {isExpanded && (
           <div className="h-full flex flex-col opacity-100 transition-opacity duration-300">
             {/* Header */}
             <div className="p-4 border-b border-gray-800 flex justify-between items-center">
@@ -406,7 +405,7 @@ const ChatPanel: React.FC = () => {
               </div>
             </form>
           </div>
-        ) : (
+        ) /* : (
           <div className="w-full h-full flex items-center justify-center">
             <MessageCircle className="w-6 h-6 text-white transition-transform duration-200 hover:scale-110" />
             {unreadMentions.length > 0 && (
@@ -415,7 +414,7 @@ const ChatPanel: React.FC = () => {
               </span>
             )}
           </div>
-        )}
+        ) */}
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ const UserManage = ({
   onGetTableDataAction,
   onUserStatusChangeAction,
   onUserTransactionAction,
+  onUserResetPasswordAction,
   onDeleteUserAction
 }: any) => {
 
@@ -125,6 +126,7 @@ const UserManage = ({
               data={tableData}
               onUserStatusChangeAction={onUserStatusChangeAction}
               onDeleteUser={onDeleteUser}
+              onResetPassword={onUserResetPasswordAction}
               onClickUserTransaction={onClickUserTransaction}
               setOrderData={setOrderData}
             />

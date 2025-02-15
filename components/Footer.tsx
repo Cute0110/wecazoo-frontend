@@ -9,6 +9,7 @@ import { useState } from "react";
 import AboutUs from "./Modals/AboutUs";
 import CustomerSupport from "./Modals/CustomerSupport";
 import PrivacyPolicy from "./Modals/PrivacyPolicy";
+import AMLPolicy from "./Modals/AMLPolicy";
 import FAQs from "./Modals/FAQs";
 import FairGameOdds from "./Modals/FairGameOdds";
 import TermsConditions from "./Modals/TermsConditions";
@@ -18,6 +19,7 @@ const Footer = ({ onScrollTo }: any) => {
   const [isAboutUsModalOpen, setIsAboutUsModalOpen] = useState(false);
   const [isCSModalOpen, setIsCSModalOpen] = useState(false);
   const [isPolicyModalOpen, setIsPolicyModalOpen] = useState(false);
+  const [isAMLModalOpen, setIsAMLModalOpen] = useState(false);
   const [isFaqsModalOpen, setIsFaqsModalOpen] = useState(false);
   const [isFGOModalOpen, setIsFGOModalOpen] = useState(false);
   const [isTCModalOpen, setIsTCModalOpen] = useState(false);
@@ -28,6 +30,7 @@ const Footer = ({ onScrollTo }: any) => {
     setIsAboutUsModalOpen(false);
     setIsCSModalOpen(false);
     setIsPolicyModalOpen(false);
+    setIsAMLModalOpen(false);
     setIsFaqsModalOpen(false);
     setIsFGOModalOpen(false);
     setIsTCModalOpen(false);
@@ -37,6 +40,7 @@ const Footer = ({ onScrollTo }: any) => {
       <AboutUs isModalOpen={isAboutUsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <CustomerSupport isModalOpen={isCSModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <PrivacyPolicy isModalOpen={isPolicyModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
+      <AMLPolicy isModalOpen={isAMLModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <FAQs isModalOpen={isFaqsModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <FairGameOdds isModalOpen={isFGOModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
       <TermsConditions isModalOpen={isTCModalOpen} onModalClose={onModalClose} modalTitle={modalTitle} />
@@ -98,6 +102,9 @@ const Footer = ({ onScrollTo }: any) => {
                   <span className="cursor-pointer" onClick={() => { setIsPolicyModalOpen(true); setModalTitle("Privacy Policy"); }}>Privacy Policy</span>
                 </li>
                 <li className="hover:text-primary transition-colors">
+                  <span className="cursor-pointer" onClick={() => { setIsAMLModalOpen(true); setModalTitle("AML Policy"); }}>AML Policy</span>
+                </li>
+                <li className="hover:text-primary transition-colors">
                   <span className="cursor-pointer" onClick={() => { setIsTCModalOpen(true); setModalTitle("Terms & Conditions"); }}>Terms & Conditions</span>
                 </li>
               </ul>
@@ -106,10 +113,13 @@ const Footer = ({ onScrollTo }: any) => {
               <h3 className="font-bold text-lg">Games</h3>
               <ul className="text-muted flex flex-col gap-6 justify-start">
                 <li className="hover:text-primary transition-colors">
-                  <span className="cursor-pointer" onClick={() => onScrollTo("slot-games")}>Slots</span>
+                  <span className="cursor-pointer" onClick={() => onScrollTo("live-games")}>Casino</span>
                 </li>
                 <li className="hover:text-primary transition-colors">
-                  <span className="cursor-pointer" onClick={() => onScrollTo("live-games")}>Live Casino</span>
+                  <span className="cursor-pointer" onClick={() => onScrollTo("slot-games")}>Sports</span>
+                </li>
+                <li className="hover:text-primary transition-colors">
+                  <span className="cursor-pointer" onClick={() => onScrollTo("slot-games")}>Slots</span>
                 </li>
               </ul>
             </div>
