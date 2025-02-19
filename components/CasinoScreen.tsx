@@ -32,7 +32,7 @@ const categories = [
   { label: "Zoo Originals", section: "isOriginal", type: "isOriginal" },
   { label: "Improved RTP", section: "isImproved", type: "isImproved" },
   // { label: "Game Providers", section: "providers", type: "provider" },
-  { label: "Trending Games", section: "isTrending", type: "isTrending" },
+  { label: "Trending", section: "isTrending", type: "isTrending" },
   // { label: "Popular Games", section: "popular-games", type: "isPopular" },
   // { label: "Most Profitable", section: "profitable-games", type: "isProfitable" },
   { label: "Live Casino", section: "isLive", type: "isLive" },
@@ -126,7 +126,7 @@ const CasinoScreen = () => {
       {contextHolder}
       <div className="min-h-screen bg-background text-foreground">
 
-        <main className={`mt-[-60px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`}>
+        <main className={`mt-[-100px] sm:mt-[-60px] ${isSidebarCollapsed ? 'md:ml-[50px]' : 'md:ml-[280px]'} transform scale-90`}>
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col lg:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
               {/* Mobile Welcome Screen */}
@@ -191,7 +191,7 @@ const CasinoScreen = () => {
               <div id="original-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isOriginal"} sectionTitle={"Zoo Originals"} onViewAll={() => onShowGames("isOriginal")} /></div>
               <div id="improved-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isImproved"} sectionTitle={"Improved RTP"} onViewAll={() => onShowGames("isImproved")} /></div>
               <div id="providers"><ProvidersRow allProvidersData={allProvidersData} /></div>
-              <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} onViewAll={() => onShowGames("isTrending")} /></div>
+              <div id="trending-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending"} onViewAll={() => onShowGames("isTrending")} /></div>
               {/* <div id="popular-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isPopular"} sectionTitle={"Popular Games"} /></div>
               <div id="profitable-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isProfitable"} sectionTitle={"Most Profitable"} /></div>
               <div id="favorite-games"><GamesRow allGamesData={allGamesData} gameSectionType={"isFavorite"} sectionTitle={"Wecazoo Favorite"} /></div> */}

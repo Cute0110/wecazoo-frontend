@@ -139,10 +139,15 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               <Headset className="w-5 h-5 mr-3" />
               {(!isSidebarCollapsed || isMobile) && <span>24/7 Support</span>}
             </Link>
-            <button onClick={onLogOutClick} className="flex items-center text-gray-300 hover:text-white">
+            <Link href="#" onClick={onLogOutClick} className="flex items-center text-gray-300 hover:text-white">
               <LogOutIcon className="w-5 h-5 mr-3" />
               {(!isSidebarCollapsed || isMobile) && <span>Log Out</span>}
-            </button>
+            </Link>
+            {(!isSidebarCollapsed || isMobile) && (
+              <div className="space-y-2">
+                <LanguageSelector />
+              </div>
+            )}
             {(!isSidebarCollapsed || isMobile) && (
               <Link
                 href="https://changelly.com/buy-crypto"
@@ -171,12 +176,6 @@ const Navbar = ({ isNavLinksHidden }: any) => {
           </>
         )}
       </nav>
-
-      {(!isSidebarCollapsed || isMobile) && (
-        <div className="mt-auto space-y-4">
-          <LanguageSelector />
-        </div>
-      )}
     </div>
   );
 
@@ -227,13 +226,13 @@ const Navbar = ({ isNavLinksHidden }: any) => {
                   className="flex items-center justify-center bg-[#0b0911] hover:bg-[#0b0911]/90 text-white rounded-lg p-3 transition-colors"
                   style={{ fontFamily: 'League Spartan, sans-serif' }}
                 >
-                  <ChatBubbleIcon className="w-5 h-5 mr-2" />
-                  <span className="text-lg">Chat</span>
+                  <ChatBubbleIcon className="w-5 h-5" />
+                  {/* <span className="text-lg">Chat</span> */}
                 </Link></div>}
 
               {/* Auth buttons in top bar for mobile */}
               {!isAuthenticated && (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 mr-4 sm:mr-32">
                   <Button
                     variant="outline"
                     onClick={() => {

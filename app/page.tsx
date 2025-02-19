@@ -92,7 +92,7 @@ const Home = () => {
           </div>
 
           <div id="trending-games">
-            <GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending Games"} onViewAll={null} />
+            <GamesRow allGamesData={allGamesData} gameSectionType={"isTrending"} sectionTitle={"Trending"} onViewAll={null} />
           </div>
 
           <section className="container mb-8">

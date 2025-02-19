@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
   return (
     <>
       <AuthModal isModalOpen={isAuthModalOpen} onModalClose={onModalClose} modalType={isAuthModalType} />
-      <section className="flex flex-col flex-grow gap-8 px-4 md:px-10 mb-6">
+      <section className="flex flex-col flex-grow gap-8 px-4 md:px-10 mb-6 mt-[-60px] sm:mt-0">
         <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-center">
           <div className="flex flex-col gap-6 md:gap-8 lg:gap-10 sm:mt-[20px]">
             <div className="flex flex-col gap-1 md:gap-2.5">

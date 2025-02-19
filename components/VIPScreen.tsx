@@ -43,24 +43,24 @@ const VIPScreen: React.FC = () => {
   const [api, contextHolder] = notification.useNotification();
 
   const vipLevels: VIPLevel[] = [
-    { name: 'Bronze I', image: '/images/vip/bronze-1.jpg', rakeBack: '0.1%', requiredWager: 1000 },
-    { name: 'Bronze II', image: '/images/vip/bronze-2.jpg', rakeBack: '0.2%', requiredWager: 5000 },
-    { name: 'Bronze III', image: '/images/vip/bronze-3.jpg', rakeBack: '0.3%', requiredWager: 10000 },
-    { name: 'Silver I', image: '/images/vip/silver-1.jpg', rakeBack: '0.4%', requiredWager: 25000 },
-    { name: 'Silver II', image: '/images/vip/silver-2.jpg', rakeBack: '0.5%', requiredWager: 50000 },
-    { name: 'Silver III', image: '/images/vip/silver-3.jpg', rakeBack: '0.6%', requiredWager: 100000 },
-    { name: 'Gold I', image: '/images/vip/gold-1.jpg', rakeBack: '0.7%', requiredWager: 250000 },
-    { name: 'Gold II', image: '/images/vip/gold-2.jpg', rakeBack: '0.8%', requiredWager: 500000 },
-    { name: 'Gold III', image: '/images/vip/gold-3.jpg', rakeBack: '0.9%', requiredWager: 1000000 },
-    { name: 'Diamond I', image: '/images/vip/diamond-1.jpg', rakeBack: '1.0%', requiredWager: 2500000 },
-    { name: 'Diamond II', image: '/images/vip/diamond-2.jpg', rakeBack: '1.1%', requiredWager: 5000000 },
-    { name: 'Diamond III', image: '/images/vip/diamond-3.jpg', rakeBack: '1.2%', requiredWager: 10000000 },
-    { name: 'Ruby I', image: '/images/vip/ruby-1.jpg', rakeBack: '1.3%', requiredWager: 25000000 },
-    { name: 'Ruby II', image: '/images/vip/ruby-2.jpg', rakeBack: '1.4%', requiredWager: 50000000 },
-    { name: 'Ruby III', image: '/images/vip/ruby-3.jpg', rakeBack: '1.5%', requiredWager: 75000000 },
-    { name: 'Emerald I', image: '/images/vip/emerald-1.jpg', rakeBack: '1.6%', requiredWager: 85000000 },
-    { name: 'Emerald II', image: '/images/vip/emerald-2.jpg', rakeBack: '1.7%', requiredWager: 95000000 },
-    { name: 'Emerald III', image: '/images/vip/emerald-3.jpg', rakeBack: '1.8%', requiredWager: 100000000 }
+    { name: 'Bronze I', image: '/images/vip/bronze-1.jpg', rakeBack: '0.1%', requiredWager: 10000 },
+    { name: 'Bronze II', image: '/images/vip/bronze-2.jpg', rakeBack: '0.2%', requiredWager: 20000 },
+    { name: 'Bronze III', image: '/images/vip/bronze-3.jpg', rakeBack: '0.3%', requiredWager: 30000 },
+    { name: 'Silver I', image: '/images/vip/silver-1.jpg', rakeBack: '0.4%', requiredWager: 50000 },
+    { name: 'Silver II', image: '/images/vip/silver-2.jpg', rakeBack: '0.5%', requiredWager: 80000 },
+    { name: 'Silver III', image: '/images/vip/silver-3.jpg', rakeBack: '0.6%', requiredWager: 130000 },
+    { name: 'Gold I', image: '/images/vip/gold-1.jpg', rakeBack: '0.7%', requiredWager: 200000 },
+    { name: 'Gold II', image: '/images/vip/gold-2.jpg', rakeBack: '0.8%', requiredWager: 300000 },
+    { name: 'Gold III', image: '/images/vip/gold-3.jpg', rakeBack: '0.9%', requiredWager: 500000 },
+    { name: 'Diamond I', image: '/images/vip/diamond-1.jpg', rakeBack: '1.0%', requiredWager: 1000000 },
+    { name: 'Diamond II', image: '/images/vip/diamond-2.jpg', rakeBack: '1.1%', requiredWager: 1500000 },
+    { name: 'Diamond III', image: '/images/vip/diamond-3.jpg', rakeBack: '1.2%', requiredWager: 2000000 },
+    { name: 'Ruby I', image: '/images/vip/ruby-1.jpg', rakeBack: '1.3%', requiredWager: 2500000 },
+    { name: 'Ruby II', image: '/images/vip/ruby-2.jpg', rakeBack: '1.4%', requiredWager: 4000000 },
+    { name: 'Ruby III', image: '/images/vip/ruby-3.jpg', rakeBack: '1.5%', requiredWager: 70000000 },
+    { name: 'Emerald I', image: '/images/vip/emerald-1.jpg', rakeBack: '1.6%', requiredWager: 120000000 },
+    { name: 'Emerald II', image: '/images/vip/emerald-2.jpg', rakeBack: '1.7%', requiredWager: 250000000 },
+    { name: 'Emerald III', image: '/images/vip/emerald-3.jpg', rakeBack: '1.8%', requiredWager: 1000000000 }
   ];
 
   useEffect(() => {
