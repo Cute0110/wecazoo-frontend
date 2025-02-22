@@ -63,7 +63,7 @@ const CasinoScreen = () => {
   };
 
   useEffect(() => {
-    document.title = "Wecazoo";
+    document.title = "Casino | Wecazoo";
     const fetchData = async () => {
       try {
         const response = await axiosInstance.post('/api/game_list', eot({ start: 0, length: 0, search: 0, order: "order", dir: "asc" }));

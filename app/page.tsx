@@ -40,7 +40,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    document.title = "Wecazoo";
+    document.title = "Wecazoo - Best Crypto Casino | 500% Bonus, No KYC & Fast Payouts";
+    document.querySelector('meta[name="description"]')?.setAttribute("content", "Wecazoo is a top crypto casino offering Solana, Bitcoin & more. Play with no KYC in the UK, Canada, Sverige, Netherlands & more. 500% deposit bonus!");
     const fetchData = async () => {
       try {
         const response = await axiosInstance.post('/api/game_list', eot({ start: 0, length: 0, search: 0, order: "order", dir: "asc" }));
