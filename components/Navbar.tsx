@@ -73,8 +73,8 @@ const Navbar = ({ isNavLinksHidden }: any) => {
           </SheetTrigger>
           <SheetContent
             side="left"
-            open={isOpen}
-            onOpenChange={setIsOpen}
+            // open={isOpen}
+            // onOpenChange={setIsOpen}
             className="w-[280px] border-r border-gray-800 bg-[#1F1635] block p-0"
           >
             <div className="h-full overflow-y-auto bg-[#1F1635]">
