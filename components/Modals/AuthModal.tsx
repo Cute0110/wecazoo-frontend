@@ -92,11 +92,6 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
         }
     };
 
-    const handleForgotPassword = (e: React.MouseEvent) => {
-        e.preventDefault();
-        setShowSupportModal(true);
-    };
-
     const handleOk = () => {
         onModalClose();
     };
@@ -163,7 +158,8 @@ const AuthModal = ({ isModalOpen, onModalClose, modalType }: any) => {
                                 </div>
                                 {isLogin && (
                                     <button
-                                        onClick={handleForgotPassword}
+                                        type="button"
+                                        onClick={() => setShowSupportModal(true)}
                                         className="text-sm text-[#1BB96B] block text-right font-semibold mt-1 hover:text-[#148F53]"
                                     >
                                         Forgot password?

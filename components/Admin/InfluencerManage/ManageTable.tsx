@@ -15,6 +15,7 @@ interface DataType {
   usersCount: number;
   usersTotalBet: number;
   profit: number;
+  percent: number;
   status: boolean;
   createDate: Date;
 }
@@ -29,6 +30,7 @@ const ManageTable = ({data, onStatusChangeAction, onDelete, onTransaction, setOr
   const [usersCountDir, setUsersCountDir] = useState(0); // 0: noSort, 1: asc, 2: desc
   const [usersTotalBetDir, setUsersTotalBetDir] = useState(0); // 0: noSort, 1: asc, 2: desc
   const [profitDir, setProfitDir] = useState(0); // 0: noSort, 1: asc, 2: desc
+  const [percentDir, setPercentDir] = useState(0); // 0: noSort, 1: asc, 2: desc
   const [createdAtDir, setCreatedAtDir] = useState(0); // 0: noSort, 1: asc, 2: desc
 
   
@@ -37,6 +39,8 @@ const ManageTable = ({data, onStatusChangeAction, onDelete, onTransaction, setOr
     setNameDir(0);
     setUsersCountDir(0);
     setUsersTotalBetDir(0);
+    setProfitDir(0);
+    setPercentDir(0);
     setCreatedAtDir(0);
   }
 
@@ -61,6 +65,10 @@ const ManageTable = ({data, onStatusChangeAction, onDelete, onTransaction, setOr
     else if (title == "Profit") {
       setOrderData({order: "profit", dir: dirTypeArray[(profitDir + 1) % 3]});
       setProfitDir((profitDir + 1) % 3);
+    }
+    else if (title == "Percent") {
+      setOrderData({order: "percent", dir: dirTypeArray[(percentDir + 1) % 3]});
+      setProfitDir((percentDir + 1) % 3);
     }
     else if (title == "Created At") {
       setOrderData({order: "createdAt", dir: dirTypeArray[(createdAtDir + 1) % 3]});
@@ -131,6 +139,14 @@ const ManageTable = ({data, onStatusChangeAction, onDelete, onTransaction, setOr
       title: <HeadTitle title={"Profit"} sortDir={profitDir} onSortClick={onSortClick}/>,
       dataIndex: 'profit',
       key: 'profit',
+      onCell: () => ({
+        style: { minWidth: '150px' }, // Set min-width for the first column in tbody
+      }),
+    },
+    {
+      title: <HeadTitle title={"Percent"} sortDir={percentDir} onSortClick={onSortClick}/>,
+      dataIndex: 'percent',
+      key: 'percent',
       onCell: () => ({
         style: { minWidth: '150px' }, // Set min-width for the first column in tbody
       }),

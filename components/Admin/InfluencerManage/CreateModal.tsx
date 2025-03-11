@@ -5,6 +5,7 @@ import { customAlphabet } from 'nanoid';
 const CreateModal = ({ isModalOpen, setIsModalOpen, modalTitle, onCreate }: any) => {
     const [nameVal, setNameVal] = useState("");
     const [promoCodeVal, setPromoCodeVal] = useState("");
+    const [percentVal, setPercentVal] = useState("20");
 
     const [api, contextHolder] = notification.useNotification();
 
@@ -21,16 +22,19 @@ const CreateModal = ({ isModalOpen, setIsModalOpen, modalTitle, onCreate }: any)
     };
 
     const handleOk = async () => {
-        if (nameVal != "" && promoCodeVal != "") {
-            onCreate(nameVal, promoCodeVal);
+        if (nameVal != "" && promoCodeVal != "" && (/^[0-9]+$/.test(percentVal)) == true && percentVal != "") {
+            onCreate(nameVal, promoCodeVal, percentVal);
             setIsModalOpen(false);
             setNameVal("");
             setPromoCodeVal("");
+            setPercentVal("20");
         } else {
             if (nameVal == "") {
                 openNotification('warning', 'top', 'Warning', 'Please input name!');
             } else if (promoCodeVal == "") {
                 openNotification('warning', 'top', 'Warning', 'Please generate code!');
+            } else if ((/^[0-9]+$/.test(percentVal)) == false || percentVal == "") {
+                openNotification('warning', 'top', 'Warning', 'Please input correct percent!');
             }
         }
     };
@@ -91,6 +95,22 @@ const CreateModal = ({ isModalOpen, setIsModalOpen, modalTitle, onCreate }: any)
                                     <button onClick={onCodeGenerate} type="button" className="rounded-md ml-2 border border-1 border-[#4cbb17] px-3 py-2 text-sm font-semibold text-[#4cbb17] hover:bg-[#4cbb17] hover:text-white">
                                         Generate
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 mb-4">
+                            <div>
+                                <label className="block text-sm font-medium leading-6 text-black">Profit Percent(%)</label>
+                                <div className="flex items-center justify-start mt-2">
+                                    <input
+                                        type="name"
+                                        id="name"
+                                        name="name"
+                                        placeholder="Percent"
+                                        value={percentVal}
+                                        onChange={(e) => setPercentVal(e.target.value)}
+                                        className="p-2 border rounded-xl bg-[#FFF] text-black"
+                                    />
                                 </div>
                             </div>
                         </div>

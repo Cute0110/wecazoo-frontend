@@ -41,6 +41,7 @@ const InfluencerManage = ({
         usersCount: originalData[i].usersCount,
         usersTotalBet: originalData[i].usersTotalBet.toFixed(2),
         profit: originalData[i].profit.toFixed(2),
+        percent: originalData[i].percent,
         createDate: originalData[i].createdAt,
         status: originalData[i].status == 0 ? false : true,
       }
@@ -98,8 +99,8 @@ const InfluencerManage = ({
     setSelectedData(null);
   }
 
-  const onCreate = (name: any, promoCode: any) => {
-    onCreateAction(name, promoCode, searchValue, paginationVal, pageSizeVal, orderData);
+  const onCreate = (name: any, promoCode: any, percent: any) => {
+    onCreateAction(name, promoCode, percent, searchValue, paginationVal, pageSizeVal, orderData);
   }
 
   const onTransactionConfirm = (id: any, payoutAmount: any) => {

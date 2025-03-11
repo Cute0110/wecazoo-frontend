@@ -80,9 +80,9 @@ const InfluencerManagePage = () => {
     }
   }
 
-  const onCreateAction = async (name: any, promoCode: any, search: any, start: any, length: any, orderData: any) => {
+  const onCreateAction = async (name: any, promoCode: any, percent: any, search: any, start: any, length: any, orderData: any) => {
     try {
-      const result = await axiosInstance.post("api/influencer_create", eot({ name, promoCode }));
+      const result = await axiosInstance.post("api/influencer_create", eot({ name, promoCode, percent }));
       const res = dot(result.data);
 
       if (res.status == 1) {

@@ -84,10 +84,10 @@ const GamesAll = ({ allGamesData, sectionTitle }: any) => {
         } else {
           setIsSlotGameModalOpen(false);
           setIsSlotGameLoading(false);
-          openNotification("error", "Error", res.msg, "topRight");
+          openNotification("info", "Info", "Coming soon...", "topRight");
         }
       } catch (err) {
-        openNotification("error", "Error", "Token expired or network error", "topRight");
+        openNotification("info", "Info", "Coming soon...", "topRight");
         setIsSlotGameModalOpen(false);
         setIsSlotGameLoading(false);
       } finally {

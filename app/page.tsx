@@ -19,6 +19,7 @@ import TrendingGames from "@/components/TrendingGames";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import FAQ from "@/components/WecazooFAQ";
 import { MoreHorizontal } from "lucide-react";
+import SportCarousel from "@/components/SportCarousel";
 
 type NotificationPlacement = NotificationArgsProps['placement'];
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
@@ -99,7 +100,7 @@ const Home = () => {
           <section className="container mb-8">
             <div id="sport_section" className="flex flex-col lg:flex-row justify-between items-center gap-4 w-full mb-4 sm:mb-0">
               {/* Mobile Welcome Screen */}
-              {isMobile && !isExpanded && <WelcomeScreen />}
+              {isMobile && !isExpanded && <SportCarousel />}
 
               {/* Desktop Layout */}
               {(!isMobile || isExpanded) && (
@@ -111,7 +112,7 @@ const Home = () => {
               )}
 
               {/* Expand button - Only visible on mobile when not expanded */}
-              {isMobile && !isExpanded && (
+              {/* {isMobile && !isExpanded && (
                 <button
                   onClick={() => setIsExpanded(true)}
                   className="p-2 bg-[#060019] rounded-full shadow-md hover:bg-[#130d25] transition-colors"
@@ -119,17 +120,17 @@ const Home = () => {
                 >
                   <MoreHorizontal className="w-6 h-6 text-white" />
                 </button>
-              )}
+              )} */}
 
               {/* Collapse button - Only visible on mobile when expanded */}
-              {isMobile && isExpanded && (
+              {/* {isMobile && isExpanded && (
                 <button
                   onClick={() => setIsExpanded(false)}
                   className="mt-4 w-full py-2 px-4 bg-[#060019] rounded-md hover:bg-[#130d25] transition-colors text-white"
                 >
                   Show less
                 </button>
-              )}
+              )} */}
             </div>
           </section>
 

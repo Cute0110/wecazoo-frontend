@@ -6,26 +6,27 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import Logo from "@/public/wecazoo-logo.svg";
 import LanguageSelector from "./LanguageSelector";
-import { 
-  Home, 
-  UserIcon, 
-  WalletIcon, 
-  GiftIcon, 
-  LogOutIcon, 
-  Menu, 
-  ChevronLeft, 
-  ChevronRight, 
-  Headset, 
-  DiamondIcon, 
+import {
+  Home,
+  UserIcon,
+  WalletIcon,
+  GiftIcon,
+  LogOutIcon,
+  Menu,
+  ChevronLeft,
+  ChevronRight,
+  Headset,
+  DiamondIcon,
   Cherry,
   Gamepad,
-  ChevronDown 
+  ChevronDown
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import AuthModal from "./Modals/AuthModal";
 import { useAuth } from "@/lib/authContext";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
 import CustomerSupport from "./Modals/CustomerSupport";
+import ClickOutside from "./ClickOutside";
 
 const Navbar = ({ isNavLinksHidden }: any) => {
   const router = useRouter();
@@ -48,6 +49,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
 
   const onLogOutClick = () => {
     setIsAuthenticated(false);
+    setIsOpen(false);
     localStorage.removeItem('authToken');
     router.push("/");
   };
@@ -64,12 +66,9 @@ const Navbar = ({ isNavLinksHidden }: any) => {
   const MobileBottomMenu = () => (
     <div className="fixed bottom-0 left-0 right-0 bg-[#1F1635] border-t border-gray-800 lg:hidden z-50">
       <div className="flex justify-around items-center py-3">
-        <Sheet>
+        {/* <Sheet>
           <SheetTrigger asChild>
-            <button onClick={() => setIsOpen(true)} className="flex flex-col items-center text-gray-300 hover:text-white">
-              <Menu className="w-6 h-6 mb-1" />
-              <span className="text-xs">Menu</span>
-            </button>
+
           </SheetTrigger>
           <SheetContent
             side="left"
@@ -78,7 +77,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
             className="w-[280px] border-r border-gray-800 bg-[#1F1635] block p-0"
           >
             <div className="h-full overflow-y-auto bg-[#1F1635]">
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="absolute right-4 top-4 p-2 rounded-full hover:bg-gray-700/50 transition-colors text-gray-300 z-50"
               >
@@ -89,7 +88,11 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               <SidebarContent />
             </div>
           </SheetContent>
-        </Sheet>
+        </Sheet> */}
+        <button onClick={() => setIsOpen(!isOpen)} className="flex flex-col items-center text-gray-300 hover:text-white">
+          <Menu className="w-6 h-6 mb-1" />
+          <span className="text-xs">Menu</span>
+        </button>
 
         <Link href="/casino" className="flex flex-col items-center text-gray-300 hover:text-white">
           <Cherry className="w-6 h-6 mb-1" />
@@ -119,12 +122,12 @@ const Navbar = ({ isNavLinksHidden }: any) => {
 
     const handleGameCategoryClick = async (e: React.MouseEvent, path: string) => {
       e.preventDefault();
-      
+
       // Extract the section ID from the path (everything after #)
       const [basePath, section] = path.split('#');
-      
+
       if (isMobile) {
-        setIsOpen(false); // Close the sidebar
+        setIsOpen(false);
       }
 
       // If we're not already on the casino page, navigate there first
@@ -133,7 +136,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
         // Wait a bit for the page to load
         await new Promise(resolve => setTimeout(resolve, 100));
       }
-      
+
       // Find the section element and scroll to it
       const element = document.getElementById(section);
       if (element) {
@@ -148,7 +151,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
     };
 
     return (
-      <div className="flex flex-col h-full p-4 pt-16 overflow-y-auto">
+      <div className={`flex flex-col h-full p-4 ${isMobile ? "pt-16" : "pt-10" } overflow-y-auto`}>
         {!isMobile && (
           <button
             onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
@@ -158,6 +161,17 @@ const Navbar = ({ isNavLinksHidden }: any) => {
               <ChevronRight className="w-4 h-4 text-gray-300 hover:text-white" /> :
               <ChevronLeft className="w-4 h-4 text-gray-300 hover:text-white" />
             }
+          </button>
+        )}
+
+        {isMobile && (
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute right-4 top-4 p-2 rounded-full hover:bg-gray-700/50 transition-colors text-gray-300 z-50"
+          >
+            <svg width="24" height="24" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.8536 2.85355C13.0488 2.65829 13.0488 2.34171 12.8536 2.14645C12.6583 1.95118 12.3417 1.95118 12.1464 2.14645L7.5 6.79289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L6.79289 7.5L2.14645 12.1464C1.95118 12.3417 1.95118 12.6583 2.14645 12.8536C2.34171 13.0488 2.65829 13.0488 2.85355 12.8536L7.5 8.20711L12.1464 12.8536C12.3417 13.0488 12.6583 13.0488 12.8536 12.8536C13.0488 12.6583 13.0488 12.3417 12.8536 12.1464L8.20711 7.5L12.8536 2.85355Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+            </svg>
           </button>
         )}
 
@@ -193,7 +207,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
 
           {/* Games Dropdown Section */}
           <div className="relative">
-            <button 
+            <button
               onClick={handleGamesClick}
               className="flex items-center text-gray-300 hover:text-white w-full"
             >
@@ -301,6 +315,14 @@ const Navbar = ({ isNavLinksHidden }: any) => {
           </div>
         )}
 
+        {isMobile && (
+          <ClickOutside onClick={() => {setIsOpen(false); setIsModalOpen(false)}}>
+            <div className={`fixed left-0 top-0 h-full bg-[#1F1635] z-50 border-r border-gray-800 transition-all duration-300 w-[280px] ${!isOpen ? 'opacity-0 transform -translate-x-full' : 'opacity-100 transform translate-x-0'}`}>
+              <SidebarContent />
+            </div>
+          </ClickOutside>
+        )}
+
         <div className="flex-1">
           <header className="fixed top-0 left-0 right-0 z-40 bg-[#130D25] shadow-lg">
             <div className={`mx-auto px-4 py-4 flex items-center justify-between ${!isMobile ? (isSidebarCollapsed ? 'ml-[180px]' : 'ml-[340px]') : ''}`}>
@@ -364,7 +386,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
             </div>
           </header>
         </div>
-      </div>
+      </div >
 
       {/* Mobile Bottom Menu */}
       {isMobile && <MobileBottomMenu />}
