@@ -49,6 +49,7 @@ const Navbar = ({ isNavLinksHidden }: any) => {
 
   const onLogOutClick = () => {
     setIsAuthenticated(false);
+    setIsOpen(false);
     localStorage.removeItem('authToken');
     router.push("/");
   };
