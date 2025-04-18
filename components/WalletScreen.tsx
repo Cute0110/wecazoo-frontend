@@ -223,7 +223,7 @@ const WalletScreen = () => {
                       </div>
                       <div className="max-w-[500px] w-full mb-[6px]">
                         <button
-                          className="w-full rounded-md transition-colors disabled:pointer-events-none bg-blue-400 text-base text-white font-bold hover:bg-gray-500 disabled:text-gray-400 px-6 h-[50px]"
+                          className="w-full rounded-md transition-colors disabled:pointer-events-none bg-[#00bf62] text-base text-white font-bold hover:opacity-90 disabled:text-gray-400 px-6 h-[50px]"
                           onClick={() => onDepositClick()}
                         >
                           Pay with <span className="text-white text-xl">Crypto</span>

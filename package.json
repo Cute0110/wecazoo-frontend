@@ -23,6 +23,7 @@
     "country-flag-icons": "^1.5.13",
     "embla-carousel-autoplay": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
+    "firebase": "^11.6.0",
     "husky": "^9.1.6",
     "lucide-react": "^0.440.0",
     "moment": "^2.30.1",
