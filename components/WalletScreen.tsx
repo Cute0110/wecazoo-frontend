@@ -23,6 +23,7 @@ import GuideBuyCyrpto from "./Modals/GuideBuyCrypto";
 import Footer from "./Footer";
 import DepositPaymentDialog from "./Modals/DepositPaymentDialog";
 import Link from "next/link";
+import PayPalButton from "./PaypalButton";
 
 const web3 = new Web3();
 
@@ -228,6 +229,14 @@ const WalletScreen = () => {
                         >
                           Pay with <span className="text-white text-xl">Crypto</span>
                         </button>
+                      </div>
+                      <div className="flex items-center w-full gap-4 my-4">
+                        <div className="border-t-[1px] border-gray-600 flex-1"></div>
+                        <span className="text-gray-600">Deposit with card</span>
+                        <div className="border-t-[1px] border-gray-600 flex-1"></div>
+                      </div>
+                      <div className="max-w-[500px] w-full">
+                        <PayPalButton depositAmount={depositAmount} />
                       </div>
                     </div>
                   </div>

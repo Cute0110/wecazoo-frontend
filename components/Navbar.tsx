@@ -310,21 +310,21 @@ const Navbar = ({ isNavLinksHidden }: any) => {
       <div className="flex">
         {/* Permanent Desktop Sidebar */}
         {!isMobile && (
-          <div className={`fixed left-0 top-0 h-full bg-[#1F1635] z-50 border-r border-gray-800 transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-[280px]'}`}>
+          <div className={`fixed left-0 top-0 h-full bg-[#1F1635] z-[1000] border-r border-gray-800 transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-[280px]'}`}>
             <SidebarContent />
           </div>
         )}
 
         {isMobile && (
           <ClickOutside onClick={() => {setIsOpen(false); setIsModalOpen(false)}}>
-            <div className={`fixed left-0 top-0 h-full bg-[#1F1635] z-50 border-r border-gray-800 transition-all duration-300 w-[280px] ${!isOpen ? 'opacity-0 transform -translate-x-full' : 'opacity-100 transform translate-x-0'}`}>
+            <div className={`fixed left-0 top-0 h-full bg-[#1F1635] z-[1000] border-r border-gray-800 transition-all duration-300 w-[280px] ${!isOpen ? 'opacity-0 transform -translate-x-full' : 'opacity-100 transform translate-x-0'}`}>
               <SidebarContent />
             </div>
           </ClickOutside>
         )}
 
         <div className="flex-1">
-          <header className="fixed top-0 left-0 right-0 z-40 bg-[#130D25] shadow-lg">
+          <header className="fixed top-0 left-0 right-0 z-[999] bg-[#130D25] shadow-lg">
             <div className={`mx-auto px-4 py-4 flex items-center justify-between ${!isMobile ? (isSidebarCollapsed ? 'ml-[180px]' : 'ml-[340px]') : ''}`}>
               <Link href="/" className="flex-shrink-0">
                 <Image priority src="/images/wecazoo.png" width={11} height={11} alt="Wecazoo Logo" className="h-9 lg:h-11 w-auto" />
