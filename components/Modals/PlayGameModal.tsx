@@ -44,7 +44,9 @@ const SlotGameList: React.FC<SlotGameListProps> = ({
           <div className="w-full h-16 bg-[#130D25] flex items-center justify-between px-4 z-20">
             <Image
               priority
-              src={Logo}
+              src="/images/wecazoo.png"
+              width={9}
+              height={9}
               alt="Wecazoo Logo"
               className="h-9 w-auto"
             />

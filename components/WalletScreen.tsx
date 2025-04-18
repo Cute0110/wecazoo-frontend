@@ -7,12 +7,12 @@ import { ChevronDown, ChevronDownIcon, CopyIcon, WalletIcon } from "lucide-react
 import Image from "next/image";
 import { FaArrowUp, FaQuestionCircle } from "react-icons/fa";
 import { RiExchangeDollarLine } from "react-icons/ri";
-import { BiMoneyWithdraw } from "react-icons/bi";
+import { BiMoneyWithdraw, BiCoinStack } from "react-icons/bi";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import { useAuth } from "@/lib/authContext";
 import { useState } from "react";
-import { notification, Select } from 'antd';
+import { Input, notification, Select } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 import axiosInstance from "@/lib/action";
 import { eot, dot } from "@/lib/cryptoUtils";
@@ -42,7 +42,7 @@ const WalletScreen = () => {
   const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
   const [paymentUrl, setPaymentUrl] = useState("");
 
-  const assetTypeArray = ["ERC 20", "BEP 20", "TRC 20", "SOLANA"];
+  const assetTypeArray = ["ERC 20 - USDT ETHEREUM", "BEP 20 - USDT BNB SMART CHAIN", "TRC 20 - USDT TRON", "SOLANA - USDT SOLANA"];
 
   const openNotification = (type: NotificationType, title: any, content: any, placement: NotificationPlacement) => {
     api[type]({
@@ -66,7 +66,8 @@ const WalletScreen = () => {
   }
 
   const handleDepositAmountInputChange = (e: any) => {
-    setDepositAmount(e.target.value);
+    const rawValue = e.target.value.replace(/\D/g, "");
+    setDepositAmount(rawValue); // Add dollar symbol
   }
 
   const handleWithdrawAmountInputChange = (e: any) => {
@@ -186,6 +187,10 @@ const WalletScreen = () => {
                 <BiMoneyWithdraw className="mr-2 text-lg md:text-xl" />
                 <span className="text-sm md:text-base">Withdraw</span>
               </TabsTrigger>
+              <TabsTrigger value="buyCrypto">
+                <BiCoinStack className="mr-2 text-lg md:text-xl" />
+                <span className="text-sm md:text-base">Buy Crypto</span>
+              </TabsTrigger>
               {/* <TabsTrigger value="transaction">
                 <RiExchangeDollarLine className="mr-2 text-lg md:text-xl" />
                 <span className="text-sm md:text-base">Transaction</span>
@@ -197,35 +202,20 @@ const WalletScreen = () => {
                 <div className="bg-[#130D25] flex flex-col p-5 md:p-6 gap-8">
                   <h2 className="text-xl font-semibold">Deposit Crypto</h2>
                   <div className="flex flex-col justify-center items-center md:justify-between gap-6 divide-y divide-gray-500/50 md:divide-none">
-                    <div className="flex flex-row">
-                      <div className="pr-4">
-                        <span className="text-muted whitespace-nowrap text-sm flex items-center">
-                          Your Balance
-                        </span>
-                        <p className="text-sm md:text-base font-medium">${authData.balance.toFixed(2)}</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col">
-                      <Button onClick={openDepositSite} className="w-full md:w-[35%] mx-auto"><WalletIcon className="w-5 h-5 mr-3" />Buy Crypto</Button>
-                      <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex items-center text-gray-300 hover:text-white w-[80%] md:w-[30%] mx-auto" style={{ "marginTop": '20px' }}>
-                        <img
-                          src="/images/pay.png"
-                          alt="VIP"
-                          className="w-full h-auto rounded-lg"
+                    <div className="flex gap-4 w-full justify-start items-center pt-6 md:pt-0">
+                      <div className="relative w-full max-w-[500px]">
+                        <span className="absolute left-[10px] top-[50%] -translate-y-1/2 text-[20px]">$</span>
+                        <input
+                          type="depositAmount"
+                          id="depositAmount"
+                          name="depositAmount"
+                          placeholder="Input deposit amount"
+                          value={depositAmount}
+                          onChange={handleDepositAmountInputChange}
+                          className="w-full text-[15px] px-6 py-2 mx-1 border rounded-xl bg-[#2A253A] flex items-center"
+                          required
                         />
-                      </Link>
-                    </div>
-                    <div className="flex gap-4 w-full justify-center pt-6 md:pt-0">
-                      <input
-                        type="depositAmount"
-                        id="depositAmount"
-                        name="depositAmount"
-                        placeholder="Input Deposit Amount"
-                        value={depositAmount}
-                        onChange={handleDepositAmountInputChange}
-                        className="w-full p-2 border rounded-xl bg-[#2A253A]"
-                        required
-                      />
+                      </div>
                       <Button onClick={onDepositClick}>Deposit</Button>
                     </div>
                   </div>
@@ -313,6 +303,28 @@ const WalletScreen = () => {
                   </div>
                   <div>
                     <Button onClick={onWithdrawClick}>Withdraw</Button>
+                  </div>
+                </div>
+              </TabsContent>
+              <TabsContent value="buyCrypto">
+                <div className="bg-[#130D25] flex flex-col p-5 md:p-6 gap-8">
+                  <h2 className="text-xl font-semibold">Buy Crypto</h2>
+                  <div className="flex flex-col justify-center items-center md:justify-between gap-6 divide-y divide-gray-500/50 md:divide-none">
+
+                    <div className="flex flex-col">
+                      <Button onClick={openDepositSite} className="w-full md:w-[35%] mx-auto"><WalletIcon className="w-5 h-5 mr-3" />Buy Crypto</Button>
+                      <Link href="https://changelly.com/buy-crypto" target="_blank" className="flex items-center text-gray-300 hover:text-white w-[80%] md:w-[30%] mx-auto" style={{ "marginTop": '20px' }}>
+                        <img
+                          src="/images/pay.png"
+                          alt="VIP"
+                          className="w-full h-auto rounded-lg"
+                        />
+                      </Link>
+                      <span className="text-gray-400 w-full md:w-[40%] mx-auto">No Crypto? No Problem. You can now buy crypto easily through changelly, a wecazoo partner. <br />
+                        Just select how much you want to buy and which crypto you want to buy. <br />
+                        Then paste in your own wallet address and
+                        choose your preferred method of payment, some examples are mastercard, visa, paypal, google pay, apple pay & many more.</span>
+                    </div>
                   </div>
                 </div>
               </TabsContent>

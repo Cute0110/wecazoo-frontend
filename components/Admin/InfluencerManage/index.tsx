@@ -98,8 +98,8 @@ const InfluencerManage = ({
     setSelectedData(null);
   }
 
-  const onCreate = (name: any, promoCode: any) => {
-    onCreateAction(name, promoCode, searchValue, paginationVal, pageSizeVal, orderData);
+  const onCreate = (name: any, promoCode: any, percent: any) => {
+    onCreateAction(name, promoCode, percent, searchValue, paginationVal, pageSizeVal, orderData);
   }
 
   const onTransactionConfirm = (id: any, payoutAmount: any) => {
