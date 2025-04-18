@@ -14,6 +14,7 @@ import FAQs from "./Modals/FAQs";
 import FairGameOdds from "./Modals/FairGameOdds";
 import TermsConditions from "./Modals/TermsConditions";
 import { useAuth } from "@/lib/authContext";
+import Link from "next/link";
 
 const Footer = ({ onScrollTo }: any) => {
   const [isAboutUsModalOpen, setIsAboutUsModalOpen] = useState(false);
@@ -113,13 +114,10 @@ const Footer = ({ onScrollTo }: any) => {
               <h3 className="font-bold text-lg">Games</h3>
               <ul className="text-muted flex flex-col gap-6 justify-start">
                 <li className="hover:text-primary transition-colors">
-                  <span className="cursor-pointer" onClick={() => onScrollTo("live-games")}>Casino</span>
+                  <Link className="cursor-pointer" href={"/casino"}>Casino</Link>
                 </li>
                 <li className="hover:text-primary transition-colors">
-                  <span className="cursor-pointer" onClick={() => onScrollTo("slot-games")}>Sports</span>
-                </li>
-                <li className="hover:text-primary transition-colors">
-                  <span className="cursor-pointer" onClick={() => onScrollTo("slot-games")}>Slots</span>
+                  <Link className="cursor-pointer" href={"/sports"}>Sports</Link>
                 </li>
               </ul>
             </div>

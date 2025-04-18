@@ -66,7 +66,7 @@ const WalletScreen = () => {
   }
 
   const handleDepositAmountInputChange = (e: any) => {
-    const rawValue = e.target.value.replace(/\D/g, "");
+    const rawValue = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
     setDepositAmount(rawValue); // Add dollar symbol
   }
 
@@ -84,8 +84,8 @@ const WalletScreen = () => {
 
   const onDepositClick = () => {
     if (!isNaN(Number(depositAmount)) && depositAmount.trim() !== "") {
-      if (Number(depositAmount) < 15) {
-        openNotification("warning", "Warning", "Minimum value is 15$!", "topRight");
+      if (Number(depositAmount) < 5) {
+        openNotification("warning", "Warning", "Minimum value is 5$!", "topRight");
       } else {
         onCreateInvoice(Number(depositAmount));
       }
@@ -100,7 +100,7 @@ const WalletScreen = () => {
 
   const onWithdrawClick = () => {
     if (!isNaN(Number(withdrawAmount)) && withdrawAmount.trim() !== "") {
-      if (Number(withdrawAmount) < 1) {
+      if (Number(withdrawAmount) < 5) {
         openNotification("warning", "Warning", "Minimum value is 5$!", "topRight");
       } else if (Number(withdrawAmount) > authData.balance) {
         openNotification("warning", "Warning", "You have not enough balance!", "topRight");
@@ -200,45 +200,35 @@ const WalletScreen = () => {
             <div className="w-full lg:max-w-4xl xl:max-w-6xl">
               <TabsContent value="deposit">
                 <div className="bg-[#130D25] flex flex-col p-5 md:p-6 gap-8">
-                  <h2 className="text-xl font-semibold">Deposit Crypto</h2>
-                  <div className="flex flex-col justify-center items-center md:justify-between gap-6 divide-y divide-gray-500/50 md:divide-none">
-                    <div className="flex gap-4 w-full justify-start items-center pt-6 md:pt-0">
-                      <div className="relative w-full max-w-[500px]">
-                        <span className="absolute left-[10px] top-[50%] -translate-y-1/2 text-[20px]">$</span>
-                        <input
-                          type="depositAmount"
-                          id="depositAmount"
-                          name="depositAmount"
-                          placeholder="Input deposit amount"
-                          value={depositAmount}
-                          onChange={handleDepositAmountInputChange}
-                          className="w-full text-[15px] px-6 py-2 mx-1 border rounded-xl bg-[#2A253A] flex items-center"
-                          required
-                        />
-                      </div>
-                      <Button onClick={onDepositClick}>Deposit</Button>
+                  <div className="flex flex-col p-5 md:p-6 gap-8 rounded-md max-w-[500px]">
+                    <h2 className="text-xl font-semibold">Deposit</h2>
+                    <div className="relative w-full max-w-[500px]">
+                      <span className="absolute left-[10px] top-[50%] -translate-y-1/2 text-[20px]">$</span>
+                      <input
+                        type="depositAmount"
+                        id="depositAmount"
+                        name="depositAmount"
+                        placeholder="Input deposit amount"
+                        value={depositAmount}
+                        onChange={handleDepositAmountInputChange}
+                        className="w-full text-[15px] px-6 py-2 mx-1 border rounded-xl bg-[#34383c] flex items-center"
+                        required
+                      />
                     </div>
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-semibold">Suggested Amount</h2>
-                    <div className="flex flex-col my-4 gap-3">
-                      {depositAmountArray.map((amount, index) => (
-                        <div key={index} className="flex items-center justify-between bg-[#2A253A] rounded-[10px] px-6 py-5 md:py-4">
-                          <div className="flex items-center justify-center gap-2.5">
-                            <p className="font-semibold text-md">${amount.toFixed(2)}</p>
-                          </div>
-                          <div className="flex items-center justify-center gap-4">
-                            <Button
-                              size="fit"
-                              variant="link"
-                              className="text-sm md:text-base font-medium"
-                              onClick={() => onCreateInvoice(amount)}
-                            >
-                              Deposit
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="block w-full">
+                      <div className="flex items-center w-full gap-4 my-4">
+                        <div className="border-t-[1px] border-gray-600 flex-1"></div>
+                        <span className="text-gray-600">Deposit with crypto</span>
+                        <div className="border-t-[1px] border-gray-600 flex-1"></div>
+                      </div>
+                      <div className="max-w-[500px] w-full mb-[6px]">
+                        <button
+                          className="w-full rounded-md transition-colors disabled:pointer-events-none bg-blue-400 text-base text-white font-bold hover:bg-gray-500 disabled:text-gray-400 px-6 h-[50px]"
+                          onClick={() => onDepositClick()}
+                        >
+                          Pay with <span className="text-white text-xl">Crypto</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
